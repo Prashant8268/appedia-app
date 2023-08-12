@@ -21,6 +21,18 @@ module.exports.createUser = async(req,res)=>{
 
 try{
 
+
+    if(req.body.password !==req.body.confirmPassword){
+        console.log('Password do not match');
+        return res.redirect('back');
+    }
+
+    const aleradyExist = await  User.findOne({email:req.body.email});
+    if(aleradyExist){
+        console.log('User already Present ');
+        return res.redirect('back');
+    }
+
     await  User.create({
         name: req.body.name,
         email: req.body.email,
