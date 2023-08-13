@@ -2,7 +2,16 @@
 const User = require('../models/User.js');
 
 
-module.exports.home =(req,res)=>{
+module.exports.home =async(req,res)=>{
+
+    if(req.cookies.user_id){
+
+        const user = await User.findById(req.cookies.user_id)    
+        return res.render('profile',{
+            title:"Codeial",
+            user:user
+        })
+    }
 
     return res.render('./home.ejs',{
         title:"Codeial"
@@ -10,7 +19,16 @@ module.exports.home =(req,res)=>{
 
 }
 
-module.exports.signup = (req,res)=>{
+module.exports.signup =  async(req,res)=>{
+
+    if(req.cookies.user_id){
+
+        const user = await User.findById(req.cookies.user_id);  
+        return res.render('profile',{
+            title:"Codeial",
+            user
+        })
+    }
 
     return res.render('signup',{
         title:"Codeial"
@@ -49,4 +67,49 @@ catch(err){
          return ;
 
 }
+}
+
+
+
+// checking auth ;
+
+module.exports.login= async(req,res)=>{
+
+    try{
+        const isUserFound = await User.findOne({email:req.body.email});
+        if(isUserFound){
+            if(isUserFound.password===req.body.password){
+
+                res.cookie('user_id',isUserFound.id)
+                return res.render('profile',{
+                    title:"Codeial",
+                    user:isUserFound
+                })
+            }
+            console.log('Username or password is incorect ');
+
+
+            return res.redirect('back');
+
+        }
+        else{
+            console.log('User not found ')
+            return res.redirect('/');
+        }
+    }
+    catch(err){
+        console.log(err,"Error in login");
+    }
+     
+}
+
+// sign out 
+
+module.exports.signout = (req,res)=>{
+    
+
+    res.clearCookie('user_id');
+
+
+    return res.redirect('/');
 }

@@ -6,14 +6,14 @@
     <body>
 
         <div class="container">
-            <div id="my-form">
-                <form>
+            <div id="my-form"  >
+                <form method="POST" action="/login">
                     <label for="email">Email or username</label>
                     <input class="input-field" type="email" name="email" placeholder="email" >
                     <label for="password">Password</label>
                     <input class="input-field" type="password" name="password" placeholder="password" >
                     <div class="button-container" >
-                    <a class="form-buttons" >Login</a>
+                    <button class="form-buttons" type="submit" >Login</button>
                     <a class="form-buttons" href="/sign-up" >Sign up</a>
                     </div>
 
