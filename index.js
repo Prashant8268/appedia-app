@@ -47,8 +47,6 @@ app.use(passport.session());
 
 app.use(passport.setAuthenticatedUser);
 
-// app.use(passport.setAuthenticatedUser());
-
 
 
 // setting router ;

@@ -3,27 +3,13 @@ const { model } = require('mongoose');
 const User = require('../models/User.js');
 
 
-module.exports.home =(req,res)=>{
 
-    return res.render('./home.ejs',{
-        title:"Codeial"
-    });
 
-}
-
-module.exports.signup = (req,res)=>{
-
-    return res.render('signup',{
-        title:"Codeial"
-    })
-}
+// controller for creating a new user 
 
 module.exports.createUser = async(req,res)=>{
-
 try{
-
-
-    if(req.body.password !==req.body.confirmPassword){
+    if(req.body.password !=req.body.confirmPassword){
         console.log('Password do not match');
         return res.redirect('back');
     }
@@ -39,32 +25,53 @@ try{
         email: req.body.email,
         password: req.body.password
     })
-
- 
-    return res.redirect('/')
-
+    return res.redirect('/sign-in')
 }
-catch(err){
-  
+catch(err){  
         console.log(err, "error in creating user");
          return ;
-
 }
 }
 
 
 
+// controller for homepage 
+module.exports.home =(req,res)=>{
+    return res.render('./homepage.ejs',{
+        title:"Codeial"
+    });
+
+}
 
 
-// for profile 
-
-module.exports.login = (req,res)=>{
-
-    return res.render('profile',{
-        title: 'Codeial',
+// home page for going to sign-up page
+module.exports.signup = (req,res)=>{
+    return res.render('signup',{
+        title:"Codeial"
     })
 }
 
-module.exports.login3=(req,res)=>{
-    return res.send("ho gya login ");
+// controller for going to sign- in page
+module.exports.signin = (req,res)=>{
+
+    return  res.render('sign_in',{
+        title: "Codeial "
+    })
+} 
+
+
+module.exports.profile = (req,res)=>{
+    
+    return res.render('profile',{
+            title: 'Codeial',
+        })
 }
+
+// controller for creating session or logging in
+
+module.exports.createSession = (req,res)=>{
+    return res.redirect('/');
+
+}
+
+
