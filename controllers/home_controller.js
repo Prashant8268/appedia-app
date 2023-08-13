@@ -1,4 +1,5 @@
 
+const { model } = require('mongoose');
 const User = require('../models/User.js');
 
 
@@ -49,4 +50,21 @@ catch(err){
          return ;
 
 }
+}
+
+
+
+
+
+// for profile 
+
+module.exports.login = (req,res)=>{
+
+    return res.render('profile',{
+        title: 'Codeial',
+    })
+}
+
+module.exports.login3=(req,res)=>{
+    return res.send("ho gya login ");
 }
