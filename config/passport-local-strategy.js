@@ -4,7 +4,6 @@ const LocalStrategy = require('passport-local').Strategy;
 
 // telling passport to use User
 
-const user = require('../models/User');
 const User = require('../models/User');
 
 passport.use(new LocalStrategy({
@@ -54,13 +53,10 @@ passport.checkAuthentication = (req,res,next)=>{
 
 passport.setAuthenticatedUser = (req,res,next)=>{
 
-
-
     if(req.isAuthenticated()){
         res.locals.user = req.user;
     }
     next();
 }
     
-
 module.exports = passport;

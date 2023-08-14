@@ -61,13 +61,13 @@ module.exports.signin = (req,res)=>{
 
 
 module.exports.profile = (req,res)=>{
-    
+
     return res.render('profile',{
             title: 'Codeial',
         })
 }
 
-// controller for creating session or logging in
+// controller for creating session or logging in 
 
 module.exports.createSession = (req,res)=>{
     return res.redirect('/');
@@ -75,3 +75,30 @@ module.exports.createSession = (req,res)=>{
 }
 
 
+// controller for signing out 
+
+module.exports.signOut = (req,res)=>{
+
+    try{
+        // console.log('sign out ')
+        // req.logout((err)=>{
+        //     if(err){
+        //         console.log('error -->log out  controller ');
+        //     }
+    
+        // });
+        req.session.destroy(err => {
+            if (err) {
+              console.error('Error destroying session:', err);
+              return res.redirect('/'); // or handle the error as needed
+            }
+            req.user = null; // Clear the user object
+            res.redirect('/sign-in'); // or any other appropriate action
+          });
+
+    }
+    catch(err){
+        console.log(err , '<----controller signout')
+    }
+
+}

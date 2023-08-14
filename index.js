@@ -26,8 +26,26 @@ app.set('layout extractScripts', true)
 app.set('view engine', 'ejs');
 
 app.set('views', './views');
+
+const sassMiddleware = require('node-sass-middleware')
+
+// storing cookie in mongo 
+app.use(sassMiddleware({
+    src: './assets/scss',
+    dest: 'assets/css',
+    debug:true,
+    prefix: '/css',
+    err:(err)=>{
+        console.log(err,"-->at sass middleware")
+    }
+}))
+
 app.use(express.static('./assets'));
 
+
+
+
+const MongoStore =  require('connect-mongo')
 
 // setting up session
 
@@ -37,8 +55,14 @@ app.use(session({
     secret: "blahsomething",
     resave: false,
     cookie:{
-        maxAge: (1000*60*20)
-    }
+        maxAge: (1000*60*10)
+    },
+    store:MongoStore.create({
+        mongoUrl: 'mongodb://127.0.0.1:27017/codeial',
+        autoRemove: 'disable'
+    },(err)=>{
+        console.log(err,"--->here at mongostore ");
+    })
 }))
 
 // Initialize Passport.js
@@ -46,6 +70,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(passport.setAuthenticatedUser);
+
 
 
 

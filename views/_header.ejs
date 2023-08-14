@@ -2,5 +2,18 @@
     <link rel="stylesheet" href="/css/_header.css">
 <nav class="nav-bar">
     <div id="site-name" >APEDIA</div>
+    <div id="check">
+        <% if (locals.user) { %>
+
+            <li><%= user.name %></li>
+            <li><a href="/sign-out">Sign out</a></li>
+
+       
+        <% } else { %>
+            <a href="/sign-in"> Sign In</a>
+            <a href="/sign-up">Sign up</a>
+            <% } %>
+         
+    </div>
 </nav>
 </header>
