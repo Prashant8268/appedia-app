@@ -1,8 +1,8 @@
 
 const { model } = require('mongoose');
 const User = require('../models/User.js');
-
-
+const Post = require('../models/Post.js');
+const Comment = require('../models/Comment.js');
 
 
 // controller for creating a new user 
@@ -36,10 +36,26 @@ catch(err){
 
 
 // controller for homepage 
-module.exports.home =(req,res)=>{
-    return res.render('./homepage.ejs',{
-        title:"Codeial"
-    });
+module.exports.home =async(req,res)=>{
+    try{  
+            const posts = await Post.find().populate('user','name').populate({
+                path:'comments',
+                populate:{
+                    path:'user', select: 'name'
+                }
+            });
+
+            console.log('posts', posts);
+            return res.render('./homepage.ejs',{
+                title:"Codeial",posts
+            });
+
+       
+    }
+    catch(err){
+        console.log(err, '<--- error at home controller line 38')
+    }
+
 
 }
 
@@ -100,5 +116,51 @@ module.exports.signOut = (req,res)=>{
     catch(err){
         console.log(err , '<----controller signout')
     }
+
+}
+
+
+
+// controller for creating a post 
+module.exports.createPost = async(req,res)=>{
+
+  try{
+
+
+    const user = await User.findById(req.user.id);
+    const post = await Post.create({
+        content: req.body.content,
+        user: req.user._id
+    }); 
+    
+    return res.redirect('back');
+  }
+    catch(err){
+        console.log(err,'<--- erron in createPost controller ')
+    }
+}
+
+
+module.exports.postComment= async(req,res)=>{
+
+    try{
+        const post =  await Post.findById(req.body.post);
+        if(post){
+             post.comments.push( await Comment.create({
+                content:req.body.comment,
+                post: req.body.post,
+                user:req.user._id
+            })); 
+             await post.save();
+            console.log('post', post)
+        }
+
+        return res.redirect('back');
+    }
+    catch(err){
+        console.log(err, '<---error in postComments controller line 150')
+    }
+
+
 
 }

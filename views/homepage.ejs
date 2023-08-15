@@ -1,1 +1,44 @@
-<div>this is home page </div>
+<link rel="stylesheet" href="/css/homepage.css">
+<div class="container">
+    <div class="side1"></div>
+    
+     
+    <div class="new-feed">
+        <h3>Posts</h3>
+        <% if (locals.user) { %>
+        <form action="/create-post"  method="POST" id="post-form">
+            <textarea placeholder="Type here...." name="content" id="content" cols="30" rows="4"></textarea>
+            <input type="submit" value="Post ">
+        </form>
+        <% } %>
+
+        <div class="posts">
+            <% if (posts) { %>
+             <% for( let i  of posts) { %>
+                <li><p> <%= i.content %></p>
+                    <p><%= i.user.name %></p>
+                    <form action="/post-comment" method="POST">
+                        <textarea name="comment" id="" cols="30" rows="2"></textarea>
+                        <input type="hidden" name="post"  value="<%= i._id %>">
+                        <input type="submit" value="Comment">
+                    </form>
+
+
+                    <% for( let  p of i.comments) { %>
+                        <li >
+                            <p><%= p.content %> </p>
+                            <p><%= p.user.name %></p>
+                        </li>
+
+                    <% } %>
+                </li>
+                
+             <% } %>
+            <% } %>
+        </div>
+
+    </div>
+  
+
+    <div class="friends"></div>
+</div>
