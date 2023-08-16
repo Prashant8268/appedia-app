@@ -44,8 +44,6 @@ module.exports.home =async(req,res)=>{
                     path:'user', select: 'name'
                 }
             });
-
-            console.log('posts', posts);
             return res.render('./homepage.ejs',{
                 title:"Codeial",posts
             });
@@ -163,4 +161,52 @@ module.exports.postComment= async(req,res)=>{
 
 
 
+}
+
+// controller for deleting a post 
+
+ module.exports.deletePost = async(req,res)=>{
+    try{
+        
+        console.log(req.params.id, 'post id <--')
+        const post = await Post.findById(req.params.id);
+        if(post.user==req.user.id){
+            await Comment.deleteMany({post: req.params.id});
+            await post.deleteOne({id: req.params.id});
+        }
+        return res.redirect('back');
+
+
+
+    }
+
+    catch(err){
+        if(err){
+            console.log('eroor --> deletePost controller');
+
+        }
+    }
+ }
+
+//  controller for deleting a post 
+
+
+module.exports.deleteComment = async(req,res)=>{
+    try{
+        
+        const comment = await Comment.findById(req.params.id);
+        if(req.user.id == comment.user){
+            await Post.findByIdAndUpdate(comment.post, {$pull: {comments: req.params.id}});
+            // await comment.deleteOne({id:req.params.id})
+            await comment.deleteOne({id: req.params.id}); 
+
+        }
+ 
+        return res.redirect('back');
+    }
+    catch(err){
+        if(err){
+            console.log(err, '<---at deleteComment controller ');
+        }
+    }
 }

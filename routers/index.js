@@ -26,4 +26,8 @@ router.get('/sign-out',controllers.signOut);
 router.post('/create-post',passport.checkAuthentication,controllers.createPost);
 router.post('/post-comment',controllers.postComment);
 
+router.get('/delete-post/:id', controllers.deletePost);
+
+router.get('/delete-comment/:id', controllers.deleteComment);
+
 module.exports = router;
