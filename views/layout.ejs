@@ -4,12 +4,34 @@
             <%= title %>
         </title>
         <%- style %>
+        
     </head>
 
     <%- include('_header') %>
+
+    <% if (flash.success && flash.success.length>0) { %>
+     
+        <h3><%= flash.success  %></h3>
+
+    <% } %>
+
+
 
     <%- body %>
 
     <%- include('_footer') %>
     <%- script %>
+    <!-- <script>
+
+     if(flash.success && flash.success.length> 0 ){ 
+            new noty({
+                theme: 'relax',
+                text: "<%= flash.success %>",
+                type: 'success',
+                layout: 'topRight',
+                timeout: 1500
+            }).show();
+ } 
+
+    </script> -->
 </html>

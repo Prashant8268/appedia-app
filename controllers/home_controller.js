@@ -86,6 +86,8 @@ module.exports.profile = (req,res)=>{
 // controller for creating session or logging in 
 
 module.exports.createSession = (req,res)=>{
+
+    req.flash('success', "Logged in successfully");
     return res.redirect('/');
 
 }
@@ -103,7 +105,11 @@ module.exports.signOut = (req,res)=>{
             }
             req.user = null; // Clear the user object
             res.redirect('/sign-in'); // or any other appropriate action
+           
+
           });
+
+
 
     }
     catch(err){
@@ -118,7 +124,6 @@ module.exports.signOut = (req,res)=>{
 module.exports.createPost = async(req,res)=>{
 
   try{
-
 
     const user = await User.findById(req.user.id);
     const post = await Post.create({
@@ -169,15 +174,10 @@ module.exports.postComment= async(req,res)=>{
         }
         return res.redirect('back');
 
-
-
     }
 
-    catch(err){
-        if(err){
+    catch(err){  
             console.log('eroor --> deletePost controller');
-
-        }
     }
  }
 
@@ -191,15 +191,11 @@ module.exports.deleteComment = async(req,res)=>{
         if(req.user.id == comment.user){
             await Post.findByIdAndUpdate(comment.post, {$pull: {comments: req.params.id}});
             await comment.deleteOne({id: req.params.id}); 
-
         }
- 
         return res.redirect('back');
     }
     catch(err){
-        if(err){
             console.log(err, '<---at deleteComment controller ');
-        }
     }
 }
 
@@ -209,8 +205,6 @@ module.exports.deleteComment = async(req,res)=>{
 module.exports.updateProfilePage = async(req,res)=>{
 
     try{
-        console.log(req.params.id);
-
         const user = await User.findById(req.params.id);
 
         return res.render('profile_update',{
@@ -221,9 +215,7 @@ module.exports.updateProfilePage = async(req,res)=>{
     }
 
     catch(err){
-        if(err){
             console.log(err, '<-----at updateprofilepage');
-        }
     }
 
 }
@@ -233,14 +225,10 @@ module.exports.updateProfilePage = async(req,res)=>{
 module.exports.updateUserProfile = async(req,res)=>{
 
     try{
-
-        console.log(req.body)
         const user = await User.findByIdAndUpdate(req.user.id, {
             name : req.body.name,
             email: req.body.email
         }) ; 
-        console.log(user , 'user')
-
         return res.redirect('back');
 
     }

@@ -27,6 +27,9 @@ app.set('view engine', 'ejs');
 
 app.set('views', './views');
 
+
+const flash = require('connect-flash');
+
 const sassMiddleware = require('node-sass-middleware')
 
 // storing cookie in mongo 
@@ -71,7 +74,10 @@ app.use(passport.session());
 
 app.use(passport.setAuthenticatedUser);
 
+const Mware = require('./config/middleware');
 
+app.use(flash());
+app.use(Mware.setFlash);
 
 
 // setting router ;
