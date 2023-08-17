@@ -9,7 +9,7 @@
   flex-direction: row-reverse;
   justify-content: space-between;
   gap: 20px;
-  background-image: linear-gradient(210deg, white, #0e0e0e); }
+  background-image: linear-gradient(210deg, #6e6a6a, #0e0e0e); }
 
 #site-name {
   font-size: x-large;

@@ -4,20 +4,15 @@
     
      
     <div class="new-feed">
-        <% if (locals.user) { %>
-            <h3>Create a new post </h3>
-        <form action="/create-post"  method="POST" id="post-form">
-            <textarea placeholder="Type here...." name="content" id="content" cols="30" rows="4"></textarea>
-            <input type="submit" value="Create Post  " id="post-button">
-        </form>
-        <% } %>
+        <%- include('_createForm') %>
 
+
+        <h3 id="post-heading">Posts</h3>
         <div class="posts">
             <% if (posts) { %>
-        <h3><%= posts?"Posts":"No Posts to show" %></h3>
 
              <% for( let i  of posts) { %>
-                <li>
+                <div class="post-card">
                     <% if (locals.user && locals.user.id ==i.user.id) { %>
                         <p><a href="/delete-post/<%= i.id %>">X</a> </p>
                     <% } %>
@@ -29,24 +24,22 @@
                     <form action="/post-comment" method="POST">
                         <textarea name="comment" id="" cols="30" rows="2" placeholder="Add comment"></textarea>
                         <input type="hidden" name="post"  value="<%= i._id %>">
-                        <input type="submit" value="Comment">
+                        <input type="submit" value="Comment" class="post-button" id="comment-button">
                     </form>
                   <% } %>
 
 
                     <% for( let  p of i.comments) { %>
                         <li >
-                           <% if (p.user.id==locals.user.id) { %>
-                            
+                           <% if (locals.user &&p.user.id==locals.user.id ) { %>
                             <small><a href="/delete-comment/<%= p.id %>">D</a></small>
                            <% } %>
-
                             <p><%= p.content %> </p>
                             <p><%= p.user.name %></p>
                         </li>
 
                     <% } %>
-                </li>
+                    </div>
                 
              <% } %>
             <% } %>
@@ -55,5 +48,14 @@
     </div>
   
 
-    <div class="friends"></div>
+    <div class="friends">
+        <% if (users && locals.user) { %>
+            <h3>Friends</h3>
+        <% for( let i of users) { %>
+          <a href="/profile-update/<%= i.id %>" > <p><%=  i.name %></p> </a>
+        
+        <% } %>
+        <% } %>
+
+    </div>
 </div>

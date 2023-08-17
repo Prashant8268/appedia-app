@@ -30,4 +30,9 @@ router.get('/delete-post/:id', controllers.deletePost);
 
 router.get('/delete-comment/:id', controllers.deleteComment);
 
+
+router.get('/profile-update/:id', controllers.updateProfilePage);
+
+router.post('/update-user-profile',controllers.updateUserProfile)
+
 module.exports = router;

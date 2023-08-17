@@ -44,8 +44,10 @@ module.exports.home =async(req,res)=>{
                     path:'user', select: 'name'
                 }
             });
+            const users = await User.find();
             return res.render('./homepage.ejs',{
-                title:"Codeial",posts
+                title:"Codeial",posts,
+                users: users
             });
 
        
@@ -94,16 +96,9 @@ module.exports.createSession = (req,res)=>{
 module.exports.signOut = (req,res)=>{
 
     try{
-        // console.log('sign out ')
-        // req.logout((err)=>{
-        //     if(err){
-        //         console.log('error -->log out  controller ');
-        //     }
-    
-        // });
         req.session.destroy(err => {
             if (err) {
-              console.error('Error destroying session:', err);
+              console.error('Error in  destroying session:', err);
               return res.redirect('/'); // or handle the error as needed
             }
             req.user = null; // Clear the user object
@@ -150,7 +145,6 @@ module.exports.postComment= async(req,res)=>{
                 user:req.user._id
             })); 
              await post.save();
-            console.log('post', post)
         }
 
         return res.redirect('back');
@@ -167,8 +161,7 @@ module.exports.postComment= async(req,res)=>{
 
  module.exports.deletePost = async(req,res)=>{
     try{
-        
-        console.log(req.params.id, 'post id <--')
+
         const post = await Post.findById(req.params.id);
         if(post.user==req.user.id){
             await Comment.deleteMany({post: req.params.id});
@@ -197,7 +190,6 @@ module.exports.deleteComment = async(req,res)=>{
         const comment = await Comment.findById(req.params.id);
         if(req.user.id == comment.user){
             await Post.findByIdAndUpdate(comment.post, {$pull: {comments: req.params.id}});
-            // await comment.deleteOne({id:req.params.id})
             await comment.deleteOne({id: req.params.id}); 
 
         }
@@ -209,4 +201,52 @@ module.exports.deleteComment = async(req,res)=>{
             console.log(err, '<---at deleteComment controller ');
         }
     }
+}
+
+
+// controller for profile update
+
+module.exports.updateProfilePage = async(req,res)=>{
+
+    try{
+        console.log(req.params.id);
+
+        const user = await User.findById(req.params.id);
+
+        return res.render('profile_update',{
+            title: 'Codeial',
+            userw : user
+        })
+
+    }
+
+    catch(err){
+        if(err){
+            console.log(err, '<-----at updateprofilepage');
+        }
+    }
+
+}
+
+// for updating user profile
+
+module.exports.updateUserProfile = async(req,res)=>{
+
+    try{
+
+        console.log(req.body)
+        const user = await User.findByIdAndUpdate(req.user.id, {
+            name : req.body.name,
+            email: req.body.email
+        }) ; 
+        console.log(user , 'user')
+
+        return res.redirect('back');
+
+    }
+    catch(err){
+        console.log(err, 'error ')
+    }
+
+   
 }

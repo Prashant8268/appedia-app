@@ -1,0 +1,14 @@
+<p><%= userw.name %></p>
+<p>
+    <%= userw.email %>
+</p>
+
+
+<% if (locals.user.id == userw.id) { %>
+    <form method="POST" action="/update-user-profile">
+        <input type="text" name="name" value="<%= user.name %>">
+        <input type="text" name="email" value="<%=  user.email %>">
+        <input type="submit" value="Update">
+    </form>
+ 
+<% } %>
