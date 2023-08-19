@@ -8,29 +8,29 @@
 
 
         <h3 id="post-heading">Posts</h3>
-        <div class="posts">
+        <div class="posts" id="posts-container">
             <% if (posts) { %>
 
              <% for( let i  of posts) { %>
-                <div class="post-card">
+                <div class="post-card" id="post-<%= i.id %>">
                     <% if (locals.user && locals.user.id ==i.user.id) { %>
-                        <p><a href="/delete-post/<%= i.id %>">X</a> </p>
+                        <p><a class="delete-post-btn" href="/delete-post/<%= i.id %>">X</a> </p>
                     <% } %>
 
                     <p><%= i.user.name %></p>
                     <p> <%= i.content %></p>
                   <% if (locals.user) { %>
                    
-                    <form action="/post-comment" method="POST">
+                    <form action="/post-comment" method="POST" class="comment-form" id= "comment-form-<%= i._id %>" >
                         <textarea name="comment" id="" cols="30" rows="2" placeholder="Add comment"></textarea>
                         <input type="hidden" name="post"  value="<%= i._id %>">
                         <input type="submit" value="Comment" class="post-button" id="comment-button">
                     </form>
                   <% } %>
 
-
+                    <div id="comments-container-<%= i.id %>">
                     <% for( let  p of i.comments) { %>
-                        <li >
+                        <li id="comment-<%= i.id  %>">
                            <% if (locals.user &&p.user.id==locals.user.id ) { %>
                             <small><a href="/delete-comment/<%= p.id %>">D</a></small>
                            <% } %>
@@ -39,10 +39,11 @@
                         </li>
 
                     <% } %>
+                </div>
                     </div>
                 
-             <% } %>
-            <% } %>
+                <% } %>
+                <% } %>
         </div>
 
     </div>

@@ -134,11 +134,13 @@ module.exports.createPost = async(req,res)=>{
     if(req.xhr){
         return res.status(200).json({
             data:{
-                post:post
+                post:post,
+                username: user.name
             },
             message:'Post created'
         })
     }
+    console.log('heree!!!')
     
     return res.redirect('back');
   }
@@ -151,14 +153,31 @@ module.exports.createPost = async(req,res)=>{
 module.exports.postComment= async(req,res)=>{
 
     try{
+        console.log(req.body)
         const post =  await Post.findById(req.body.post);
         if(post){
-             post.comments.push( await Comment.create({
+            let comment= await Comment.create({
                 content:req.body.comment,
                 post: req.body.post,
                 user:req.user._id
-            })); 
+            })
+             post.comments.push(comment); 
+
+
              await post.save();
+             if(req.xhr){
+                return res.status(200).json({
+                    data:{
+                        comment:comment,
+                        user:req.user.name,
+                        postId: post.id
+                    },
+                    message:"Comment posted"
+
+                })
+        }
+        
+
         }
 
         return res.redirect('back');
@@ -180,6 +199,17 @@ module.exports.postComment= async(req,res)=>{
         if(post.user==req.user.id){
             await Comment.deleteMany({post: req.params.id});
             await post.deleteOne({id: req.params.id});
+        }
+        console.log('yhha se id ', post.id);
+
+        if(req.xhr){
+            return res.status(200).json({
+                data:{
+                    postId:post.id
+                },
+                message: "Post deleted successfully "
+
+            })
         }
         return res.redirect('back');
 
@@ -234,16 +264,32 @@ module.exports.updateProfilePage = async(req,res)=>{
 module.exports.updateUserProfile = async(req,res)=>{
 
     try{
-        const user = await User.findByIdAndUpdate(req.user.id, {
-            name : req.body.name,
-            email: req.body.email
-        }) ; 
-        return res.redirect('back');
+        // const user = await User.findByIdAndUpdate(req.user.id, {
+        //     name : req.body.name,
+        //     email: req.body.email
+        // }) ; 
+        const user = await User.findById(req.user._id);
+        User.uploadedAvatar(req,res,(err)=>{
+            if(err){
+            console.log('Error at updateUserProfile controller',err);
+            }
+            user.name = req.body.name;
+            user.email = req.body.email;
+            console.log(req.file, '<--uploaded file');
+            if(req.file){
+                user.avatar = User.avatarPath +'/'+ req.file.filename
+            };
+
+            user.save();
+            return res.redirect('back');
+            
+        })
+
 
     }
     catch(err){
         console.log(err, 'error ')
     }
 
-   
+  
 }
