@@ -44,6 +44,8 @@ app.use(sassMiddleware({
 }))
 
 app.use(express.static('./assets'));
+
+app.use('/uploads',express.static(__dirname+ '/uploads'));
  
 
 

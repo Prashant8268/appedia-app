@@ -260,6 +260,8 @@ module.exports.updateProfilePage = async(req,res)=>{
 }
 
 // for updating user profile
+const fs = require('fs');
+const path = require('path'); 
 
 module.exports.updateUserProfile = async(req,res)=>{
 
@@ -277,6 +279,11 @@ module.exports.updateUserProfile = async(req,res)=>{
             user.email = req.body.email;
             console.log(req.file, '<--uploaded file');
             if(req.file){
+
+                if(user.avatar){
+                    fs.unlinkSync(path.join(__dirname, '..', user.avatar))
+                }
+
                 user.avatar = User.avatarPath +'/'+ req.file.filename
             };
 
