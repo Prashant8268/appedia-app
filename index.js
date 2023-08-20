@@ -17,6 +17,8 @@ const session = require('express-session');
 const passport = require('passport');
 const passportLocal = require('./config/passport-local-strategy');
 
+const passportJWT  = require('./config/passport-jwt-strategy'); 
+
 const expressLayouts = require('express-ejs-layouts');
 app.use(expressLayouts);
 
@@ -85,7 +87,7 @@ app.use(Mware.setFlash);
 // setting router ;
 // below you can also use only './routers as it will point to index aut
 app.use('/',require('./routers'))
-
+app.use('/api', require('./routers/api'));
 app.listen(port,(err)=>{
     if(err){
         console.log('Error in starting server');

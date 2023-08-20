@@ -279,11 +279,9 @@ module.exports.updateUserProfile = async(req,res)=>{
             user.email = req.body.email;
             console.log(req.file, '<--uploaded file');
             if(req.file){
-
                 if(user.avatar){
                     fs.unlinkSync(path.join(__dirname, '..', user.avatar))
                 }
-
                 user.avatar = User.avatarPath +'/'+ req.file.filename
             };
 
