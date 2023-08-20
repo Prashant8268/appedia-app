@@ -45,8 +45,10 @@ module.exports.home =async(req,res)=>{
                 }
             });
             const users = await User.find();
+            
             return res.render('./homepage.ejs',{
-                title:"Codeial",posts,
+                title:"Codeial",
+                posts,
                 users: users
             });
 
