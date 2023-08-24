@@ -18,6 +18,7 @@ const passport = require('passport');
 const passportLocal = require('./config/passport-local-strategy');
 
 const passportJWT  = require('./config/passport-jwt-strategy'); 
+const passportGoogle = require('./config/passport-google-Oauth-strategy');
 
 const expressLayouts = require('express-ejs-layouts');
 app.use(expressLayouts);

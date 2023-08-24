@@ -35,4 +35,7 @@ router.get('/profile-update/:id', controllers.updateProfilePage);
 
 router.post('/update-user-profile',controllers.updateUserProfile)
 
+router.get('/user/auth/google',passport.authenticate('google',{scope:['profile', 'email']}));
+router.get('/user/auth/google/callback',passport.authenticate('google',{failureRedirect:'/sign-in'}), controllers.createSession);
+
 module.exports = router;
