@@ -4,6 +4,8 @@ const User = require('../models/User.js');
 const Post = require('../models/Post.js');
 const Comment = require('../models/Comment.js');
 
+const nodeMailer = require('../mailers/comment_mailer.js');
+
 
 // controller for creating a new user 
 
@@ -155,7 +157,6 @@ module.exports.createPost = async(req,res)=>{
 module.exports.postComment= async(req,res)=>{
 
     try{
-        console.log(req.body)
         const post =  await Post.findById(req.body.post);
         if(post){
             let comment= await Comment.create({
@@ -165,12 +166,15 @@ module.exports.postComment= async(req,res)=>{
             })
              post.comments.push(comment); 
 
+             comment = await comment.populate('user', 'name email')
+             nodeMailer.newComment(comment);
+
 
              await post.save();
              if(req.xhr){
                 return res.status(200).json({
                     data:{
-                        comment:comment,
+                        comment:comment, 
                         user:req.user.name,
                         postId: post.id
                     },
@@ -202,7 +206,6 @@ module.exports.postComment= async(req,res)=>{
             await Comment.deleteMany({post: req.params.id});
             await post.deleteOne({id: req.params.id});
         }
-        console.log('yhha se id ', post.id);
 
         if(req.xhr){
             return res.status(200).json({
