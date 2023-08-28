@@ -20,10 +20,10 @@ const transporter = nodemailer.createTransport({
   });
 
 
-  let renderTemplate = (data,relativePaht)=>{
+  let renderTemplate = (data,relativePath)=>{
     let mainHTML;
     ejs.renderFile(
-        path.join(__dirname, '../views/mailer',relativePaht),
+        path.join(__dirname, '../views/mailers',relativePath),
         data,
         function(err,template){
             if(err){

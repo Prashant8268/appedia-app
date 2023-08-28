@@ -11,7 +11,7 @@ opts.secretOrKey = 'apedia';
 
 passport.use(new JWTStrategy(opts, async function(jwt_payload, done) {
 
-   let user =  User.findById(jwt_payload._id);
+   let user = await User.findById(jwt_payload._id);
 
    if(user){ 
     return done(null, user);

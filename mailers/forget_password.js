@@ -1,15 +1,12 @@
 const nodemailer = require('../config/nodemailer');
-const nodeMailer = require('../config/nodemailer');
 
 
-
-exports.newComment = (comment)=>{
-
-    let htmlString = nodeMailer.renderTemplate({comment: comment}, '/new_comment.ejs')
+exports.forgetPassword = (AccessToken)=>{
+    let htmlString = nodeMailer.renderTemplate({AccessToken: AccessToken}, '/forget_password.ejs')
     nodemailer.transporter.sendMail({
         from:'godne1029@gmail.com',
-        to:comment.user.email,
-        subject:'new commet added',
+        to:AccessToken.user.email,
+        subject:'Forget password',
         html:  htmlString
     },(err, info)=>{
         if(err){
