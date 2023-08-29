@@ -3,37 +3,7 @@ const { model } = require('mongoose');
 const User = require('../models/User.js');
 const Post = require('../models/Post.js');
 const Comment = require('../models/Comment.js');
-
 const nodeMailer = require('../mailers/comment_mailer.js');
-
-
-// controller for creating a new user 
-
-module.exports.createUser = async(req,res)=>{
-try{
-    if(req.body.password !=req.body.confirmPassword){
-        console.log('Password do not match');
-        return res.redirect('back');
-    }
-
-    const aleradyExist = await  User.findOne({email:req.body.email});
-    if(aleradyExist){
-        console.log('User already Present ');
-        return res.redirect('back');
-    }
-
-    await  User.create({
-        name: req.body.name,
-        email: req.body.email,
-        password: req.body.password
-    })
-    return res.redirect('/sign-in')
-}
-catch(err){  
-        console.log(err, "error in creating user");
-         return ;
-}
-}
 
 
 
@@ -44,8 +14,9 @@ module.exports.home =async(req,res)=>{
                 path:'comments',
                 populate:{
                     path:'user', select: 'name'
-                }
-            });
+                },
+                populate:('likes')
+            }).populate('likes');
             const users = await User.find();
             
             return res.render('./homepage.ejs',{
@@ -89,12 +60,7 @@ module.exports.profile = (req,res)=>{
 
 // controller for creating session or logging in 
 
-module.exports.createSession = (req,res)=>{
 
-    req.flash('success', "Logged in successfully");
-    return res.redirect('/');
-
-}
 
 
 // controller for signing out 
@@ -124,182 +90,5 @@ module.exports.signOut = (req,res)=>{
 
 
 
-// controller for creating a post 
-module.exports.createPost = async(req,res)=>{
-
-  try{
-
-    const user = await User.findById(req.user.id);
-    const post = await Post.create({
-        content: req.body.content,
-        user: req.user._id
-    });
-    
-    if(req.xhr){
-        return res.status(200).json({
-            data:{
-                post:post,
-                username: user.name
-            },
-            message:'Post created'
-        })
-    }
-    console.log('heree!!!')
-    
-    return res.redirect('back');
-  }
-    catch(err){
-        console.log(err,'<--- erron in createPost controller ')
-    }
-}
 
 
-module.exports.postComment= async(req,res)=>{
-
-    try{
-        const post =  await Post.findById(req.body.post);
-        if(post){
-            let comment= await Comment.create({
-                content:req.body.comment,
-                post: req.body.post,
-                user:req.user._id
-            })
-             post.comments.push(comment); 
-
-             comment = await comment.populate('user', 'name email')
-             nodeMailer.newComment(comment);
-
-
-             await post.save();
-             if(req.xhr){
-                return res.status(200).json({
-                    data:{
-                        comment:comment, 
-                        user:req.user.name,
-                        postId: post.id
-                    },
-                    message:"Comment posted"
-
-                })
-        }
-        
-
-        }
-
-        return res.redirect('back');
-    }
-    catch(err){
-        console.log(err, '<---error in postComments controller line 150')
-    }
-
-
-
-}
-
-// controller for deleting a post 
-
- module.exports.deletePost = async(req,res)=>{
-    try{
-
-        const post = await Post.findById(req.params.id);
-        if(post.user==req.user.id){
-            await Comment.deleteMany({post: req.params.id});
-            await post.deleteOne({id: req.params.id});
-        }
-
-        if(req.xhr){
-            return res.status(200).json({
-                data:{
-                    postId:post.id
-                },
-                message: "Post deleted successfully "
-
-            })
-        }
-        return res.redirect('back');
-
-    }
-
-    catch(err){  
-            console.log('eroor --> deletePost controller');
-    }
- }
-
-//  controller for deleting a post 
-
-
-module.exports.deleteComment = async(req,res)=>{
-    try{
-        
-        const comment = await Comment.findById(req.params.id);
-        if(req.user.id == comment.user){
-            await Post.findByIdAndUpdate(comment.post, {$pull: {comments: req.params.id}});
-            await comment.deleteOne({id: req.params.id}); 
-        }
-        return res.redirect('back');
-    }
-    catch(err){
-            console.log(err, '<---at deleteComment controller ');
-    }
-}
-
-
-// controller for profile update
-
-module.exports.updateProfilePage = async(req,res)=>{
-
-    try{
-        const user = await User.findById(req.params.id);
-
-        return res.render('profile_update',{
-            title: 'Codeial',
-            userw : user
-        })
-
-    }
-
-    catch(err){
-            console.log(err, '<-----at updateprofilepage');
-    }
-
-}
-
-// for updating user profile
-const fs = require('fs');
-const path = require('path'); 
-
-module.exports.updateUserProfile = async(req,res)=>{
-
-    try{
-        // const user = await User.findByIdAndUpdate(req.user.id, {
-        //     name : req.body.name,
-        //     email: req.body.email
-        // }) ; 
-        const user = await User.findById(req.user._id);
-        User.uploadedAvatar(req,res,(err)=>{
-            if(err){
-            console.log('Error at updateUserProfile controller',err);
-            }
-            user.name = req.body.name;
-            user.email = req.body.email;
-            console.log(req.file, '<--uploaded file');
-            if(req.file){
-                if(user.avatar){
-                    fs.unlinkSync(path.join(__dirname, '..', user.avatar))
-                }
-                user.avatar = User.avatarPath +'/'+ req.file.filename
-            };
-
-            user.save();
-            return res.redirect('back');
-            
-        })
-
-
-    }
-    catch(err){
-        console.log(err, 'error ')
-    }
-
-  
-}

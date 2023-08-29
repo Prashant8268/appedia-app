@@ -7,7 +7,7 @@
             e.preventDefault(); 
             $.ajax({
                 type: 'post',
-                url: '/create-post',
+                url: '/posts/create-post',
                 data: newPostForm.serialize(),
                 success: (data)=>{
                     console.log(data)
@@ -24,10 +24,10 @@
 
     let newPostDom = (i,username)=>{
         return $(`<div class="post-card" id="post-${i._id}">
-           <p><a href="/delete-post/${i._id}">X</a> </p>
+           <p><a href="/posts/delete-post/${i._id}">X</a> </p>
         <p>${ username }</p>
         <p> ${ i.content }</p>
-        <form action="/post-comment" method="POST" class="comment-form">
+        <form action="/comments/post-comment" method="POST" class="comment-form">
             <textarea name="comment" id="" cols="30" rows="2" placeholder="Add comment"></textarea>
             <input type="hidden" name="post"  value="${ i._id }">
             <input type="submit" value="Comment" class="post-button" id="comment-button">
@@ -39,7 +39,7 @@
 
     let newCommentDom = (i,user)=>{
         return $(`<li id="comment-${ i._id  }">
-         <small><a href="/delete-comment/${i._id }">D</a></small>
+         <small><a href="/comments/delete-comment/${i._id }">D</a></small>
          <p>${ i.content }</p>
          <p>${user}</p>
      </li>`)
@@ -54,7 +54,7 @@
                 let newCommentForm = $(form); // Convert the form to a jQuery object
                 $.ajax({
                     type: 'post',
-                    url: '/post-comment',
+                    url: '/comments/post-comment',
                     data: newCommentForm.serialize(),
                     success: (data) => {
                         let newComment = newCommentDom(data.data.comment, data.data.user);

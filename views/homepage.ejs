@@ -15,14 +15,21 @@
              <% for( let i  of posts) { %>
                 <div class="post-card" id="post-<%= i.id %>">
                     <% if (locals.user && locals.user.id ==i.user.id) { %>
-                        <p><a class="delete-post-btn" href="/delete-post/<%= i.id %>">X</a> </p>
+                        <p><a class="delete-post-btn" href="/posts/delete-post/<%= i.id %>">X</a> </p>
                     <% } %>
-
+                    <div>
                     <p><%= i.user.name %></p>
                     <p> <%= i.content %></p>
+                </div>
+                <div>
+                   <a href="/likes/toggle?id=<%= i.id %>&type=Post" class="like-tag"> 
+                    <img id="like-logo" src="https://cdn-icons-png.flaticon.com/512/1077/1077035.png" alt="like">
+                   </a>
+                    <span><%= i.likes.length %></span>
+                </div>
                   <% if (locals.user) { %>
                    
-                    <form action="/post-comment" method="POST" class="comment-form" id= "comment-form-<%= i._id %>" >
+                    <form action="/comments/post-comment" method="POST" class="comment-form" id= "comment-form-<%= i._id %>" >
                         <textarea name="comment" id="" cols="30" rows="2" placeholder="Add comment"></textarea>
                         <input type="hidden" name="post"  value="<%= i._id %>">
                         <input type="submit" value="Comment" class="post-button" id="comment-button">
@@ -33,10 +40,16 @@
                     <% for( let  p of i.comments) { %>
                         <li id="comment-<%= i.id  %>">
                            <% if (locals.user &&p.user.id==locals.user.id ) { %>
-                            <small><a href="/delete-comment/<%= p.id %>">D</a></small>
+                            <small><a href="/comments/delete-comment/<%= p.id %>">D</a></small>
                            <% } %>
                             <p><%= p.content %> </p>
                             <p><%= p.user.name %></p>
+                            <div>
+                                <a href="/likes/toggle?id=<%= p._id %>&type=Comment" class="like-tag"> 
+                                 <img id="like-logo" src="https://cdn-icons-png.flaticon.com/512/1077/1077035.png" alt="like">
+                                </a>
+                                 <span><%= (p.likes.length) %></span>
+                             </div>
                         </li>
 
                     <% } %>
@@ -54,7 +67,7 @@
         <% if (users && locals.user) { %>
             <h3>Friends</h3>
         <% for( let i of users) { %>
-          <a href="/profile-update/<%= i.id %>" > <p><%=  i.name %></p> </a>
+          <a href="/user/profile-update/<%= i.id %>" > <p><%=  i.name %></p> </a>
         
         <% } %>
         <% } %>

@@ -6,7 +6,7 @@
 
 
 <% if (locals.user.id == userw.id) { %>
-    <form method="POST" action="/update-user-profile" enctype="multipart/form-data">
+    <form method="POST" action="/user/update-user-profile" enctype="multipart/form-data">
         <input type="text" name="name" value="<%= user.name %>">
         <input type="text" name="email" value="<%=  user.email %>">
         <input type="file" name="avatar" placeholder="Profile Picture">
