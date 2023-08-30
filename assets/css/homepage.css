@@ -1,8 +1,9 @@
+@import url("https://fonts.googleapis.com/css2?family=Sorts+Mill+Goudy:ital@1&display=swap");
 body {
   margin: 0px;
   padding: 0px;
-  background-color: #d8d3d3;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+  color: #914C4C;
+  font-family: 'Sorts Mill Goudy', serif; }
 
 .container {
   display: flex;
@@ -10,19 +11,10 @@ body {
   width: 100%;
   height: 100%; }
 
-.side1 {
-  width: 20%;
-  height: 400px;
-  background-color: #d8d3d3;
-  opacity: .5; }
-
 .new-feed {
-  width: 60%;
+  width: 70%;
   height: 100%;
   padding-top: 8px;
-  background-color: #fff9fb;
-  background-color: #d8d3d3;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   padding-left: 20px;
   display: flex;
   flex-direction: column;
@@ -32,8 +24,7 @@ body {
     margin-top: -14px; }
     .new-feed #post-form textarea {
       background-color: #bfdfdf;
-      color: black;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+      color: black; }
   .new-feed::-webkit-scrollbar {
     width: 4px;
     /* Set the width of the scrollbar */ }
@@ -58,7 +49,6 @@ body {
     padding: 5px;
     border-radius: 4px;
     font-size: 1.1rem;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     border: 0;
     background-color: #5C6784;
     color: white;
@@ -75,13 +65,11 @@ body {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    margin-right: 3px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    margin-right: 3px; }
     .new-feed .posts textarea {
       padding: 10px;
       border: 0px;
       width: 8rem;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background-color: white;
       min-height: 2rem;
       font-size: 0.7rem;
@@ -91,32 +79,51 @@ body {
         outline: 0px; }
     .new-feed .posts .post-card {
       padding-left: 10px;
+      padding-top: 10px;
       margin-top: -15px;
       background-color: #c5cad6;
+      display: flex;
+      flex-direction: column;
       border: 1px solid black; }
+    .new-feed .posts #user-name {
+      position: relative;
+      top: -10px; }
+    .new-feed .posts #user-avatar {
+      position: relative;
+      top: 8px;
+      margin-right: 10px;
+      height: 45px;
+      width: 45px;
+      border-radius: 50%; }
+    .new-feed .posts button {
+      padding: 0;
+      margin: 0;
+      position: relative;
+      left: 78.7%; }
+      .new-feed .posts button img {
+        height: 30px;
+        width: 20px; }
   .new-feed #comment-button {
     font-size: 0.8rem;
     border-radius: 2px; }
 
 #post-heading {
-  background-image: linear-gradient(210deg, white, #0e0e0e);
   padding: 0.5rem 0px 0.8rem 0.3rem;
   /* top right bottom left */
-  color: #DCE0D9;
-  font-size: 0.9rem;
+  color: #914C4C;
+  font-size: 1.5rem;
   height: 1rem; }
 
-.friends {
+.side-bar {
   width: 25%;
-  display: block; }
-  .friends h3 {
-    padding: 5px;
-    color: white;
-    background-image: linear-gradient(210deg, white, #0e0e0e); }
-  .friends a {
+  display: flex;
+  flex-direction: column; }
+  .side-bar h3 {
+    padding: 5px; }
+  .side-bar a {
     text-decoration: none;
-    color: #000613; }
-  .friends p {
+    color: #914C4C; }
+  .side-bar p {
     margin-left: 8px; }
 
 #like-logo {

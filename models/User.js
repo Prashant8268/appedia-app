@@ -23,7 +23,13 @@ const userSchema = new mongoose.Schema({
         },
         avatar:{
             type: String
-        }
+        },
+        friendship:[
+                      {
+                      type: mongoose.Schema.Types.ObjectId,
+                      ref:'Friendship'
+                    }
+                  ]
 
     
 },
