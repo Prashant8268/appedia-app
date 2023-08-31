@@ -32,17 +32,28 @@
             <input type="hidden" name="post"  value="${ i._id }">
             <input type="submit" value="Comment" class="post-button" id="comment-button">
         </form>
+        <div class="toggle-comments" container="comments-container-<%= post.id %>">See Comments</div>
         <div id="comments-container-${i._id }">
     </div>
         </div>`)
     }
 
-    let newCommentDom = (i,user)=>{
-        return $(`<li id="comment-${ i._id  }">
-         <small><a href="/comments/delete-comment/${i._id }">D</a></small>
-         <p>${ i.content }</p>
-         <p>${user}</p>
-     </li>`)
+    let newCommentDom = (comment,user)=>{
+        return $(`<li id="comment-${comment._id }">
+            <small>
+                <a href="/comments/delete-comment/${comment._id }">
+                <img src="https://cdn-icons-png.flaticon.com/512/11011/11011600.png" style="height: 15px; width: 8pxpx;">
+                </a>
+            </small>
+            <small>${comment.content } </small>
+            <small>${user} </small>
+            <div>
+                <a href="/likes/toggle?id=${comment._id }&type=Comment" class="like-tag"> 
+                <img id="like-logo" src="https://cdn-icons-png.flaticon.com/512/1077/1077035.png" alt="like">
+                </a>
+                <span>${comment.likes.length }</span>
+            </div>
+    </li>`)
     }
 
     let createComment = ()=>{
@@ -73,4 +84,38 @@
 
     createComment();
     createPost();
+
+    const toggleComment = document.querySelectorAll('.toggle-comments');
+
+    toggleComment.forEach((e)=>{
+        e.addEventListener('click',(event)=>{
+            if(event.target.innerHTML=='See Comments'){
+               event.target.innerHTML= 'Hide Comments'
+            }
+            else{
+                event.target.innerHTML = 'See Comments'
+            }
+            const commentContainer = document.getElementById(event.target.getAttribute('container'));
+            commentContainer.classList.toggle('hide');
+     
+        })
+    })
+
+
+const deletePost = document.querySelectorAll('.delete-post-btn');
+deletePost.forEach((e)=>{
+    e.addEventListener('click',(event)=>{
+        const secondChild = e.querySelector('.check:nth-child(1)');
+        secondChild.classList.toggle('hide');
+
+    })
+})
+
+//     <button class="delete-post-btn" id="delete-post-<%= post.id %>">
+//     <img src="https://cdn-icons-png.flaticon.com/512/2893/2893795.png" alt="options" >
+//     <div class="hide">
+//         <button><a href="/posts/delete-post/${i._id}">Delete</a></button>
+//     </div>
+// </button>
+
 }

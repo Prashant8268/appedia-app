@@ -12,19 +12,19 @@
                         <img src="<%= post.user.avatar %>"  id="user-avatar">
                         <span id="user-name"><%= post.user.name %></span>
                         <% if (locals.user && locals.user.id==post.user.id) { %>         
-                        <button>
-                            <img src="https://cdn-icons-png.flaticon.com/512/2893/2893795.png" alt="options" >
+                        <button class="delete-post-btn">
+                            <a href="/posts/delete-post/<%= post.id %>">Delete</a>
                         </button>
                         <% } %>
                     </div>
-                    <div>
-                        <p><%= post.content %></p>
+                    <div style="color: black; ">
+                        <p  ><%= post.content %></p>
                         <% if (locals.user) { %> 
                             <a href="/likes/toggle?id=<%= post.id %>&type=Post" class="like-tag"> 
                                 <img id="like-logo" src="https://cdn-icons-png.flaticon.com/512/1077/1077035.png" alt="like">
                             </a>
                         <% } %>
-                        <span><%= post.likes.length %>  &nbsp; Likes</span>
+                        <span>  <span style="font-size: 1.5rem;"><%= post.likes.length %></span>   Likes</span>
                         <% if (locals.user) { %>
                             <form action="/comments/post-comment" method="POST" class="comment-form" id= "comment-form-<%= post._id %>" >
                                 <textarea name="comment" id="" cols="30" rows="2" placeholder="Add comment"></textarea>
@@ -33,24 +33,26 @@
                             </form>
                         <% } %>
                     </div>
-                    <div id="comments-container-<%= post.id %>">
+                    <div class="toggle-comments" container="comments-container-<%= post.id %>">See Comments</div>
+                    <div id="comments-container-<%= post.id %>" class="hide">
                         <% for( let  comment of post.comments) { %>
-                            <li id="comment-<%= post.id  %>">
-                            <% if (locals.user &&comment.user.id==locals.user.id ) { %>
-                                <small>
-                                    <a href="/comments/delete-comment/<%= comment.id %>">
-                                    <img src="https://cdn-icons-png.flaticon.com/512/11011/11011600.png" style="height: 15px; width: 8pxpx;">
-                                    </a>
-                                </small>
-                            <% } %>
-                                <small><%= comment.user.name %> </small>
-                                <small><%= comment.content %> </small>
-                                <div>
-                                    <a href="/likes/toggle?id=<%= comment._id %>&type=Comment" class="like-tag"> 
-                                    <img id="like-logo" src="https://cdn-icons-png.flaticon.com/512/1077/1077035.png" alt="like">
-                                    </a>
-                                    <span><%= (comment.likes.length) %></span>
-                                </div>
+                            <li id="comment-<%= comment.id  %>" class="single-comment">
+                               <div> <%= comment.user.name %></div>
+                                <% if (locals.user &&comment.user.id==locals.user.id ) { %>
+                                    <small>
+                                        <a href="/comments/delete-comment/<%= comment.id %>">
+                                        <img src="https://cdn-icons-png.flaticon.com/512/11011/11011600.png" style="height: 15px; width: 8pxpx;">
+                                        </a>
+                                    </small>
+                                <% } %>
+                                    
+                                    <small><%= comment.content %></small> 
+                                    <div>
+                                        <a href="/likes/toggle?id=<%= comment._id %>&type=Comment" class="like-tag"> 
+                                        <img id="like-logo" src="https://cdn-icons-png.flaticon.com/512/1077/1077035.png" alt="like">
+                                        </a>
+                                        <span><%= (comment.likes.length) %></span>
+                                    </div>
                             </li>
                 
                         <% } %>

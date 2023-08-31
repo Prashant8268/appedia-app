@@ -13,13 +13,13 @@ module.exports.home =async(req,res)=>{
             const posts = await Post.find().populate('user','name avatar').populate({
                 path:'comments',
                 populate:{
-                    path:'user', select: 'name'
+                    path:'user', select: 'name',
                 },
-                populate:('likes')
+                // populate:('likes')
             }).populate('likes');
             const users = await User.find();
 
-            console.log(posts[0])
+
             
             return res.render('./homepage.ejs',{
                 title:"Codeial",
