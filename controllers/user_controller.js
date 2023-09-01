@@ -1,7 +1,8 @@
 const Like = require('../models/Like');
 const Post = require('../models/Post');
 const Comment = require('../models/Comment');
-const User = require('../models/User')
+const User = require('../models/User');
+const Friendship = require('../models/Friendship');
 
 
 
@@ -39,29 +40,13 @@ module.exports.createUser = async(req,res)=>{
     
     }
 
-    // controller for profile update
-
-module.exports.updateProfilePage = async(req,res)=>{
-
-    try{
-        const user = await User.findById(req.params.id);
-
-        return res.render('profile_update',{
-            title: 'Codeial',
-            userw : user
-        })
-
-    }
-
-    catch(err){
-            console.log(err, '<-----at updateprofilepage');
-    }
-
-}
+   
 
 // for updating user profile
 const fs = require('fs');
 const path = require('path'); 
+const { ConnectionStates } = require('mongoose');
+const { Console } = require('console');
 
 module.exports.updateUserProfile = async(req,res)=>{
 
@@ -95,4 +80,112 @@ module.exports.updateUserProfile = async(req,res)=>{
     catch(err){
         console.log(err, 'error ')
     }
+}
+
+ // controller for profile update
+
+ module.exports.updateProfilePage = async(req,res)=>{
+
+    try{
+        const user = await User.findById(req.params.id) .populate({
+            path: 'friends',
+            populate: [
+                { path: 'from_user', select: 'name' },
+                { path: 'to_user', select: 'name' }
+            ]
+        });
+        let areFriends;
+        let pending=false;
+        let rfu;
+        let friendship;
+        for(let i of user.friends){
+            if(i.from_user.id==user.id && i.to_user.id==req.user.id){
+                if(i.status=='accepted'){
+                    areFriends=true;
+                }
+                else if(i.status=='pending'){
+                    pending=true;     
+                }
+                friendship=i;
+            }
+            else if (i.from_user.id==req.user.id && i.to_user.id==user.id){
+                if(i.status=='accepted'){
+                    areFriends=true;
+                }
+                else if(i.status=='pending'){
+                    pending=true;
+                    rfu = 'Request Sent'
+                }
+                friendship=i;
+
+            }
+        }
+
+        return res.render('profile_update',{
+            title: 'Codeial',
+            userw : user,
+            areFriends,
+            pending,
+            rfu,
+            friendRequest:friendship
+        })
+
+    }
+
+    catch(err){
+            console.log(err, '<-----at updateprofilepage');
+    }
+
+}
+
+
+// controller for adding a friend
+
+module.exports.addFriend = async(req,res)=>{
+    const to_user = await User.findById(req.query.id);
+    const friendship = await Friendship.create({
+        to_user:to_user.id,
+        from_user:req.user.id,
+        status:'pending'
+    });
+
+    const from_user = await User.findById(req.user.id);
+    to_user.friends.push(friendship);
+    to_user.save();
+    from_user.friends.push(friendship);
+    from_user.save();
+    return res.redirect('back')
+
+}
+
+// accepting a friend request 
+
+module.exports.acceptRequest= async(req,res)=>{
+
+    try{
+        const friendship = await Friendship.findById(req.query.id);
+        friendship.status='accepted';
+        friendship.save();
+        return res.redirect('back');
+    }
+    catch(err){
+        console.log(err, 'error at acceptRequest');
+    }
+
+}
+
+// reject or cancel a friend request 
+
+module.exports.removeFriend = async(req,res)=>{
+    const friendship = await Friendship.findByIdAndRemove(req.query.id);
+
+    const from_user = await User.findById(friendship.from_user);
+    from_user.friends.pull(friendship);
+    from_user.save();
+
+    const to_user= await User.findById(friendship.to_user);
+    to_user.friends.pull(friendship);
+    to_user.save();
+    return res.redirect('back');
+
 }

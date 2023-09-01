@@ -12,6 +12,11 @@ router.post('/create-session',passport.authenticate(
 ),userController.createSession);
 
 router.get('/profile-update/:id', userController.updateProfilePage);
-router.post('/update-user-profile',userController.updateUserProfile)
+router.post('/update-user-profile',userController.updateUserProfile);
+
+router.get('/add-friend',userController.addFriend)
+
+router.get('/accept-request',userController.acceptRequest);
+router.get('/remove-friend',userController.removeFriend);
 
 module.exports = router;

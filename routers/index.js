@@ -13,12 +13,8 @@ router.get('/',controllers.home);
 router.get('/sign-up',controllers.signup);
 router.get('/sign-in',controllers.signin);
 
-router.get('/profile', passport.checkAuthentication,controllers.profile);
+
 router.get('/sign-out',controllers.signOut);
-
-
-
-
 
 router.get('/forget-page',forgetController.forgetPage);
 router.post('/forget-password',forgetController.handleForget);

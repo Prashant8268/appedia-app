@@ -17,10 +17,9 @@ module.exports.home =async(req,res)=>{
                 },
                 // populate:('likes')
             }).populate('likes');
+
             const users = await User.find();
 
-
-            
             return res.render('./homepage.ejs',{
                 title:"Codeial",
                 posts,
@@ -35,7 +34,6 @@ module.exports.home =async(req,res)=>{
 
 
 }
-
 
 // home page for going to sign-up page
 module.exports.signup = (req,res)=>{
@@ -53,14 +51,8 @@ module.exports.signin = (req,res)=>{
 } 
 
 
-module.exports.profile = (req,res)=>{
 
-    return res.render('profile',{
-            title: 'Codeial',
-        })
-}
 
-// controller for creating session or logging in 
 
 
 
@@ -89,8 +81,3 @@ module.exports.signOut = (req,res)=>{
     }
 
 }
-
-
-
-
-

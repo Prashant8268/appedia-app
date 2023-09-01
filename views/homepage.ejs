@@ -38,21 +38,25 @@
                         <% for( let  comment of post.comments) { %>
                             <li id="comment-<%= comment.id  %>" class="single-comment">
                                <div> <%= comment.user.name %></div>
-                                <% if (locals.user &&comment.user.id==locals.user.id ) { %>
-                                    <small>
-                                        <a href="/comments/delete-comment/<%= comment.id %>">
-                                        <img src="https://cdn-icons-png.flaticon.com/512/11011/11011600.png" style="height: 15px; width: 8pxpx;">
-                                        </a>
-                                    </small>
-                                <% } %>
+                               <div style="color: black;" >
+                                    <small style="color: black;">  <%= comment.content %></small>
+                                   <% if (locals.user) { %>
                                     
-                                    <small><%= comment.content %></small> 
-                                    <div>
-                                        <a href="/likes/toggle?id=<%= comment._id %>&type=Comment" class="like-tag"> 
-                                        <img id="like-logo" src="https://cdn-icons-png.flaticon.com/512/1077/1077035.png" alt="like">
+                                         <a href="/likes/toggle?id=<%= comment._id %>&type=Comment" class="like-tag"> 
+                                        <img id="like-logo-C" src="https://cdn-icons-png.flaticon.com/512/1077/1077035.png" alt="like">
                                         </a>
-                                        <span><%= (comment.likes.length) %></span>
-                                    </div>
+                                   <% } %>
+                                    
+                                        <span><span style="font-size: 1.2rem;"><%= (comment.likes.length) %></span> Likes</span>
+                                        
+                                        <% if (locals.user &&comment.user.id==locals.user.id ) { %>
+                                            <small>
+                                                <a href="/comments/delete-comment/<%= comment.id %>">
+                                                <img src="https://cdn-icons-png.flaticon.com/512/10684/10684706.png" style="height: 15px; width: 10pxpx;">
+                                                </a>
+                                            </small>
+                                        <% } %>
+                                </div>                                                                        
                             </li>
                 
                         <% } %>
@@ -74,11 +78,11 @@
         </div>
         <% } %>
 
-        <div class="all-users">
+        <div class="all-users" >
             <% if (users && locals.user) { %>
                 <h3>All Users</h3>
             <% for( let i of users) { %>
-            <a href="/user/profile-update/<%= i.id %>" > <p><%=  i.name %></p> </a>
+            <a href="/user/profile-update/<%= i.id %>" > <p style="color: black;"><%=  i.name %></p> </a>
             <% } %>
             <% } %>
         </div>

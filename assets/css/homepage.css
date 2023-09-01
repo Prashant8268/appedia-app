@@ -142,6 +142,10 @@ body {
   top: 3%;
   width: 20px; }
 
+#like-logo-c {
+  height: 14px;
+  width: 14px; }
+
 .like-tag {
   text-decoration: none; }
 
@@ -151,3 +155,6 @@ body {
 .delete-post-btn {
   position: relative;
   right: 20px; }
+
+.toggle-comments {
+  color: black; }

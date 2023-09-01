@@ -1,0 +1,69 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+$primary-color: #c66a6a;
+$primary-font: 'Sorts Mill Goudy', serif;
+
+.section-1{
+    display: flex;
+    padding: 60px 170px;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 40px;
+    font-family: $primary-color;
+    align-self: stretch;
+    .h1{
+        color: $primary-color;
+        font-family: $primary-font;
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 32px; /* 133.333% */
+    }
+}
+
+#user-avatar{
+
+        height: 12rem;
+        width: 12rem;
+        border-radius: 50%;
+        box-shadow: 10px 10px white 0.4;
+
+}
+.container{
+    display: flex;
+    padding: 60px 170px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    align-self: stretch;
+}
+
+.inner-section{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    flex: 1 0 0;
+    input{
+        border-radius: 6px;
+        width: 29rem;
+        display: block;
+        margin-bottom: 1.4rem;
+        margin-top: 5px;
+        height: 1.8rem;
+        border: 2px solid rgba(0, 0, 0, 0.10);
+        background: #FFF;
+        &:focus{
+            outline: none;
+          
+        }
+    }
+}
+#submit-btn:hover{
+    background-color: $primary-color;
+    opacity: 0.8;
+    color: black;
+}
