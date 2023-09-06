@@ -97,7 +97,7 @@
 <% if (locals.user) { %> 
 <script>
     console.log('script loaded')
-    new ChatEngine('user-chat-box','<%= locals.user._id %>');
+    new ChatEngine('user-chat-box','<%= locals.user.email %>');
 </script>
 <% } %>
  

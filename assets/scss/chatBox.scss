@@ -5,7 +5,7 @@ $primary-background: rgba(103, 14, 14, 0.05);
     position: fixed;
     right: 8%;
     padding: 0.6rem;
-    top: 60%;
+    top: 30%;
     height: 200px;
     display: flex;
     flex-direction: column;
@@ -29,12 +29,14 @@ $primary-background: rgba(103, 14, 14, 0.05);
     left: -28%;
     width: 70%;
     color: black;
+    background-color: grey;
     margin-bottom: 3px;
 
 }
 .self-msg{
     position: relative;
     margin: 0;
+    background-color: blue;
     border: 1px solid grey;
     list-style: none;
     margin-bottom: 3px;
