@@ -69,11 +69,8 @@ module.exports.signOut = (req,res)=>{
             }
             req.user = null; // Clear the user object
             res.redirect('/sign-in'); // or any other appropriate action
-           
 
           });
-
-
 
     }
     catch(err){

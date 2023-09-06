@@ -2,21 +2,18 @@ const express  = require('express');
 const path = require('path');
 const router = require('./routers');
 const port = 5000;
+const cors = require('cors');
+
 
 
 const cookieParser = require('cookie-parser');
-
-
 const app = express();
-
+app.use(cors());
 app.use(express.urlencoded());
-
 const db = require('./config/mongoose');
-
 const session = require('express-session');
 const passport = require('passport');
 const passportLocal = require('./config/passport-local-strategy');
-
 const passportJWT  = require('./config/passport-jwt-strategy'); 
 const passportGoogle = require('./config/passport-google-Oauth-strategy');
 
@@ -55,6 +52,17 @@ app.use('/uploads',express.static(__dirname + '/uploads'));
 
 const MongoStore =  require('connect-mongo')
 
+// config for chatScoket
+
+
+const chatServer = require('http').Server(app);
+const chatSockets = require('./config/chat_sockets').chatSockets(chatServer);
+chatServer.listen(8000,()=>{
+    console.log('chat server is listening on port 8000')
+
+});
+
+
 // setting up session
 
 app.use(session({ 
@@ -80,6 +88,7 @@ app.use(passport.session());
 app.use(passport.setAuthenticatedUser);
 
 const Mware = require('./config/middleware');
+const { chat } = require('googleapis/build/src/apis/chat');
 
 app.use(flash());
 app.use(Mware.setFlash);

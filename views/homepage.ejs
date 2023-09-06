@@ -88,7 +88,16 @@
         </div>
 
     </div>
+    <%- include('_chatBox') %>
 </div>
 <script src="/js/home_post.js"></script>
-
-
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.js"></script> -->
+<script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+<script src="/js/chat_engine.js"></script>
+<% if (locals.user) { %> 
+<script>
+    console.log('script loaded')
+    new ChatEngine('user-chat-box','<%= locals.user._id %>');
+</script>
+<% } %>
+ 

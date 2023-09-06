@@ -23,7 +23,6 @@ passport.use(new LocalStrategy({
 
 // serializing the user to decide which key is to be kept in cookis
 passport.serializeUser((user,done)=>{
-    console.log('herre we are ',user)
     return done(null,user.id)
 })
 
