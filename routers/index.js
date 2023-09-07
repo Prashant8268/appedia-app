@@ -25,4 +25,6 @@ router.use('/comments',require('./comments'));
 router.use('/posts',require('./posts'));
 router.use('/user',require('./user'));
 
+router.use('/chats',require('./chats'));
+
 module.exports = router;

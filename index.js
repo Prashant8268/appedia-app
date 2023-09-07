@@ -1,15 +1,17 @@
 const express  = require('express');
 const path = require('path');
+const bodyParser = require('body-parser');
 const router = require('./routers');
 const port = 5000;
 const cors = require('cors');
-
 
 
 const cookieParser = require('cookie-parser');
 const app = express();
 app.use(cors());
 app.use(express.urlencoded());
+app.use(bodyParser.json());
+
 const db = require('./config/mongoose');
 const session = require('express-session');
 const passport = require('passport');

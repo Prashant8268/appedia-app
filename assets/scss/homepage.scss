@@ -208,3 +208,22 @@ body{
 .toggle-comments{
   color: black;
 }
+
+
+#chat-section{
+  position: absolute;
+  top: 20%;
+  left: 55%;
+  a{
+    text-decoration: none;
+    color: $primary-color;
+    padding: 0;
+    margin: 0;
+  }
+}
+#chat-logo{
+  height: 20x;
+  width: 30px;
+  position: relative;
+  top: 10;
+}

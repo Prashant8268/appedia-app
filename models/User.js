@@ -24,14 +24,19 @@ const userSchema = new mongoose.Schema({
         avatar:{
             type: String
         },
+        chats:[
+          {
+            type: mongoose.Schema.Types.ObjectId,
+            ref:'Chatroom'
+          }
+        ],
         friends:[
-                {
-                  type: mongoose.Schema.Types.ObjectId,
-                  ref:'Friendship'
-                }
-              ]
+          {
+            type:mongoose.Schema.Types.ObjectId,
+            ref:'Friendship'
+          }
+        ]
 
-    
 },
 {
     timestamps:true
