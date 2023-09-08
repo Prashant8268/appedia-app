@@ -20,7 +20,7 @@ module.exports.chatSockets = function(socketServer){
         });
 
         socket.on('send_message',async(data)=>{
-            console.log('message received', data);
+
             const message = await Message.create({
                 content:data.message,
                 sender:data.user1
@@ -29,7 +29,10 @@ module.exports.chatSockets = function(socketServer){
             chatroom.messages.push(message);
             chatroom.save();
             data.message=message;
-            console.log(data, '<----data')
+            console.log(data, '<----data first')
+
+
+
 
             // below is for sending data to chatroom so all can receive it 
             io.in(data.chatroom).emit('receive_message',data);

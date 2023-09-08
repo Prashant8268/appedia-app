@@ -13,12 +13,13 @@ class ChatEngine{
     connectionHandler(){
 
         let self = this;
+        let user1;
+        let user2;
         this.socket.on('connect',async()=>{
             console.log('connection establish using sockets...!');
 
             let isPresent;
-            let user1;
-            let user2;
+
 
             await $.ajax({
                 type: 'post',
@@ -28,8 +29,10 @@ class ChatEngine{
                 },
                 success: (data)=>{
                     isPresent = data.chatroom;
+                    self.loggedUser = user1;
                     user1= data.user1;
                     user2 = data.user2;
+
                 },
                 error: (err)=>{
                     console.log(err, '<--err at chats_section.js')
@@ -71,7 +74,7 @@ class ChatEngine{
                         user2,
                         chatroom:isPresent.name
                     })
-                }
+                };
             });
 
         });
@@ -88,7 +91,7 @@ class ChatEngine{
             if(data.user1){
                 console.log('yes they are same',data.user1)
             }
-            if(data.user1==data.message.sender){
+            if(user1==data.message.sender){
                 msgType='self'
             };
             newMsg.textContent = data.message.content;

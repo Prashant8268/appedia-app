@@ -92,7 +92,6 @@ module.exports.areChatsPresent = async (req,res)=>{
                 receiver:user2.id
             })
         }
-        console.log(user1.name, user2.name)
         return  res.status(200).json({
             Message: 'Successfull called',
             chatroom: isPresent,
