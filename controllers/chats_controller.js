@@ -3,6 +3,7 @@ const User = require('../models/User');
 const Message = require('../models/Message')
 const Chatroom = require('../models/Chatroom');
 const { chat } = require('googleapis/build/src/apis/chat');
+// const { chat } = require('googleapis/build/src/apis/chat');
 module.exports.chatSection=async(req,res)=>{
 
     // const chatroom = await Chatroom.create({
@@ -31,10 +32,9 @@ module.exports.chatSection=async(req,res)=>{
 
         }
 
-    }).populate({
-        path:'friends',
-        
     });
+
+    const users = await User.find();
     // const posts = await Post.find().populate('user','name avatar').populate({
     //     path:'comments',
     //     populate:{
@@ -42,12 +42,68 @@ module.exports.chatSection=async(req,res)=>{
     //     },
     //     // populate:('likes')
     // }).populate('likes');
-
-    const chats =  user.chats;
-    console.log(chats.length, 'length')
     
     return res.render('chat_section',{
         title:'Codeial | Chats',
-        chats:[]
+        chats:[],
+        users
     })
+}
+
+module.exports.areChatsPresent = async (req,res)=>{
+    try{
+        const user2 = await User.findOne({email:req.body.userEmail});
+        const user1 = await User.findById(req.user.id); 
+
+        // console.log(user2.name, user1.name);
+        // const chatRoom = await Chatroom.create({
+        //     name:user1.id+user2.id,
+        //     sender:user1.id,
+        //     receiver:user2.id,
+        //     latestMessage: 'Checking',
+
+        // });
+
+        // const message = await Message.create({
+        //     content: 'Checking',
+        //     sender:user1.id
+        // });
+
+        // chatRoom.messages.push(message);
+        // chatRoom.save();
+
+        // user1.chats.push(chatRoom);
+        // user2.chats.push(chatRoom);
+
+        let isPresent = await Chatroom.findOne({name: user1.id+user2.id}).populate({
+            path:'messages',
+
+        })
+        if(!isPresent){
+            isPresent = await Chatroom.findOne({name:user2.id+user1.id}).populate({
+                path:'messages',
+            })
+        }
+
+        if(!isPresent){
+            isPresent = await Chatroom.create({
+                name:user1.id+user2.id,
+                sender:user1.id,
+                receiver:user2.id
+            })
+        }
+        console.log(user1.name, user2.name)
+        return  res.status(200).json({
+            Message: 'Successfull called',
+            chatroom: isPresent,
+            user1:user1.id,
+            user2:user2.id
+        })
+
+    }
+    catch(err){
+        console.log(err, 'error at areChats Present_controller');
+        return ;
+    }
+
 }

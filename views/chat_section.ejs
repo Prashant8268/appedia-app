@@ -4,33 +4,49 @@
     <span>Chats</span>
 </div>
 <div class="container">
-<div class="chats-container">
-    <% for(let chat of chats){ %>
+    <div class="chats-container" id="chats-container">
+        <% for(let chat of chats){ %>
+            <li>
+                <h4><img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Profile"> User</h4>
+                <div>Default Message </div>
+            </li>
+        <% } %>
         <li>
             <h4><img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Profile"> User</h4>
             <div>Default Message </div>
         </li>
-    <% } %>
-    <li>
-        <h4><img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Profile"> User</h4>
-        <div>Default Message </div>
-    </li>
-    <li>
-        <h4><img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Profile"> User</h4>
-        <div>Default Message </div>
-    </li>
-    <li>
-        <h4><img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Profile"> User</h4>
-        <div>Default Message </div>
-    </li>
+        <li>
+            <h4><img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Profile"> User</h4>
+            <div>Default Message </div>
+        </li>
+        <li>
+            <h4><img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Profile"> User</h4>
+            <div>Default Message </div>
+        </li>
+    </div>
+    <div class="chats hide">
+        <li>
+            <h4><img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Profile"> User</h4>
+        </li>
+        <div class="single-chat">
+
+        </div>
+        <form action="">
+            <input type="text" id="msg">
+            <input type="button" value="Send"  id="send-message">
+        </form>
+
+    </div>
+
+
+    <div class="aside">
+        <h3>Start New Chat With </h3>
+        <% for(user of users) { %>
+            <li class="open-chat" user_Email="<%= user.email %>"><%= user.name %> </li>
+        <% } %>
+
+    </div>
 </div>
 
-<div class="aside">
-    <h3>Start New Chat With </h3>
-
-    <li>friend</li>
-    <li>friend</li>
-    <li>friend</li>
-
-</div>
-</div>
+<script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+<script src="/js/chats_section.js" type="text/javascript"></script>

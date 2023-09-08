@@ -6,6 +6,7 @@ body{
 $primary-color: #914C4C;
 $primary-font: 'Sorts Mill Goudy', serif;
 $primary-background: rgba(0, 0, 0, 0.05);
+$chat-color:#d4c9c9;
 
 .header{
     color: $primary-color;
@@ -27,6 +28,7 @@ $primary-background: rgba(0, 0, 0, 0.05);
 
     li{
         padding: 0.7rem;
+        padding-top: 0;
         margin: 0;
         border-bottom: 3px solid $primary-background;
         list-style: none;
@@ -53,6 +55,7 @@ $primary-background: rgba(0, 0, 0, 0.05);
 
 .container{
     @include flexRow;
+    padding-top: 0;
 }
 .aside{
     margin-left: 1rem;
@@ -63,5 +66,81 @@ $primary-background: rgba(0, 0, 0, 0.05);
         color: black;
         list-style: none;
         margin-bottom: 0.5rem;
+        a{
+            @include aTag;
+        }
     }
 }
+
+.hide{
+    display: none;
+}
+
+.chats{
+    height: 70%;
+    width: 70%;
+    padding: 0.7rem;
+    li{
+        margin: 0;
+        border-bottom: 3px solid $primary-background;
+        list-style: none;
+        h4{
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            img{
+                height: 30px;
+                width: 30px;
+                position: relative;
+                top: 10;
+                margin-right: 0.8rem;
+            }
+        }
+
+    
+
+    }
+
+}
+
+.single-chat{
+    padding: 1rem;
+    background-color: $chat-color;
+    display: flex;
+    height: 70%;
+    flex-direction: column;
+    justify-content: space-between; 
+    .self{
+        @include messageCon;
+        margin-top: 1rem;
+        margin-left: auto;
+
+    }
+    .other{
+        @include messageCon;
+        display: inline;
+        margin-right: auto;
+
+    }
+
+
+    form{
+        position: relative;
+        bottom: -33;
+        left: -1rem;
+        input{
+            width: 90%;
+            height: 1.5rem;
+            margin: 0;
+            padding: 0.8rem;
+            &:focus{
+                outline: none;
+            }
+        }
+        button{
+            width: 9%;
+            height: 1.8rem;
+            position: relative;
+            left: -3px;
+        }
+    }
+}
+
