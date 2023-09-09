@@ -170,3 +170,7 @@ body {
   width: 30px;
   position: relative;
   top: 10; }
+
+.single-comment a {
+  padding: 0;
+  margin: 0; }

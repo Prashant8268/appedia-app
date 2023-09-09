@@ -23,7 +23,7 @@ module.exports.createPost = async(req,res)=>{
               message:'Post created'
           })
       }
-      console.log('heree!!!')
+
       
       return res.redirect('back');
     }
@@ -39,7 +39,7 @@ module.exports.createPost = async(req,res)=>{
  module.exports.deletePost = async(req,res)=>{
     try{
         const post = await Post.findById(req.params.id);
-        if(post.user==req.user.id){
+        if(post.user ==req.user.id){
             await Comment.deleteMany({post: req.params.id});
             await post.deleteOne({id: req.params.id});
         }

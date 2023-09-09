@@ -56,6 +56,12 @@ module.exports.deleteComment = async(req,res)=>{
             await Post.findByIdAndUpdate(comment.post, {$pull: {comments: req.params.id}});
             await comment.deleteOne({id: req.params.id});
         }
+        if(req.xhr){
+            return res.json({
+                comment: comment.id
+            })
+        }
+
         return res.redirect('back');
     }
     catch(err){

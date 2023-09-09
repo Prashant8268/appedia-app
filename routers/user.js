@@ -11,12 +11,12 @@ router.post('/create-session',passport.authenticate(
     {failureRedirect:'/sign-in'},
 ),userController.createSession);
 
-router.get('/profile-update/:id', userController.updateProfilePage);
-router.post('/update-user-profile',userController.updateUserProfile);
+router.get('/profile-update/:id', passport.checkAuthentication,userController.updateProfilePage);
+router.post('/update-user-profile',passport.checkAuthentication,userController.updateUserProfile);
 
-router.get('/add-friend',userController.addFriend)
+router.get('/add-friend',passport.checkAuthentication,userController.addFriend)
 
-router.get('/accept-request',userController.acceptRequest);
-router.get('/remove-friend',userController.removeFriend);
+router.get('/accept-request',passport.checkAuthentication,userController.acceptRequest);
+router.get('/remove-friend',passport.checkAuthentication,userController.removeFriend);
 
 module.exports = router;

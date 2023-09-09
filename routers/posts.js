@@ -7,5 +7,5 @@ const router = express.Router();
 
 router.post('/create-post',passport.checkAuthentication,postController.createPost);
 
-router.get('/delete-post/:id', postController.deletePost);
+router.get('/delete-post/:id',passport.checkAuthentication, postController.deletePost);
 module.exports = router;

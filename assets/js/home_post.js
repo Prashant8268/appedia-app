@@ -1,8 +1,13 @@
 {
+    let deletePost = document.querySelectorAll('.delete-post-btn');
+    function refreshPosts(){
+        deletePost = document.querySelectorAll('.delete-post-btn');
+        console.log(deletePost);
+     }
 
+    
     let createPost = ()=>{
         let newPostForm = $('#post-form');
-
         newPostForm.submit(async(e)=>{
             e.preventDefault(); 
             await $.ajax({
@@ -13,6 +18,10 @@
                     console.log(data,'this is data ')
                     let newPost = newPostDom(data.data.post,data.data.username,data.data.avatar);
                     $('#posts-container').prepend(newPost);
+                    refreshPosts();
+                    check();
+                    createComment();
+                    refreshToggleComment();
                 },
                 error: (err)=>{
                     console.log(err, '<--err at homepost.js')
@@ -28,8 +37,8 @@
         <div>
             <img src="${avatar}"  id="user-avatar">
             <span id="user-name">${username}</span>
-            <button class="delete-post-btn">
-                <a href="/posts/delete-post/${i._id}">Delete</a>
+            <button class="delete-post-btn" postId=${i._id}>
+                Delete
             </button>
         </div>
         <div style="color: black; ">
@@ -51,25 +60,28 @@
     }
 
     let newCommentDom = (comment,user)=>{
-        return $(`<li id="comment-${comment._id}" class="single-comment">
-        <div> ${user}</div>
+        return $(`
+        <li id="comment-${comment._id}" class="single-comment">
+        <div>${user}</div>
         <div style="color: black;" >
-             <small style="color: black;"> ${comment.content}</small> 
+             <small style="color: black;">${comment.content}</small>
                   <a href="/likes/toggle?id=${comment._id}&type=Comment" class="like-tag"> 
                  <img id="like-logo-C" src="https://cdn-icons-png.flaticon.com/512/1077/1077035.png" alt="like">
                  </a>
-                 <span><span style="font-size: 1.2rem;">${comment.likes.length}</span> Likes</span>
+                 <span><span style="font-size: 1.2rem;">${comment.likes.length}</span> Likes</span>                 
                      <small>
-                         <a href="/comments/delete-comment/${comment._id}" class="delete-comment>
+                         <button class="delete-comment" href="/comments/delete-comment/${comment._id}"  >
                          <img src="https://cdn-icons-png.flaticon.com/128/484/484560.png" style="height: 15px; width: 10pxpx;">
-                         </a>
+                         </button>
                      </small>
          </div>                                                                        
      </li>`)
     }
 
+
+
     let createComment = ()=>{
-        let newCommentForms = $('.comment-form');
+     let newCommentForms = $('.comment-form');
         newCommentForms.each((index, form) => {
             $(form).submit(async(e) => {
                 e.preventDefault(); 
@@ -88,10 +100,8 @@
                         const temp = document.getElementById(`#comments-container-${postId}`);
                        // Remove a specific class from the div using jQuery
                         $(`#comments-container-${postId}`).removeClass("hide");
-
-
-
-
+                        check2();
+                        refreshToggleComment();
                         
                     },
                     error: (err) => {
@@ -107,32 +117,36 @@
     }
     createComment();
     createPost();
-    const toggleComment = document.querySelectorAll('.toggle-comments');
-    toggleComment.forEach((e)=>{
-        e.addEventListener('click',(event)=>{
-            if(event.target.innerHTML=='See Comments'){
-               event.target.innerHTML= 'Hide Comments'
-            }
-            else{
-                event.target.innerHTML = 'See Comments'
-            }
-            const commentContainer = document.getElementById(event.target.getAttribute('container'));
-            commentContainer.classList.toggle('hide');
-     
+    let toggleComment = document.querySelectorAll('.toggle-comments');
+
+    function refreshToggleComment(){
+        toggleComment = document.querySelectorAll('.toggle-comments');
+        toggleComment.forEach((e)=>{
+            e.addEventListener('click',(event)=>{
+                if(event.target.innerHTML=='See Comments'){
+                   event.target.innerHTML= 'Hide Comments'
+                }
+                else{
+                    event.target.innerHTML = 'See Comments'
+                }
+                const commentContainer = document.getElementById(event.target.getAttribute('container'));
+                commentContainer.classList.toggle('hide');
+         
+            })
         })
-    })
+
+    }
+    refreshToggleComment();
 
 
-const deletePost = document.querySelectorAll('.delete-post-btn');
-deletePost.forEach((e)=>{
+
+ function check() { deletePost.forEach((e)=>{
     e.addEventListener('click',async()=>{
-
         const postId = e.getAttribute('postId');
        await $.ajax({
             type: 'get',
             url: `/posts/delete-post/${postId}`,
             success: (data)=>{
-
                 const post = document.getElementById(`post-${postId}`);
                 post.parentNode.removeChild(post);
                 
@@ -143,23 +157,30 @@ deletePost.forEach((e)=>{
         })
     })
     })
+}
+check();
+
+
 
 // for deleteing a comment using async
 
-const deleteComment = document.querySelectorAll('.delete-comment');
-deleteComment.forEach((e)=>{
-    e.addEventListener('click',async()=>{
-        e.preventDefault();
+
+
+function check2(){
+    let deleteComment = document.querySelectorAll('.delete-comment');
+    deleteComment.forEach((link)=>{
+    link.addEventListener('click',async(event)=>{
+        event.preventDefault();
         console.log('clicked');
-        const href = e.getAttribute('href');
+        const href = link.getAttribute('href');
         console.log('href', href);
-        return ;
        await $.ajax({
             type: 'get',
             url: href,
             success: (data)=>{
-                const post = document.getElementById(`comment-`);
+                const post = document.getElementById(`comment-${data.comment}`);
                 post.parentNode.removeChild(post);
+
                 
             },
             error: (err)=>{
@@ -168,6 +189,9 @@ deleteComment.forEach((e)=>{
         })
     })
     })
+}
+
+check2();
 
 
 }

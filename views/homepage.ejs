@@ -13,7 +13,6 @@
                         <span id="user-name"><%= post.user.name %></span>
                         <% if (locals.user && locals.user.id==post.user.id) { %>         
                         <button class="delete-post-btn" postId="<%= post.id %>">
-                            <a href="/posts/delete-post/<%= post.id %>"></a>
                             Delete
                         </button>
                         <% } %>
@@ -37,12 +36,11 @@
                     <div class="toggle-comments"  container="comments-container-<%= post.id %>">See Comments</div>
                     <div id="comments-container-<%= post.id %>" class="hide">
                         <% for( let  comment of post.comments) { %>
-                            <li id="comment-<%= comment.id  %>" class="single-comment">
+                            <li id="comment-<%= comment.id%>" class="single-comment">
                                <div> <%= comment.user.name %></div>
                                <div style="color: black;" >
                                     <small style="color: black;">  <%= comment.content %></small>
                                    <% if (locals.user) { %>
-                                    
                                          <a href="/likes/toggle?id=<%= comment._id %>&type=Comment" class="like-tag"> 
                                         <img id="like-logo-C" src="https://cdn-icons-png.flaticon.com/512/1077/1077035.png" alt="like">
                                         </a>
@@ -52,9 +50,9 @@
                                         
                                         <% if (locals.user && ( post.user.id == locals.user.id  || comment.user.id == locals.user.id)) { %>
                                             <small>
-                                                <a href="/comments/delete-comment/<%= comment.id %>" class="delete-comment" >
+                                                <button class="delete-comment" href="/comments/delete-comment/<%= comment.id %>"  >
                                                 <img src="https://cdn-icons-png.flaticon.com/128/484/484560.png" style="height: 15px; width: 10pxpx;">
-                                                </a>
+                                                </button>
                                             </small>
                                         <% } %>
                                 </div>                                                                        
