@@ -1,11 +1,5 @@
 <% if (locals.user) { %>
     <h3 id="post-heading" >Create a new post </h3>
-    <div class="header" id="chat-section">
-        <a href="/chats">
-        <img src="https://cdn-icons-png.flaticon.com/512/4964/4964263.png" alt="" id="chat-logo">
-        <span>Chat Section</span>
-        </a>
-    </div>
 <form action="/posts/create-post"  method="POST" id="post-form">
     <textarea placeholder="Type here...." name="content" id="content" cols="30" rows="4"></textarea>
     <input type="submit" value="Post  " class="post-button">

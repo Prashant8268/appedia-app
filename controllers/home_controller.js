@@ -16,7 +16,7 @@ module.exports.home =async(req,res)=>{
                     path:'user', select: 'name',
                 },
                 // populate:('likes')
-            }).populate('likes');
+            }).populate('likes').sort({createdAt: -1});
 
             const users = await User.find();
 

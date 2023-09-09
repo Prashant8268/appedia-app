@@ -12,8 +12,9 @@
                         <img src="<%= post.user.avatar %>"  id="user-avatar">
                         <span id="user-name"><%= post.user.name %></span>
                         <% if (locals.user && locals.user.id==post.user.id) { %>         
-                        <button class="delete-post-btn">
-                            <a href="/posts/delete-post/<%= post.id %>">Delete</a>
+                        <button class="delete-post-btn" postId="<%= post.id %>">
+                            <a href="/posts/delete-post/<%= post.id %>"></a>
+                            Delete
                         </button>
                         <% } %>
                     </div>
@@ -33,7 +34,7 @@
                             </form>
                         <% } %>
                     </div>
-                    <div class="toggle-comments" container="comments-container-<%= post.id %>">See Comments</div>
+                    <div class="toggle-comments"  container="comments-container-<%= post.id %>">See Comments</div>
                     <div id="comments-container-<%= post.id %>" class="hide">
                         <% for( let  comment of post.comments) { %>
                             <li id="comment-<%= comment.id  %>" class="single-comment">
@@ -49,16 +50,15 @@
                                     
                                         <span><span style="font-size: 1.2rem;"><%= (comment.likes.length) %></span> Likes</span>
                                         
-                                        <% if (locals.user &&comment.user.id==locals.user.id ) { %>
+                                        <% if (locals.user && ( post.user.id == locals.user.id  || comment.user.id == locals.user.id)) { %>
                                             <small>
-                                                <a href="/comments/delete-comment/<%= comment.id %>">
-                                                <img src="https://cdn-icons-png.flaticon.com/512/10684/10684706.png" style="height: 15px; width: 10pxpx;">
+                                                <a href="/comments/delete-comment/<%= comment.id %>" class="delete-comment" >
+                                                <img src="https://cdn-icons-png.flaticon.com/128/484/484560.png" style="height: 15px; width: 10pxpx;">
                                                 </a>
                                             </small>
                                         <% } %>
                                 </div>                                                                        
                             </li>
-                
                         <% } %>
                        </div>
                 </div>
@@ -73,6 +73,12 @@
     <div class="side-bar">
 
         <% if (locals.user) { %>
+        <div class="header" id="chat-section">
+            <a href="/chats">
+            <img src="https://cdn-icons-png.flaticon.com/512/4964/4964263.png" alt="" id="chat-logo">
+            <span>Chat Section</span>
+            </a>
+        </div>
         <div class="friends">
             <h3>Friends</h3>
         </div>
@@ -90,12 +96,7 @@
     </div>
 </div>
 <script src="/js/home_post.js"></script>
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.js"></script> -->
 <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
 <script src="/js/chat_engine.js"></script>
-<% if (locals.user) { %> 
-<!-- <script>
-    new ChatEngine('user-chat-box','');
-</script> -->
-<% } %>
+
  

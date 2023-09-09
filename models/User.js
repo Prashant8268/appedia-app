@@ -22,7 +22,8 @@ const userSchema = new mongoose.Schema({
             required: true
         },
         avatar:{
-            type: String
+            type: String,
+            default:'https://cdn-icons-png.flaticon.com/512/3135/3135715.png'
         },
         chats:[
           {

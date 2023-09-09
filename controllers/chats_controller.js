@@ -55,25 +55,6 @@ module.exports.areChatsPresent = async (req,res)=>{
         const user2 = await User.findOne({email:req.body.userEmail});
         const user1 = await User.findById(req.user.id); 
 
-        // console.log(user2.name, user1.name);
-        // const chatRoom = await Chatroom.create({
-        //     name:user1.id+user2.id,
-        //     sender:user1.id,
-        //     receiver:user2.id,
-        //     latestMessage: 'Checking',
-
-        // });
-
-        // const message = await Message.create({
-        //     content: 'Checking',
-        //     sender:user1.id
-        // });
-
-        // chatRoom.messages.push(message);
-        // chatRoom.save();
-
-        // user1.chats.push(chatRoom);
-        // user2.chats.push(chatRoom);
 
         let isPresent = await Chatroom.findOne({name: user1.id+user2.id}).populate({
             path:'messages',

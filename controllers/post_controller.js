@@ -7,18 +7,18 @@ const Comment = require('../models/Comment.js');
 module.exports.createPost = async(req,res)=>{
 
     try{
-  
       const user = await User.findById(req.user.id);
       const post = await Post.create({
           content: req.body.content,
           user: req.user._id
-      });
+      })
       
       if(req.xhr){
           return res.status(200).json({
               data:{
                   post:post,
-                  username: user.name
+                  username: user.name,
+                  avatar:user.avatar
               },
               message:'Post created'
           })
@@ -38,7 +38,6 @@ module.exports.createPost = async(req,res)=>{
 
  module.exports.deletePost = async(req,res)=>{
     try{
-
         const post = await Post.findById(req.params.id);
         if(post.user==req.user.id){
             await Comment.deleteMany({post: req.params.id});
@@ -59,6 +58,6 @@ module.exports.createPost = async(req,res)=>{
     }
 
     catch(err){  
-            console.log('eroor --> deletePost controller');
+            console.log(err,'eroor --> deletePost controller');
     }
  }

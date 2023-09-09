@@ -51,11 +51,10 @@ module.exports.postComment= async(req,res)=>{
 
 module.exports.deleteComment = async(req,res)=>{
     try{
-        
-        const comment = await Comment.findById(req.params.id);
-        if(req.user.id == comment.user){
+        const comment = await Comment.findById(req.params.id).populate('post');
+        if(req.user.id == comment.user || req.user.id == comment.post.user){
             await Post.findByIdAndUpdate(comment.post, {$pull: {comments: req.params.id}});
-            await comment.deleteOne({id: req.params.id}); 
+            await comment.deleteOne({id: req.params.id});
         }
         return res.redirect('back');
     }
