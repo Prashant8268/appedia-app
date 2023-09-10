@@ -23,10 +23,6 @@ const chatroomSchema = new mongoose.Schema({
         type: String,
         default: "",
     },
-    lastMessageByMe:{
-        type: Boolean,
-        default: false
-    }
 
 },
 {

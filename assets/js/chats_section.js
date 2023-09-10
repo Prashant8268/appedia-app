@@ -87,10 +87,6 @@ class ChatEngine{
             const singleChat = document.querySelector('.single-chat');
             let newMsg = document.createElement('div');
             let msgType = 'other';
-            console.log(data.user1, data.message.sender);
-            if(data.user1){
-                console.log('yes they are same',data.user1)
-            }
             if(user1==data.message.sender){
                 msgType='self'
             };
@@ -118,14 +114,6 @@ openChatElements.forEach((element) => {
 
     new ChatEngine('single-chat',user_Email);
 
-
-
-    
-
-
-
-
-    // Add your custom logic here
   });
 });
 

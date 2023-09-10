@@ -6,46 +6,31 @@ const { chat } = require('googleapis/build/src/apis/chat');
 // const { chat } = require('googleapis/build/src/apis/chat');
 module.exports.chatSection=async(req,res)=>{
 
-    // const chatroom = await Chatroom.create({
-    //     name:'First_chatRoom',
-    //     sender:req.user.id,
-    //     receiver:req.user.id,
-    //     latestMessage:'First message'
-    // });
 
-    // const message = await Message.create({
-    //     content:'First Message',
-    //     sender:req.user.id
-    // });
-    // chatroom.messages.push(message);
-    // chatroom.save();
-
-    const user = await User.findById(req.user.id).populate({
-        path:'chats',
-        populate:{
-            path:'receiver', select:'name',
-            path:'sender',select:'name',
-            populate:{
-                path:'messages',
-                populate:'sender'
-            }
-
+    const user = await User.findById(req.user.id)
+    .populate({
+      path: 'chats',
+      populate: [
+        {
+            path: 'sender',
+            select: 'name avatar'
+          
+        },
+        {
+            path: 'receiver',
+            select: 'name avatar'
+          
         }
+      ]
+    })
+    console.log(user.chats,'<---chats')
 
-    });
 
     const users = await User.find();
-    // const posts = await Post.find().populate('user','name avatar').populate({
-    //     path:'comments',
-    //     populate:{
-    //         path:'user', select: 'name',
-    //     },
-    //     // populate:('likes')
-    // }).populate('likes');
-    
+
     return res.render('chat_section',{
         title:'Codeial | Chats',
-        chats:[],
+        chats:user.chats,
         users
     })
 }
@@ -70,9 +55,15 @@ module.exports.areChatsPresent = async (req,res)=>{
             isPresent = await Chatroom.create({
                 name:user1.id+user2.id,
                 sender:user1.id,
-                receiver:user2.id
-            })
+                receiver:user2.id,
+                latestMessage:true
+            });
+            user1.chats.push(isPresent);
+            user2.chats.push(isPresent);
+            user2.save();
+            user1.save();
         }
+
         return  res.status(200).json({
             Message: 'Successfull called',
             chatroom: isPresent,

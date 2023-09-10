@@ -26,14 +26,10 @@ module.exports.chatSockets = function(socketServer){
                 sender:data.user1
             });
             const chatroom = await Chatroom.findOne({name:data.chatroom});
+            chatroom.latestMessage=data.message;
             chatroom.messages.push(message);
             chatroom.save();
             data.message=message;
-            console.log(data, '<----data first')
-
-
-
-
             // below is for sending data to chatroom so all can receive it 
             io.in(data.chatroom).emit('receive_message',data);
         })

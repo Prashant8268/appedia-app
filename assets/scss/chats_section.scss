@@ -79,9 +79,11 @@ $chat-color:#d4c9c9;
 .chats{
     height: 70%;
     width: 70%;
-    padding: 0.7rem;
+    background-color: $chat-color;
     li{
-        margin: 0;
+        margin: 0; 
+        padding: 0;
+        background-color: white;
         border-bottom: 3px solid $primary-background;
         list-style: none;
         h4{
@@ -103,7 +105,6 @@ $chat-color:#d4c9c9;
 
 .single-chat{
     padding: 1rem;
-    background-color: $chat-color;
     display: flex;
     height: 70%;
     flex-direction: column;
