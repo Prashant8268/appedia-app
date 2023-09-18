@@ -4,6 +4,17 @@ body {
   padding: 0px;
   color: #914C4C;
   font-family: 'Sorts Mill Goudy', serif; }
+  body::-webkit-scrollbar {
+    width: 4px;
+    /* Set the width of the scrollbar */ }
+  body::-webkit-scrollbar-thumb {
+    background-color: #888;
+    /* Set the color of the thumb (draggable part) */
+    border-radius: 3px;
+    /* Round the corners of the thumb */ }
+  body::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+    /* Set the color of the track (non-draggable part) */ }
 
 .container {
   display: flex;
@@ -19,15 +30,6 @@ body {
   display: flex;
   flex-direction: column;
   overflow-y: scroll; }
-  .new-feed #post-form {
-    background-color: rgba(103, 14, 14, 0.05);
-    font-family: "Sorts Mill Goudy", serif;
-    width: 50%;
-    margin-top: -14px; }
-    .new-feed #post-form textarea {
-      background-color: transparent;
-      font-family: "Sorts Mill Goudy", serif;
-      color: black; }
   .new-feed::-webkit-scrollbar {
     width: 4px;
     /* Set the width of the scrollbar */ }
@@ -98,19 +100,6 @@ body {
       height: 45px;
       width: 45px;
       border-radius: 50%; }
-    .new-feed .posts button {
-      padding: 6px;
-      margin: 0;
-      position: relative;
-      background-color: rgba(103, 14, 14, 0.05);
-      border: 2px;
-      left: 74%;
-      border-radius: 3%;
-      text-decoration: none;
-      color: black;
-      font-family: "Sorts Mill Goudy", serif; }
-      .new-feed .posts button:hover {
-        background-color: #c77c6b; }
   .new-feed #comment-button {
     font-size: 0.8rem;
     border-radius: 2px; }
@@ -138,6 +127,7 @@ body {
   height: 20px;
   position: relative;
   top: 3%;
+  background-color: red;
   width: 20px; }
 
 #like-logo-c {
@@ -151,8 +141,19 @@ body {
   display: none; }
 
 .delete-post-btn {
+  width: 50px;
+  padding: 2px;
+  margin: 0;
   position: relative;
-  right: 20px; }
+  background-color: rgba(103, 14, 14, 0.05);
+  border: 2px;
+  left: 80%;
+  border-radius: 3%;
+  text-decoration: none;
+  color: black;
+  font-family: "Sorts Mill Goudy", serif; }
+  .delete-post-btn:hover {
+    background-color: #c77c6b; }
 
 .toggle-comments {
   color: black; }
@@ -174,3 +175,23 @@ body {
 .single-comment a {
   padding: 0;
   margin: 0; }
+
+#post-form {
+  background-color: rgba(103, 14, 14, 0.05);
+  font-family: "Sorts Mill Goudy", serif;
+  width: 50%;
+  margin-top: -14px; }
+  #post-form textarea {
+    background-color: transparent;
+    font-family: "Sorts Mill Goudy", serif;
+    color: black; }
+
+@media (max-width: 600px) {
+  #post-form {
+    width: 80%; }
+  .side-bar {
+    position: absolute;
+    width: 100%;
+    background-color: darkblue; }
+  .new-feed {
+    width: 100%; } }

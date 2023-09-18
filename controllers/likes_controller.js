@@ -34,6 +34,15 @@ module.exports.toggleLikes = async(req,res)=>{
             likeable.likes.push(newLike._id);
             likeable.save();
         }
+        if(req.xhr){
+            return res.json({
+                type:req.query.type,
+                id:req.query.id,
+                length:likeable.likes.length
+            })
+        }
+        
+
         return res.json({
             message: 'Request successfull',
             data:{

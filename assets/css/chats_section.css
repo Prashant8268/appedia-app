@@ -43,7 +43,8 @@ body {
   display: flex;
   flex-direction: row;
   padding: 0.7rem;
-  padding-top: 0; }
+  padding-top: 0;
+  height: 80vh; }
 
 .aside {
   margin-left: 1rem;

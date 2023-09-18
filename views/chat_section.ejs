@@ -4,7 +4,7 @@
     <span>Chats</span>
 </div>
 <div class="container">
-    <div class="chats-container hide" id="chats-container">
+    <div class="chats-container" id="chats-container">
         <% for(let chat of chats){ %>
             <li>
                 <% if (locals.user.id == chat.sender.id) { %>
@@ -12,14 +12,14 @@
                     <div>me: <%= chat.latestMessage %></div>
                 <% } else { %>
                     <h4><img src=<%= chat.sender.avatar %> alt="Profile" style="height: 35px; width: 35px; border-radius:50%" ><%= chat.sender.name %></h4>
-                    <div><%= chat.latestMessage %></div>
+                    <div style="font-weight: bold;"><%= chat.latestMessage %></div>
                     <% } %>
 
             </li>
         <% } %>
 
     </div>
-    <div class="chats">
+    <div class="chats hide">
         <li>
             <h4><img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Profile"> User</h4>
         </li>

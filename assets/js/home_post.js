@@ -1,3 +1,5 @@
+
+
 {
     let deletePost = document.querySelectorAll('.delete-post-btn');
     function refreshPosts(){
@@ -22,6 +24,8 @@
                     check();
                     createComment();
                     refreshToggleComment();
+                    toggleLikes();
+
                 },
                 error: (err)=>{
                     console.log(err, '<--err at homepost.js')
@@ -46,7 +50,11 @@
                 <a href="/likes/toggle?id=${i._id}&type=Post" class="like-tag"> 
                     <img id="like-logo" src="https://cdn-icons-png.flaticon.com/512/1077/1077035.png" alt="like">
                 </a>
-            <span>  <span style="font-size: 1.5rem;">${i.likes.length}</span>   Likes</span>
+                <span style="font-size: 1rem; font-family: 'Courier New', Courier, monospace;">
+                <span style="font-size: 1rem; font-family: 'Sorts Mill Goudy', serif;" id="post-like-${i._id}">
+                </span>
+                Likes
+                </span>
                 <form action="/comments/post-comment" method="POST" class="comment-form" id= "comment-form-${i._id}" >
                     <textarea name="comment" id="" cols="30" rows="2" placeholder="Add comment"></textarea>
                     <input type="hidden" name="post"  value="${i._id}">
@@ -65,10 +73,14 @@
         <div>${user}</div>
         <div style="color: black;" >
              <small style="color: black;">${comment.content}</small>
-                  <a href="/likes/toggle?id=${comment._id}&type=Comment" class="like-tag"> 
-                 <img id="like-logo-C" src="https://cdn-icons-png.flaticon.com/512/1077/1077035.png" alt="like">
-                 </a>
-                 <span><span style="font-size: 1.2rem;">${comment.likes.length}</span> Likes</span>                 
+                <a href="/likes/toggle?id=${comment._id}&type=Comment" class="like-tag"> 
+                <img id="like-logo-C" src="https://cdn-icons-png.flaticon.com/512/1077/1077035.png" alt="like">
+                </a>
+                <span>
+                    <span style="font-size: 1.2rem;" id="comment-like-<%= comment.id %>">
+                    No 
+                    </span>Likes    
+                </span>   
                      <small>
                          <button class="delete-comment" href="/comments/delete-comment/${comment._id}"  >
                          <img src="https://cdn-icons-png.flaticon.com/128/484/484560.png" style="height: 15px; width: 10pxpx;">
@@ -102,6 +114,7 @@
                         $(`#comments-container-${postId}`).removeClass("hide");
                         check2();
                         refreshToggleComment();
+                        toggleLikes();
                         
                     },
                     error: (err) => {
@@ -174,7 +187,7 @@ function check2(){
         console.log('clicked');
         const href = link.getAttribute('href');
         console.log('href', href);
-       await $.ajax({
+        await $.ajax({
             type: 'get',
             url: href,
             success: (data)=>{
@@ -193,6 +206,50 @@ function check2(){
 
 check2();
 
+// ajax code for toggle likes
+
+const toggleLikes = ()=>{
+    let likeableItems = document.querySelectorAll('.like-tag');
+    likeableItems.forEach((item)=>{
+        item.addEventListener('click',async(event)=>{
+            event.preventDefault();
+            const href = item.getAttribute('href');;
+            await $.ajax({
+                type: 'get',
+                url: href,
+                success: (data)=>{
+                    let likeContainer;
+                    if(data.type=='Post'){
+                        likeContainer = document.getElementById(`post-like-${data.id}`);
+
+                    }
+                    else{
+                        likeContainer=document.getElementById(`comment-like-${data.id}`);
+
+                    }
+                    if(data.length==0){
+                        likeContainer.innerHTML='No';
+                        return ;
+                    }
+                    
+                        likeContainer.innerHTML= data.length;
+                    
+
+
+
+                    
+                },
+                error: (err)=>{
+                    console.log(err, '<--err at homepost.js')
+                }
+            })
+
+
+        })
+    })
+}
+
+toggleLikes();
 
 }
 

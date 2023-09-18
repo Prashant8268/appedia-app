@@ -21,7 +21,7 @@ const chatroomSchema = new mongoose.Schema({
     ],
     latestMessage: {
         type: String,
-        default: "",
+        default: " ",
     },
 
 },

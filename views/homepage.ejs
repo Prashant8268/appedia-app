@@ -2,7 +2,6 @@
 <div class="container">
     <div class="new-feed">
         <%- include('_createForm') %>
-
         <h4 id="post-heading">Posts</h4>
         <div class="posts" id="posts-container">
             <% if (posts) { %>
@@ -11,20 +10,37 @@
                     <div>
                         <img src="<%= post.user.avatar %>"  id="user-avatar">
                         <span id="user-name"><%= post.user.name %></span>
-                        <% if (locals.user && locals.user.id==post.user.id) { %>         
+                    </div>
+                    <% if (locals.user && locals.user.id==post.user.id) { %>         
                         <button class="delete-post-btn" postId="<%= post.id %>">
                             Delete
                         </button>
                         <% } %>
-                    </div>
                     <div style="color: black; ">
-                        <p  ><%= post.content %></p>
+                        <p><%= post.content %></p>
                         <% if (locals.user) { %> 
                             <a href="/likes/toggle?id=<%= post.id %>&type=Post" class="like-tag"> 
-                                <img id="like-logo" src="https://cdn-icons-png.flaticon.com/512/1077/1077035.png" alt="like">
+                                <img id="like-logo" src="https://cdn-icons-png.flaticon.com/512/1077/1077035.png" alt="like"         
+                                >
                             </a>
                         <% } %>
-                        <span>  <span style="font-size: 1.5rem;"><%= post.likes.length %></span>   Likes</span>
+                        
+                            <% if (post.likes.length==0) { %>
+                                <span style="font-size: 1rem; font-family: 'Courier New', Courier, monospace;">
+                                    <span style="font-size: 1rem; font-family: 'Sorts Mill Goudy', serif;" id="post-like-<%= post.id %>">
+                                        No
+                                    </span>
+                                    Likes
+                                </span>
+                            <% }else{ %>
+                                <span style="font-size: 1rem; font-family: 'Courier New', Courier, monospace;">
+                                    <span style="font-size: 1rem; font-family: 'Sorts Mill Goudy', serif;" id="post-like-<%= post.id %>">
+                                        <%= post.likes.length %>
+                                    </span>
+                                    Likes
+                                </span>
+                                <% } %>
+                        
                         <% if (locals.user) { %>
                             <form action="/comments/post-comment" method="POST" class="comment-form" id= "comment-form-<%= post._id %>" >
                                 <textarea name="comment" id="" cols="30" rows="2" placeholder="Add comment"></textarea>
@@ -46,7 +62,15 @@
                                         </a>
                                    <% } %>
                                     
-                                        <span><span style="font-size: 1.2rem;"><%= (comment.likes.length) %></span> Likes</span>
+                                        <span>
+                                            <span style="font-size: 1.2rem;" id="comment-like-<%= comment.id %>">
+                                            <% if (comment.likes.length==0){ %>
+                                             No 
+                                            <% } else{ %>
+                                             <%= comment.likes.length %>
+                                            <% } %>
+                                            </span>Likes
+                                        </span>
                                         
                                         <% if (locals.user && ( post.user.id == locals.user.id  || comment.user.id == locals.user.id)) { %>
                                             <small>
@@ -69,7 +93,6 @@
   
 
     <div class="side-bar">
-
         <% if (locals.user) { %>
         <div class="header" id="chat-section">
             <a href="/chats">

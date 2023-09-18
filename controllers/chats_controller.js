@@ -23,11 +23,8 @@ module.exports.chatSection=async(req,res)=>{
         }
       ]
     })
-    console.log(user.chats,'<---chats')
-
 
     const users = await User.find();
-
     return res.render('chat_section',{
         title:'Codeial | Chats',
         chats:user.chats,

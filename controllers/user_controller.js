@@ -164,8 +164,17 @@ module.exports.acceptRequest= async(req,res)=>{
 
     try{
         const friendship = await Friendship.findById(req.query.id);
+        console.log(friendship)
+
+        const user1 = await User.findById(friendship.from_user);
+        const user2 = await User.findById(friendship.to_user);
+        console.log(user1, '<---user1')
+        user1.friendsName.push(user2.id);
+        user2.friendsName.push(user1.id);
         friendship.status='accepted';
         friendship.save();
+        user1.save();
+        user2.save();
         return res.redirect('back');
     }
     catch(err){
@@ -181,11 +190,13 @@ module.exports.removeFriend = async(req,res)=>{
 
     const from_user = await User.findById(friendship.from_user);
     from_user.friends.pull(friendship);
-    from_user.save();
 
     const to_user= await User.findById(friendship.to_user);
     to_user.friends.pull(friendship);
+    from_user.friendsName.pull(to_user.id);
+    to_user.friendsName.pull(from_user.id);
     to_user.save();
+    from_user.save();
     return res.redirect('back');
 
 }

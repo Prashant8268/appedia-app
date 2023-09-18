@@ -3,6 +3,7 @@ const { model } = require('mongoose');
 const User = require('../models/User.js');
 const Post = require('../models/Post.js');
 const Comment = require('../models/Comment.js');
+const Friendship = require('../models/Friendship.js')
 const nodeMailer = require('../mailers/comment_mailer.js');
 
 
@@ -15,15 +16,16 @@ module.exports.home =async(req,res)=>{
                 populate:{
                     path:'user', select: 'name',
                 },
-                // populate:('likes')
             }).populate('likes').sort({createdAt: -1});
 
+            const LoggedUser = await User.findById(req.user.id).populate('friendsName' , 'name');
             const users = await User.find();
 
             return res.render('./homepage.ejs',{
                 title:"Codeial",
                 posts,
-                users: users
+                users: users,
+                friends:LoggedUser.friendsName
             });
 
        

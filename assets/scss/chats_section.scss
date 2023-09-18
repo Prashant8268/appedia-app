@@ -56,6 +56,7 @@ $chat-color:#d4c9c9;
 .container{
     @include flexRow;
     padding-top: 0;
+    height: 80vh;
 }
 .aside{
     margin-left: 1rem;
