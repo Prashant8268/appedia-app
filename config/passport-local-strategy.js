@@ -14,7 +14,7 @@ passport.use(new LocalStrategy({
     async(req,email,password, done)=>{
         const user = await User.findOne({email:email});
         if(!user || user.password!=password){
-            req.flash('success', 'invalid email/password')
+            req.flash('success', 'Invalid email/password')
             return done(null,false);
         }
         return done(null, user);
@@ -32,8 +32,7 @@ passport.deserializeUser(async(id,done)=>{
 
     try{
         const user = await  User.findById(id);
-        
-         return done(null,user);
+        return done(null,user);
     }
     catch(err){
         console.log(err, 'Error in finding user --> passport ')
@@ -47,7 +46,7 @@ passport.checkAuthentication = (req,res,next)=>{
             return next();
             
         }
-     return res.redirect('/');
+     return res.redirect('/sign-in');
 
 
 
@@ -55,7 +54,6 @@ passport.checkAuthentication = (req,res,next)=>{
 }
 
 passport.setAuthenticatedUser = (req,res,next)=>{
-
     if(req.isAuthenticated()){
         res.locals.user = req.user;
     }

@@ -142,6 +142,7 @@ module.exports.updateUserProfile = async(req,res)=>{
 // controller for adding a friend
 
 module.exports.addFriend = async(req,res)=>{
+    req.flash('success', 'Request Sent')
     const to_user = await User.findById(req.query.id);
     const friendship = await Friendship.create({
         to_user:to_user.id,
@@ -163,6 +164,7 @@ module.exports.addFriend = async(req,res)=>{
 module.exports.acceptRequest= async(req,res)=>{
 
     try{
+        req.flash('success', 'Request Accepted');
         const friendship = await Friendship.findById(req.query.id);
         console.log(friendship)
 
@@ -186,8 +188,8 @@ module.exports.acceptRequest= async(req,res)=>{
 // reject or cancel a friend request 
 
 module.exports.removeFriend = async(req,res)=>{
-    const friendship = await Friendship.findByIdAndRemove(req.query.id);
 
+    const friendship = await Friendship.findByIdAndRemove(req.query.id);
     const from_user = await User.findById(friendship.from_user);
     from_user.friends.pull(friendship);
 

@@ -89,11 +89,11 @@ app.use(passport.session());
 
 app.use(passport.setAuthenticatedUser);
 
-const Mware = require('./config/middleware');
+const Middleware = require('./config/middleware');
 const { chat } = require('googleapis/build/src/apis/chat');
 
 app.use(flash());
-app.use(Mware.setFlash);
+app.use(Middleware.setFlash);
 
 
 // setting router ;

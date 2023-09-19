@@ -5,12 +5,14 @@ const Post = require('../models/Post.js');
 const Comment = require('../models/Comment.js');
 const Friendship = require('../models/Friendship.js')
 const nodeMailer = require('../mailers/comment_mailer.js');
+const middleware = require('../config/middleware.js');
+const { readerrevenuesubscriptionlinking } = require('googleapis/build/src/apis/readerrevenuesubscriptionlinking/index.js');
 
 
 
 // controller for homepage 
 module.exports.home =async(req,res)=>{
-    try{  
+    try{
             const posts = await Post.find().populate('user','name avatar').populate({
                 path:'comments',
                 populate:{
@@ -40,43 +42,33 @@ module.exports.home =async(req,res)=>{
 // home page for going to sign-up page
 module.exports.signup = (req,res)=>{
     return res.render('signup',{
-        title:"Codeial"
+        title:"Apedia"
     })
 }
 
 // controller for going to sign- in page
 module.exports.signin = (req,res)=>{
-
+    console.log(req.flash('success')[0], '<--msg')
     return  res.render('sign_in',{
-        title: "Codeial "
+        title: "Apedia ",
+        flash:{
+            success:'Logout Successfullly'
+        }
+    
     })
 } 
 
 
 
-
-
-
-
-
 // controller for signing out 
 
-module.exports.signOut = (req,res)=>{
+module.exports.signOut = async(req, res) => {
+    try {
+        await req.session.destroy();
+        return res.redirect('sign-in?logout=true')
 
-    try{
-        req.session.destroy(err => {
-            if (err) {
-              console.error('Error in  destroying session:', err);
-              return res.redirect('/'); // or handle the error as needed
-            }
-            req.user = null; // Clear the user object
-            res.redirect('/sign-in'); // or any other appropriate action
-
-          });
-
+    } catch (err) {
+      console.log(err, '<----controller signout');
     }
-    catch(err){
-        console.log(err , '<----controller signout')
-    }
-
-}
+  }
+  

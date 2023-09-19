@@ -1,6 +1,25 @@
 
 
 {
+
+    // this is code for notification
+    const notification =(message)=>{
+        const noti = document.createElement('div');
+        noti.id='notification';
+        noti.innerHTML =message;
+        const body = document.querySelector('body');
+        body.prepend(noti);
+        setTimeout(() => {
+            // Apply the animation by changing the CSS properties
+            noti.style.opacity = '0';
+            setTimeout(() => {
+              noti.remove();
+            }, 700); // 500 milliseconds (0.5 seconds) matches the animation duration
+          }, 2000);
+
+    }
+
+
     let deletePost = document.querySelectorAll('.delete-post-btn');
     function refreshPosts(){
         deletePost = document.querySelectorAll('.delete-post-btn');
@@ -25,6 +44,8 @@
                     createComment();
                     refreshToggleComment();
                     toggleLikes();
+                    notification('Posted');
+ 
 
                 },
                 error: (err)=>{
@@ -51,8 +72,9 @@
                     <img id="like-logo" src="https://cdn-icons-png.flaticon.com/512/1077/1077035.png" alt="like">
                 </a>
                 <span style="font-size: 1rem; font-family: 'Courier New', Courier, monospace;">
-                <span style="font-size: 1rem; font-family: 'Sorts Mill Goudy', serif;" id="post-like-${i._id}">
-                </span>
+                    <span style="font-size: 1rem; font-family: 'Sorts Mill Goudy', serif;" id="post-like-${i._id}">
+                        No
+                    </span>
                 Likes
                 </span>
                 <form action="/comments/post-comment" method="POST" class="comment-form" id= "comment-form-${i._id}" >
@@ -77,10 +99,10 @@
                 <img id="like-logo-C" src="https://cdn-icons-png.flaticon.com/512/1077/1077035.png" alt="like">
                 </a>
                 <span>
-                    <span style="font-size: 1.2rem;" id="comment-like-<%= comment.id %>">
+                    <span style="font-size: 1.2rem;" id="comment-like-${comment._id}">
                     No 
-                    </span>Likes    
-                </span>   
+                    </span>Likes
+                </span>  
                      <small>
                          <button class="delete-comment" href="/comments/delete-comment/${comment._id}"  >
                          <img src="https://cdn-icons-png.flaticon.com/128/484/484560.png" style="height: 15px; width: 10pxpx;">
@@ -115,6 +137,7 @@
                         check2();
                         refreshToggleComment();
                         toggleLikes();
+                        notification('Commented');
                         
                     },
                     error: (err) => {
@@ -162,6 +185,7 @@
             success: (data)=>{
                 const post = document.getElementById(`post-${postId}`);
                 post.parentNode.removeChild(post);
+                notification('Post Deleted');
                 
             },
             error: (err)=>{
@@ -184,15 +208,14 @@ function check2(){
     deleteComment.forEach((link)=>{
     link.addEventListener('click',async(event)=>{
         event.preventDefault();
-        console.log('clicked');
         const href = link.getAttribute('href');
-        console.log('href', href);
         await $.ajax({
             type: 'get',
             url: href,
             success: (data)=>{
                 const post = document.getElementById(`comment-${data.comment}`);
                 post.parentNode.removeChild(post);
+                notification('Comment deleted')
 
                 
             },
@@ -220,6 +243,7 @@ const toggleLikes = ()=>{
                 success: (data)=>{
                     let likeContainer;
                     if(data.type=='Post'){
+
                         likeContainer = document.getElementById(`post-like-${data.id}`);
 
                     }
@@ -233,6 +257,7 @@ const toggleLikes = ()=>{
                     }
                     
                         likeContainer.innerHTML= data.length;
+                        notification('Liked');
                     
 
 

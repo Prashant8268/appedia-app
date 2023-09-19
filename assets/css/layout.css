@@ -11,3 +11,27 @@ body::-webkit-scrollbar-thumb {
 body::-webkit-scrollbar-track {
   background-color: #f1f1f1;
   /* Set the color of the track (non-draggable part) */ }
+
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%); }
+  to {
+    transform: translateX(0%); } }
+
+#notification {
+  padding: 0.6rem;
+  color: #595353;
+  font-family: "Sorts Mill Goudy", serif;
+  background-color: #e79a9a;
+  display: inline-block;
+  border-radius: 0.2rem;
+  animation: slideIn 0.3s ease-in-out;
+  transition: opacity 0.5s ease-out;
+  position: fixed;
+  margin-left: 2rem;
+  margin-top: 1rem;
+  top: 13%; }
+
+@media (max-width: 750) {
+  #notification {
+    font: smaller; } }
