@@ -64,13 +64,15 @@ module.exports.signup = (req,res)=>{
 // controller for going to sign- in page
 module.exports.signin = (req,res)=>{
 
-    flash ={};
-    if(req.query.logout){
-        flash.success='Logout Successfully'
+    if(!req.query.logout){
+        return  res.render('sign_in',{
+            title: "Apedia "
+        })
+
     }
-    else{
-        flash.success='';
-    }
+    let flash = {};
+    flash.success='Logout Successfully'
+    console.log('flash', flash)
     return  res.render('sign_in',{
         title: "Apedia ",
         flash

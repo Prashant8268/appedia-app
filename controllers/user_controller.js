@@ -51,10 +51,6 @@ const { Console } = require('console');
 module.exports.updateUserProfile = async(req,res)=>{
 
     try{
-        // const user = await User.findByIdAndUpdate(req.user.id, {
-        //     name : req.body.name,
-        //     email: req.body.email
-        // }) ; 
         const user = await User.findById(req.user._id);
         User.uploadedAvatar(req,res,(err)=>{
             if(err){
@@ -62,7 +58,6 @@ module.exports.updateUserProfile = async(req,res)=>{
             }
             user.name = req.body.name;
             user.email = req.body.email;
-            console.log(req.file, '<--uploaded file');
             if(req.file){
                 if(user.avatar){
                     fs.unlinkSync(path.join(__dirname, '..', user.avatar))
@@ -170,7 +165,6 @@ module.exports.acceptRequest= async(req,res)=>{
 
         const user1 = await User.findById(friendship.from_user);
         const user2 = await User.findById(friendship.to_user);
-        console.log(user1, '<---user1')
         user1.friendsName.push(user2.id);
         user2.friendsName.push(user1.id);
         friendship.status='accepted';
