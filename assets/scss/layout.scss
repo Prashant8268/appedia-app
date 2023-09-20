@@ -29,7 +29,8 @@ $primary-font: 'Sorts Mill Goudy', serif;
 
 #notification{
   padding: 0.6rem;
-  color: rgb(89, 83, 83);
+  // color: rgb(89, 83, 83);
+  color: white;
   font-family: $primary-font;
   background-color: $primary-color;
   display: inline-block;

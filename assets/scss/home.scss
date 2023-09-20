@@ -11,7 +11,8 @@ body{
     align-items: center;
     padding: 3.5rem;
     flex-wrap: nowrap;
-    height: 63%;
+    height: 100%;
+    width: auto;
 }
 
 .container{
@@ -76,20 +77,25 @@ body{
 }
 
 /* responsive  */
-@media (max-width: 710px) {
+@media (max-width: 600px) {
     body{
         font-size: small;
     }
+    .main-class{
+        align-items: baseline;
+        padding: 0;
+    }
     .container{
-        width: 100%;
+        margin-top: 4rem;
+        width: 100vw;
         height: auto;
         gap:38px;
         flex-wrap: wrap;
         font-size: smaller;
-
+        align-items: baseline;
     }
     #my-form{
-        width: 95%;
+        width: 100%;
     }
     .input-field{
         height: 1.6rem;
@@ -107,8 +113,3 @@ body{
 
 }
 
-@media (max-width: 450px) {
-    .container{
-        width: 100%;
-    }  
-}

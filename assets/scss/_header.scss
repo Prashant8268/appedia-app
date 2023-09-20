@@ -25,20 +25,25 @@ $primary-color: #914C4C;
 .canbe{
     text-decoration: none;
     display: flex;
-    margin-left: 15px;
-    margin-top: 10px;
+    margin-left: 0.5rem;
+    flex-shrink: 1;
+    margin-top: 1rem;
     flex-direction: row;
-    img{
-        height: 50px;
-        width: 50px;
-        position: relative;
-        top: -8px;
-        left: 30px;
-        border-radius: 50%;
+    a{
+        img{
+            height: 3rem;
+            width: 3rem;
+            position: relative;
+            top: -1rem;
+            left: 0rem;
+            border-radius: 50%;
+        }
+
     }
+
     li{
         text-decoration: none;
-        margin-right: 45px;
+        margin-right: 1rem;
         list-style: none;
 
     }
@@ -55,5 +60,38 @@ $primary-color: #914C4C;
     }
 }
 
+#dont-know{
+    position: relative;
+    top: -2rem;
+}
+
+@media (max-width: 600px) {
+
+    #dont-know{
+        top: -0.8rem;
+    }
+    .nav-bar{
+        font-size: smaller;
+        flex-shrink: 1;
+        a{
+            img{
+                height: 1.5rem;
+                width: 1.5rem;
+                top: -0.3rem;
+                left: 0;
+            }
+
+        }
+
+    }
+    .canbe{
+        font-size: smaller;
+    }
+    #site-name{
+        position: relative;
+        top: 0.4rem;
+        font-size: 1.2rem;
+    }
+  }
 
 

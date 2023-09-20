@@ -20,7 +20,7 @@ body::-webkit-scrollbar-track {
 
 #notification {
   padding: 0.6rem;
-  color: #595353;
+  color: white;
   font-family: "Sorts Mill Goudy", serif;
   background-color: #e79a9a;
   display: inline-block;

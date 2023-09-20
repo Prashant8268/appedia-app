@@ -20,14 +20,29 @@ module.exports.home =async(req,res)=>{
                 },
             }).populate('likes').sort({createdAt: -1});
 
-            const LoggedUser = await User.findById(req.user.id).populate('friendsName' , 'name');
-            const users = await User.find();
+            const LoggedUser = await User.findById(req.user.id).populate('friendsName' , 'name')
+            .populate({
+                path:'friends',
+                populate:[
+                    {
+                        path:'from_user', select:'name',
+                    },
+                    {
+                        path:'to_user',select:'name'
+                    }
+                ]
+            });
+            let users = await User.find();
+            users = users.filter(item=>item.id!=req.user.id)
+            let friendships = LoggedUser.friends;
+            friendships = friendships.filter(item=>item.status =='pending');
 
             return res.render('./homepage.ejs',{
                 title:"Codeial",
                 posts,
-                users: users,
-                friends:LoggedUser.friendsName
+                friends:LoggedUser.friendsName,
+                friendships,
+                users
             });
 
        
@@ -48,12 +63,17 @@ module.exports.signup = (req,res)=>{
 
 // controller for going to sign- in page
 module.exports.signin = (req,res)=>{
-    console.log(req.flash('success')[0], '<--msg')
+
+    flash ={};
+    if(req.query.logout){
+        flash.success='Logout Successfully'
+    }
+    else{
+        flash.success='';
+    }
     return  res.render('sign_in',{
         title: "Apedia ",
-        flash:{
-            success:'Logout Successfullly'
-        }
+        flash
     
     })
 } 

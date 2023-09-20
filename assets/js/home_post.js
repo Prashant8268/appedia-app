@@ -276,6 +276,30 @@ const toggleLikes = ()=>{
 
 toggleLikes();
 
+
+
+
+// for displaying  friends request
+
+const sideElement = document.querySelectorAll('.side-element');
+sideElement.forEach((item)=>{
+    item.addEventListener('click',()=>{
+        const requestSection = item.firstChild.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling;
+        if(requestSection.style.height==0){
+            requestSection.style.height  = 'auto';
+            requestSection.style.width = 'auto';
+            requestSection.style.display='block';
+        }
+        else{
+            requestSection.style.display="none";
+            requestSection.style.height="";
+            requestSection.style.width="";
+        };
+    
+    });
+    
+})
+
 }
 
 

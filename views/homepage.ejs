@@ -93,29 +93,73 @@
   
 
     <div class="side-bar">
-        <% if (locals.user) { %>
-        <div class="header" id="chat-section">
+        <div class="side-element">
+            <img src="https://cdn-icons-png.flaticon.com/512/4450/4450283.png" alt="friend">
+            <div class="info">Friends Request</div>
+            <div class="request-section">
+                <% if (friendships.length>0) { %>
+                    <% for( friend of friendships ) { %>
+                        <div class="single-request">
+                            <% if (friend.to_user.id == locals.user.id) { %>
+                                <div><%= friend.from_user.name %></div>
+                                <div class="buttton-container">
+                                    <button>
+                                        <a href="/user/accept-request?id=<%= friend.id  %>">Accept</a>
+                                    </button>
+                                    <button>
+                                        <a href="/user/remove-friend?id=<%=friend.id  %>">Reject</a>
+                                    </button>
+                                </div>      
+                            <% } %>
+                        </div>
+                    <% } %>
+                <%} else {  %>
+                    No new Request
+                <% } %>
+            </div>
+        </div>
+        <div class="side-element">
             <a href="/chats">
-            <img src="https://cdn-icons-png.flaticon.com/512/4964/4964263.png" alt="" id="chat-logo">
-            <span>Chat Section</span>
+            <img src="https://cdn-icons-png.flaticon.com/512/4964/4964263.png" alt="chat">
+            <div class="info">Chats</div>
             </a>
         </div>
-        <div class="friends">
-            <h3>Friends</h3>
+        <div class="side-element">
+            <img src="https://cdn-icons-png.flaticon.com/512/3220/3220829.png" alt="chat">
+            <div class="info">Friends</div>
+            <div class="request-section">
+                <% if (friends.length>0) { %>
+                    <% for( friend of friends ) { %>
+                        <div class="single-request">
+                        <a href="/user/profile-update/<%= friend.id %>" >
+                            <p style="color: black;"><%=  friend.name %></p> 
+                        </a>
+                        </div>
+                    <% } %>
+                <%} else {  %>
+                    No Friends
+                <% } %>
+            </div>
         </div>
-        <% } %>
-
-        <div class="all-users" >
-            <% if (users && locals.user) { %>
-                <h3>All Users</h3>
-            <% for( let i of users) { %>
-            <a href="/user/profile-update/<%= i.id %>" > <p style="color: black;"><%=  i.name %></p> </a>
-            <% } %>
-            <% } %>
+        <div class="side-element">
+            <img src="https://cdn-icons-png.flaticon.com/512/1165/1165725.png" alt="chat">
+            <div class="info">All Users</div>
+            <div class="request-section">
+                <% for(user of users) { %>
+                    <div class="single-request">
+                        <a href="/user/profile-update/<%= user.id %>" >
+                            <p style="color: black;"><%=  user.name %></p> 
+                        </a>
+                    </div>
+                <% } %>
+            </div>
         </div>
-
+        
     </div>
 </div>
+
+
+
 <script src="/js/home_post.js"></script>
 <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
 <script src="/js/chat_engine.js"></script>

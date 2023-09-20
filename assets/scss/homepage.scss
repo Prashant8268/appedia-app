@@ -30,7 +30,7 @@ body{
 }
 
 .new-feed{
-    width: 70%;
+    width: 100%;
     height: 100%;   
     padding-top: 8px;
     padding-left: 20px;
@@ -147,22 +147,7 @@ body{
   height: 1rem;
 }
 
-.side-bar{
-    width: 25%;
-    display: flex;
-    flex-direction: column;
-    h3{
-      padding: 5px;
 
-    }
-    a{
-      text-decoration: none;
-      color: $primary-color;
-    }
-    p{
-      margin-left: 8px;
-    }
-}
 #like-logo{
   height: 20px;
   position: relative;
@@ -183,13 +168,10 @@ body{
   display: none;
 }
 .delete-post-btn{
-    width: 50px;
+    width: 2.6rem;
     padding: 2px;
-    margin: 0;
-    position: relative;
     background-color: $primary-background;
     border: 2px;
-    left: 80%;
     border-radius: 3%;
     text-decoration: none;
     color: black;
@@ -235,6 +217,7 @@ body{
     background-color: transparent;
     font-family: $primary-font;
     color: black;
+    width: 80%;
 
   }
 }
@@ -242,18 +225,100 @@ body{
 
 // responsive designs 
 
+
+
+
+
+// side bar 
+.side-bar{
+  position: fixed;
+  right: 5;
+  top: 40%;
+  display: flex;
+  flex-direction: column;  
+  align-items: center; /* Center items horizontally */
+  justify-content: center;
+
+  img{
+    display: block;
+    height: 3rem;
+    width: 3rem;
+  }
+
+}
+
+.info{
+  height: 0;
+  width: 0;
+  overflow: hidden;
+  background-color: lightpink;
+  transition: width 0.5s, height 0.5s, opacity 0.5s;
+}
+.side-element{
+  margin-bottom: 1rem;
+}
+.side-element:hover{
+  img{
+    transform: scale(1,1.1);
+  }
+  .info{
+    height: auto;
+    width: auto;
+    position: absolute;
+    border-radius: 0.2rem;
+    right: 2ewm;
+    padding: 0.2rem;
+    font-size: smaller;
+
+  }
+}
+
+
+.request-section{
+  height: 0;
+  width: 0;
+  overflow: hidden;
+  display: none;
+  position: fixed;
+  padding: 0.5rem;
+  right: 10%;
+  top: 50%;
+  border-radius: 0.4rem;
+  transition: width 0.2s, height 0.2s, opacity 0.3s;
+  background-image: linear-gradient(9deg, rgb(216, 214, 252), white);
+  font-family: inherit;
+  a{
+    text-decoration: none;
+  }
+
+}
+
+.single-request{margin-bottom: 0.4rem;}
+
+.buttton-container{
+  
+  button{
+    font-size: 0.7rem;
+      a{
+        text-decoration: none;
+        color:black;
+      }
+  }
+}
+
+
+
+
 @media (max-width: 600px) {
+
+  .side-element{
+    img{
+      height: 10%;
+    }
+  }
 
   #post-form{
     width: 80%;
-  }
-  .side-bar{
-    position: absolute;
-    width: 100%;
-    background-color: darkblue;
-  }
-  .new-feed{
-    width: 100%;
   }
 
 }
