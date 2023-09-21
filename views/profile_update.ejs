@@ -1,44 +1,43 @@
 <link rel="stylesheet" href="/css/profile.css">
-
-<div class="section-1" >
-    <div>
-    <img src="<%= userw.avatar%>" id="user-avatar">
-    </div>
-    <div>
-        <div class="h1"><%= userw.name %></div>
-        <div>Email: <%= userw.email %></div>
-    </div>
-    <% if (locals.user && locals.user.id!=userw.id) { %> 
-    <% if (areFriends) { %>
-        <Button><a href="/user/remove-friend?id=<%=friendRequest.id %>"> Remove Friend</a></Button>
-    <% } else if(pending){ %>
-        <% if (rfu) { %>
-         <button><a href="/user/remove-friend?id=<%= friendRequest.id %>">Cancel Friend Request</a></button>
-        <% } else{  %>
-        <button><a href="/user/accept-request?id=<%= friendRequest.id %>">Accept</a></button>
-        <button> <a href="/user/remove-friend?id=<%= friendRequest.id %>">Reject</a></button>
-        <% } %>
-        <% } else { %>
-        <Button><a href="/user/add-friend?id=<%= userw.id  %>"> Add Friend</a></Button>
-    <% } %>
-    <% } %>
-
-
-</div>
-<% if (locals.user.id == userw.id) { %>
 <div class="container">
-    <div class="inner-section">
-        <h2>Update your profile here</h2>
-        <form method="POST" action="/user/update-user-profile" enctype="multipart/form-data">
-            <label for="name">Name</label>
-            <input type="text" name="name" value="<%= user.name %>">
-            <label for="email">Email</label>
-            <input type="text" name="email" value="<%=  user.email %>">
-            <input type="file" name="avatar" placeholder="Profile Picture">
-            <input type="submit" value="Update" id="submit-btn">
-        </form>
+    <div class="section-1" >
+        <img src="<%= userw.avatar%>" id="user-avatar">
+        <div>
+            <div class="h1"><%= userw.name %></div>
+            <div>Email: <%= userw.email %></div>
+        </div>
+        <% if (locals.user && locals.user.id!=userw.id) { %> 
+        <% if (areFriends) { %>
+            <Button><a href="/user/remove-friend?id=<%=friendRequest.id %>"> Remove Friend</a></Button>
+        <% } else if(pending){ %>
+            <% if (rfu) { %>
+            <button><a href="/user/remove-friend?id=<%= friendRequest.id %>">Cancel Friend Request</a></button>
+            <% } else{  %>
+            <button><a href="/user/accept-request?id=<%= friendRequest.id %>">Accept</a></button>
+            <button> <a href="/user/remove-friend?id=<%= friendRequest.id %>">Reject</a></button>
+            <% } %>
+            <% } else { %>
+            <Button><a href="/user/add-friend?id=<%= userw.id  %>"> Add Friend</a></Button>
+        <% } %>
+        <% } %>
+
 
     </div>
+    <% if (locals.user.id == userw.id) { %>
+    <div class="second-container">
+        <div class="inner-section">
+            <h2>Update your profile here</h2>
+            <form method="POST" action="/user/update-user-profile" enctype="multipart/form-data">
+                <label for="name">Name</label>
+                <input type="text" name="name" value="<%= user.name %>">
+                <label for="email">Email</label>
+                <input type="text" name="email" value="<%=  user.email %>">
+                <input type="file" name="avatar" placeholder="Profile Picture">
+                <input type="submit" value="Update" id="submit-btn">
+            </form>
+
+        </div>
+    </div>
+    
+    <% } %>
 </div>
- 
-<% } %>

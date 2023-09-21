@@ -23,6 +23,11 @@ const chatroomSchema = new mongoose.Schema({
         type: String,
         default: " ",
     },
+    lastSender:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'User'
+    }
+
 
 },
 {

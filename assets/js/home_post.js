@@ -287,7 +287,7 @@ sideElement.forEach((item)=>{
         const requestSection = item.firstChild.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling;
         if(requestSection.style.height==0){
             requestSection.style.height  = 'auto';
-            requestSection.style.width = 'auto';
+            requestSection.style.width = '9rem';
             requestSection.style.display='block';
         }
         else{

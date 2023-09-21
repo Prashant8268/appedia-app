@@ -5,31 +5,42 @@ const Chatroom = require('../models/Chatroom');
 const { chat } = require('googleapis/build/src/apis/chat');
 // const { chat } = require('googleapis/build/src/apis/chat');
 module.exports.chatSection=async(req,res)=>{
+    try{
+        const user = await User.findById(req.user.id)
+        .populate({
+          path: 'chats',
+          populate: [
+            {
+                path: 'sender',
+                select: 'name avatar'
+              
+            },
+            {
+                path: 'receiver',
+                select: 'name avatar'
+              
+            }
+          ]
+        })
+    
+        let users = await User.find();
+        users = users.map((item)=>({
+            id:item._id,
+            _id:item._id,
+            name:item.name
+        }));
 
+        console.log('chats-->',user.chats)
+        return res.render('chat_section',{
+            title:'Codeial | Chats',
+            chats:user.chats,
+            users
+        })
+    }
+    catch(err){
+        console.log(err, 'Error in chats controller');
+    }
 
-    const user = await User.findById(req.user.id)
-    .populate({
-      path: 'chats',
-      populate: [
-        {
-            path: 'sender',
-            select: 'name avatar'
-          
-        },
-        {
-            path: 'receiver',
-            select: 'name avatar'
-          
-        }
-      ]
-    })
-
-    const users = await User.find();
-    return res.render('chat_section',{
-        title:'Codeial | Chats',
-        chats:user.chats,
-        users
-    })
 }
 
 module.exports.areChatsPresent = async (req,res)=>{
@@ -53,7 +64,7 @@ module.exports.areChatsPresent = async (req,res)=>{
                 name:user1.id+user2.id,
                 sender:user1.id,
                 receiver:user2.id,
-                latestMessage:true
+                latestMessage:true,
             });
             user1.chats.push(isPresent);
             user2.chats.push(isPresent);
@@ -75,3 +86,8 @@ module.exports.areChatsPresent = async (req,res)=>{
     }
 
 }
+
+
+
+
+

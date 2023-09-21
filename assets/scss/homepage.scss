@@ -152,7 +152,6 @@ body{
   height: 20px;
   position: relative;
   top: 3%;
-  background-color: red;
   width: 20px;
 }
 #like-logo-c{
@@ -170,6 +169,9 @@ body{
 .delete-post-btn{
     width: 2.6rem;
     padding: 2px;
+    position: relative;
+    left: 8rem;
+    top: -2rem;
     background-color: $primary-background;
     border: 2px;
     border-radius: 3%;
@@ -240,7 +242,6 @@ body{
   justify-content: center;
 
   img{
-    display: block;
     height: 3rem;
     width: 3rem;
   }
@@ -260,6 +261,7 @@ body{
 .side-element:hover{
   img{
     transform: scale(1,1.1);
+
   }
   .info{
     height: auto;
@@ -293,7 +295,12 @@ body{
 
 }
 
-.single-request{margin-bottom: 0.4rem;}
+.single-request{
+  margin-bottom: 0.4rem;
+  a{
+    color: black;
+  }
+}
 
 .buttton-container{
   
@@ -310,8 +317,35 @@ body{
 
 
 @media (max-width: 600px) {
-
+  .post-card{
+    font-size: 0.9rem;
+  }
+  .new-feed{
+    font-size: 0.7rem;
+    #user-avatar{
+      height: 1.2rem;
+      width: 1.2rem;
+    }
+  }
+  #post-heading{
+    font-size: 1rem;
+  }
+  .side-bar{
+    img{
+      height: 1.5rem;
+      width: 1.5rem;
+    }
+  }
   .side-element{
+    a{
+      font-size: smaller;
+    }
+    .info{
+      right: 10;
+    }
+    .request-section{
+      right: 2rem;
+    }
     img{
       height: 10%;
     }

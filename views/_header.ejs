@@ -6,7 +6,7 @@
         <% if (locals.user) { %>
             <li>
             <a href="/user/profile-update/<%= user.id %>" >
-            <img src="<%= user.avatar %>">
+            <img src="<%= user.avatar %>" alt="Profile">
                 <span id="dont-know"> <%=  user.name %></span>
             </a>
             </li>

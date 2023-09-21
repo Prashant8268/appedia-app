@@ -33,6 +33,11 @@ module.exports.home =async(req,res)=>{
                 ]
             });
             let users = await User.find();
+            users = users.map((item)=>({
+                id:item._id,
+                _id:item._id,
+                name:item.name
+            }))
             users = users.filter(item=>item.id!=req.user.id)
             let friendships = LoggedUser.friends;
             friendships = friendships.filter(item=>item.status =='pending');

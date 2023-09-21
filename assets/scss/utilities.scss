@@ -3,7 +3,8 @@
     flex-direction: row;
     padding: 0.7rem;
   }
-
+  $primary-color: #c66a6a;
+  $primary-font: 'Sorts Mill Goudy', serif;
   @mixin messageCon{
     padding: 0.4rem;
     background-color: grey;
@@ -16,4 +17,27 @@
   @mixin aTag{
     text-decoration: none;
     color: black;
+  }
+
+  @mixin aButton{
+    background-color: transparent;
+    padding: 0.4rem;
+    font-size: 0.7rem;
+    border: 0;
+    background-image: linear-gradient(9deg, rgb(216, 214, 252), white);
+    height: 1.5rem;
+    align-self: center;
+    transition: opacity 0.4 ease-in-out;
+    border-radius: 2px;
+    opacity: 0.9;
+    &:hover{
+      transform: scale(1,1.05);
+      opacity: 1;
+    }
+    a{
+      color: black;
+      padding: 0;
+      margin: 0;
+      text-decoration: none;
+    }
   }

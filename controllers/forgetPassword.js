@@ -12,7 +12,7 @@ module.exports.handleForget= async(req,res)=>{
                 user:user.id,
                 isValid: true,
                 value:crypto.randomBytes(20).toString('hex')
-            }); 
+            });
 
             await AccessToken.populate('user');
             

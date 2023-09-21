@@ -115,7 +115,6 @@ body {
   height: 20px;
   position: relative;
   top: 3%;
-  background-color: red;
   width: 20px; }
 
 #like-logo-c {
@@ -131,6 +130,9 @@ body {
 .delete-post-btn {
   width: 2.6rem;
   padding: 2px;
+  position: relative;
+  left: 8rem;
+  top: -2rem;
   background-color: rgba(103, 14, 14, 0.05);
   border: 2px;
   border-radius: 3%;
@@ -182,7 +184,6 @@ body {
   /* Center items horizontally */
   justify-content: center; }
   .side-bar img {
-    display: block;
     height: 3rem;
     width: 3rem; }
 
@@ -226,6 +227,8 @@ body {
 
 .single-request {
   margin-bottom: 0.4rem; }
+  .single-request a {
+    color: black; }
 
 .buttton-container button {
   font-size: 0.7rem; }
@@ -234,6 +237,24 @@ body {
     color: black; }
 
 @media (max-width: 600px) {
+  .post-card {
+    font-size: 0.9rem; }
+  .new-feed {
+    font-size: 0.7rem; }
+    .new-feed #user-avatar {
+      height: 1.2rem;
+      width: 1.2rem; }
+  #post-heading {
+    font-size: 1rem; }
+  .side-bar img {
+    height: 1.5rem;
+    width: 1.5rem; }
+  .side-element a {
+    font-size: smaller; }
+  .side-element .info {
+    right: 10; }
+  .side-element .request-section {
+    right: 2rem; }
   .side-element img {
     height: 10%; }
   #post-form {

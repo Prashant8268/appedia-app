@@ -10,10 +10,7 @@ module.exports.chatSockets = function(socketServer){
     });
 
     io.on('connection',function(socket){
-        console.log('new connection received',socket.id);
-
         socket.on('join_room',(data)=>{
-            console.log('joining request rec.',data);
             socket.join(data.chatroom);
             io.in(data.chatroom).emit('user_joined',data);
 
@@ -28,6 +25,7 @@ module.exports.chatSockets = function(socketServer){
             const chatroom = await Chatroom.findOne({name:data.chatroom});
             chatroom.latestMessage=data.message;
             chatroom.messages.push(message);
+            chatroom.lastSender=data.user1;
             chatroom.save();
             data.message=message;
             // below is for sending data to chatroom so all can receive it 
@@ -35,7 +33,6 @@ module.exports.chatSockets = function(socketServer){
         })
         
         socket.on('disconnect',function(){
-        console.log('socket connection disconnected')
         })
 
     });

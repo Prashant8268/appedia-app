@@ -10,13 +10,12 @@ const Friendship = require('../models/Friendship');
 module.exports.createUser = async(req,res)=>{
     try{
         if(req.body.password !=req.body.confirmPassword){
-            console.log('Password do not match');
+            req.flash('success','Password do not match');
             return res.redirect('back');
         }
     
         const aleradyExist = await  User.findOne({email:req.body.email});
         if(aleradyExist){
-            console.log('User already Present ');
             return res.redirect('back');
         }
     
@@ -24,7 +23,8 @@ module.exports.createUser = async(req,res)=>{
             name: req.body.name,
             email: req.body.email,
             password: req.body.password
-        })
+        });
+        req.flash('success','Account Created Please Login In')
         return res.redirect('/sign-in')
     }
     catch(err){  
