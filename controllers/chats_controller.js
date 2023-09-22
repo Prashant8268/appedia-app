@@ -27,10 +27,10 @@ module.exports.chatSection=async(req,res)=>{
         users = users.map((item)=>({
             id:item._id,
             _id:item._id,
-            name:item.name
+            name:item.name,
+            email:item.email
         }));
 
-        console.log('chats-->',user.chats)
         return res.render('chat_section',{
             title:'Codeial | Chats',
             chats:user.chats,

@@ -11,13 +11,12 @@ class ChatEngine{
 
 
     connectionHandler(){
-
         let self = this;
         let user1;
         let user2;
+        console.log('at conntect socket client')
         this.socket.on('connect',async()=>{
             console.log('connection establish using sockets...!');
-
             let isPresent;
 
 
@@ -49,7 +48,7 @@ class ChatEngine{
 
 
             const chats = document.querySelector('.chats');
-            chats.classList.toggle('hide');
+            chats.classList.remove('hide');
             const singleChat = document.querySelector('.single-chat');
     
             for(let message of isPresent.messages){
@@ -107,7 +106,6 @@ const openChatElements = document.querySelectorAll('.open-chat');
 openChatElements.forEach((element) => {
   element.addEventListener('click', async function () {
     // You can access the clicked element using "this" or "element" variable
-
     const chatsContainer = document.getElementById('chats-container');
     chatsContainer.classList.add('hide');
     const user_Email = this.getAttribute('user_Email');

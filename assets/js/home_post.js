@@ -62,10 +62,10 @@
         <div>
             <img src="${avatar}"  id="user-avatar">
             <span id="user-name">${username}</span>
-            <button class="delete-post-btn" postId=${i._id}>
-                Delete
-            </button>
         </div>
+        <button class="delete-post-btn" postId=${i._id}>
+            Delete
+        </button>
         <div style="color: black; ">
             <p  >${i.content}</p>
                 <a href="/likes/toggle?id=${i._id}&type=Post" class="like-tag"> 

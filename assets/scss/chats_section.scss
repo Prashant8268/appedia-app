@@ -32,14 +32,14 @@ $chat-color:#d4c9c9;
 
 .container{
     @include flexRow;
-    padding-top: 0;
-    padding-left: 0;
+    padding: 0;
     height: 80vh;
 }
 
 .chats-container{
-    height: 70%;
+    height: 100%;
     width: 30%;
+    border-right: 2px solid $primary-background;
     li{
         margin: 0;
         padding: 0.6rem;
@@ -97,7 +97,6 @@ $chat-color:#d4c9c9;
     li{
         margin: 0; 
         padding: 0;
-        background-color: white;
         border-bottom: 3px solid $primary-background;
         list-style: none;
         h4{

@@ -2,7 +2,6 @@ const Chatroom = require('../models/Chatroom');
 const User = require('../models/User');
 const Message = require('../models/Message');
 module.exports.chatSockets = function(socketServer){
-
     let io = require('socket.io')(socketServer,{
         cors:{
             origin:'*'
@@ -17,7 +16,6 @@ module.exports.chatSockets = function(socketServer){
         });
 
         socket.on('send_message',async(data)=>{
-
             const message = await Message.create({
                 content:data.message,
                 sender:data.user1

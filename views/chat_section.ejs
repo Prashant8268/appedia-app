@@ -30,7 +30,7 @@
                                 <% if (chat.lastSender==locals.user.id) { %>
                                     You : 
                                    <% } %>
-                                <%= chat.latestMessage %>
+                               <span style="font-weight: bold;"><%= chat.latestMessage %></span> 
                             </div>
                         </div> 
                     </div>
@@ -64,6 +64,8 @@
 
     </div>
 </div>
+
+
 
 <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
 <script src="/js/chats_section.js" type="text/javascript"></script>

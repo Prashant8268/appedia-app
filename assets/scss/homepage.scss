@@ -171,7 +171,7 @@ body{
     padding: 2px;
     position: relative;
     left: 8rem;
-    top: -2rem;
+    top: 0rem;
     background-color: $primary-background;
     border: 2px;
     border-radius: 3%;
@@ -276,6 +276,18 @@ body{
 }
 
 
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0%);
+  }
+}
+
+
+
+
 .request-section{
   height: 0;
   width: 0;
@@ -289,6 +301,9 @@ body{
   transition: width 0.2s, height 0.2s, opacity 0.3s;
   background-image: linear-gradient(9deg, rgb(216, 214, 252), white);
   font-family: inherit;
+  animation: slideIn 0.3s ease-in-out;
+
+  
   a{
     text-decoration: none;
   }
