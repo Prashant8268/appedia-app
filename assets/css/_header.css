@@ -12,6 +12,7 @@
   background: rgba(103, 14, 14, 0.05); }
 
 #site-name {
+  font-family: 'Major Mono Display', monospace;
   color: #914C4C;
   text-align: justify;
   font-size: 40px;
