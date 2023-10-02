@@ -16,11 +16,12 @@ module.exports.chatSockets = function(socketServer){
         });
 
         socket.on('send_message',async(data)=>{
+            const chatroom = await Chatroom.findOne({name:data.chatroom});
             const message = await Message.create({
                 content:data.message,
-                sender:data.user1
+                sender:data.user1,
+                chatroom:chatroom.id
             });
-            const chatroom = await Chatroom.findOne({name:data.chatroom});
             chatroom.latestMessage=data.message;
             chatroom.messages.push(message);
             chatroom.lastSender=data.user1;

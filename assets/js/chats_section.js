@@ -57,10 +57,6 @@ class ChatEngine{
             while (singleChat.firstChild) {
                 singleChat.removeChild(singleChat.firstChild);
             }
-
-            // <li>
-            // <h4><img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Profile"> User</h4>
-            // </li>
             const li = document.createElement('li');
             const heading = document.createElement('h4');
             const img = document.createElement('img');
@@ -73,7 +69,6 @@ class ChatEngine{
             
             for(let message of isPresent.messages){
                 const newMsg = document.createElement('div');
-                console.log(message,'message')
                 if(message.sender==user1){
                     newMsg.className='self'
                 }
@@ -83,6 +78,33 @@ class ChatEngine{
                 newMsg.innerHTML=message.content;
                 singleChat.append(newMsg);
             }
+
+            const deleteButton = document.createElement('button');
+            deleteButton.classList.add('delete-chats');
+            deleteButton.id=isPresent;
+            deleteButton.innerHTML = "Delete";
+            chats.append(deleteButton);
+            deleteButton.addEventListener('click',async(e)=>{
+                console.log('delete btn clicked')
+                await $.ajax({
+                    type: 'post',
+                    url: '/chats/delete-chats',
+                    data: {
+                        chatroom:isPresent
+                    },
+                    success: (data)=>{
+                        while (singleChat.firstChild) {
+                            singleChat.removeChild(singleChat.firstChild);
+                        }
+    
+                    },
+                    error: (err)=>{
+                        console.log(err, '<--err at chats_section.js')
+                    }
+                })
+
+            })
+
 
             $(`#send-message`).click(function(){
                 let msg = $(`#msg`).val();
@@ -135,6 +157,7 @@ openChatElements.forEach((element) => {
 
   });
 });
+
 
 
 

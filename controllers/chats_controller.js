@@ -3,7 +3,7 @@ const User = require('../models/User');
 const Message = require('../models/Message')
 const Chatroom = require('../models/Chatroom');
 const { chat } = require('googleapis/build/src/apis/chat');
-// const { chat } = require('googleapis/build/src/apis/chat');
+
 module.exports.chatSection=async(req,res)=>{
     try{
         const user = await User.findById(req.user.id)
@@ -89,6 +89,23 @@ module.exports.areChatsPresent = async (req,res)=>{
 }
 
 
+// Controller for deleting chats
+module.exports.deleteChats = async(req,res)=>{
+    try{
+        const chatroom = await Chatroom.findById(req.body.chatroom._id);
+        await Message.deleteMany({chatroom:chatroom._id});
+        await Chatroom.deleteOne(chatroom);
 
+
+        return res.status(200).json({
+            'message': 'successfull'
+        })
+
+    }
+    catch(err){
+        console.log('error', err);
+        return ;
+    }
+}
 
 

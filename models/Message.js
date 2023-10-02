@@ -8,6 +8,10 @@ const messageSchema = new mongoose.Schema({
     content:{
         type: String,
         required: true
+    },
+    chatroom:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'Chatroom'
     }
 },
 {
