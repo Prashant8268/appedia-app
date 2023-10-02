@@ -6,45 +6,44 @@
 </div>
 <div class="container">
     <div class="chats-container" id="chats-container">
-        <% for(let chat of chats){ %>
-            <li>
-                <% if (locals.user.id == chat.sender.id) { %>
+        <% for(let chat of chats){ %>  
+            <% if (locals.user.id == chat.sender.id) { %>
+            <li class="open-chat" user_Email="<%= chat.receiver.email %>">
+                <div>
+                    <img src=<%= chat.receiver.avatar %> alt="Profile">
                     <div>
-                        <img src=<%= chat.receiver.avatar %> alt="Profile">
+                        <div><%= chat.receiver.name %></div>
                         <div>
-                            <div><%= chat.receiver.name %></div>
-                            <div>
-                                <% if (chat.lastSender==locals.user.id) { %>
-                                 You : 
-                                <% } %>
-                                <%= chat.latestMessage %>
-                            </div>
-                        </div> 
-                    </div>
-                <% } else { %>
-                    <div>
-                        <img src=<%= chat.sender.avatar %> alt="Profile">
-                        <div>
-                            <div><%= chat.sender.name %></div>
-                            <div>
-                                <% if (chat.lastSender==locals.user.id) { %>
-                                    You : 
-                                   <% } %>
-                               <span style="font-weight: bold;"><%= chat.latestMessage %></span> 
-                            </div>
-                        </div> 
-                    </div>
-                <% } %>
-        
+                            <% if (chat.lastSender==locals.user.id) { %>
+                                You : 
+                            <% } %>
+                            <%= chat.latestMessage %>
+                        </div>
+                    </div> 
+                </div>
             </li>
+            <% } else { %>
+            <li  class="open-chat" user_Email="<%= chat.sender.email %>">
+                <div>
+                    <img src=<%= chat.sender.avatar %> alt="Profile">
+                    <div>
+                        <div><%= chat.sender.name %></div>
+                        <div>
+                            <% if (chat.lastSender==locals.user.id) { %>
+                                You : 
+                                <% } %>
+                            <span style="font-weight: bold;"><%= chat.latestMessage %></span> 
+                        </div>
+                    </div> 
+                </div>
+            </li>
+            <% } %>
         <% } %>
         
         </div> 
 
     <div class="chats hide">
-        <li>
-            <h4><img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Profile"> User</h4>
-        </li>
+
         <div class="single-chat">
 
         </div>
@@ -55,14 +54,6 @@
 
     </div>
 
-
-    <div class="aside">
-        <h3>Start New Chat With </h3>
-        <% for(user of users) { %>
-            <li class="open-chat" user_Email="<%= user.email %>"><%= user.name %> </li>
-        <% } %>
-
-    </div>
 </div>
 
 

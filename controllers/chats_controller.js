@@ -12,16 +12,16 @@ module.exports.chatSection=async(req,res)=>{
           populate: [
             {
                 path: 'sender',
-                select: 'name avatar'
+                select: 'name avatar email'
               
             },
             {
                 path: 'receiver',
-                select: 'name avatar'
+                select: 'name avatar email'
               
             }
           ]
-        })
+        }).sort({ 'chats.updatedAt': 1 })
     
         let users = await User.find();
         users = users.map((item)=>({
@@ -30,10 +30,10 @@ module.exports.chatSection=async(req,res)=>{
             name:item.name,
             email:item.email
         }));
-
+        users = users.filter((user)=>user.id!=req.user.id);
         return res.render('chat_section',{
             title:'Codeial | Chats',
-            chats:user.chats,
+            chats:user.chats,  
             users
         })
     }
@@ -71,12 +71,13 @@ module.exports.areChatsPresent = async (req,res)=>{
             user2.save();
             user1.save();
         }
+        
 
         return  res.status(200).json({
             Message: 'Successfull called',
             chatroom: isPresent,
             user1:user1.id,
-            user2:user2.id
+            user2
         })
 
     }
