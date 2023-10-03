@@ -5,112 +5,310 @@ body{
 }
 
 
-.main-class{
+// .main-class{
+//     display: flex;
+//     justify-content: center; 
+//     align-items: center;
+//     padding: 3.5rem;
+//     flex-wrap: nowrap;
+//     height: 70%;
+//     width: auto;
+// }
+
+// .container{
+//     width: 50%;    
+//     color: pink;
+//     display: flex;
+//     flex-wrap: wrap;   
+//     justify-content: center; 
+//     align-items: center;
+// }
+
+
+// #my-form{
+//     padding: 1.5rem;
+//     width: 80%;
+//     border-radius: 25px;
+//     box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.4);
+//     color: black;
+//     font-weight: 400;
+//     background-image: linear-gradient(9deg, rgb(216, 214, 252), white);
+// }
+// #my-form label{
+//     color: black;
+//     font-weight: 10000;
+// }
+
+// .input-field{
+//     display: block;
+//     margin-top: 0.5rem;
+//     margin-bottom: 0.5rem;
+//     width: 100%;
+//     height: 2rem;
+//     border: 0px;
+//     padding-left: 15px;
+//     padding-top: 5px;
+//     border-radius: 4px; 
+// }
+// .input-field:focus{
+//     outline: none;
+// }
+// .button-container{
+//     display: flex;
+//     flex-direction: row;
+//     justify-content: space-between;
+// }
+// .form-buttons{
+//     outline: none;
+//     text-decoration: none;
+//     width: 40%;
+//     border-radius: 5px;
+//     border: 0px;
+//     padding: 0.5rem;
+//     color: black;
+//     background-color: white;
+//     text-align: center;
+//     transition: transform 0.2 ease-in-out;
+// }
+// .form-buttons:hover{
+//     transform: scale(1.1);
+//     background-color: rgb(206, 226, 247);
+
+// }
+
+// /* responsive  */
+// @media (max-width: 600px) {
+//     body{
+//         font-size: small;
+//     }
+//     .main-class{
+//         align-items: baseline;
+//         padding: 0;
+//         height: 90%;
+//     }
+//     .container{
+//         margin-top: 4rem;
+//         width: 100vw;
+//         height: auto;
+//         gap:38px;
+//         flex-wrap: wrap;
+//         font-size: smaller;
+//         align-items: baseline;
+//     }
+//     #my-form{
+//         width: 100%;
+//     }
+//     .input-field{
+//         height: 1.6rem;
+//         font-size: smaller;
+
+//     }
+//     .button-container{
+
+//         height: auto;
+//         button{
+//         font-size: smaller;
+
+//         }
+//     }
+
+// }
+@import 'utilities';
+@import url('https://fonts.googleapis.com/css2?family=Sorts+Mill+Goudy:ital@1&display=swap');
+
+.hero-section{
+    height: 90%;
     display: flex;
-    justify-content: center; 
-    align-items: center;
-    padding: 3.5rem;
-    flex-wrap: nowrap;
-    height: 70%;
-    width: auto;
-}
-
-.container{
-    width: 50%;    
-    color: pink;
-    display: flex;
-    flex-wrap: wrap;   
-    justify-content: center; 
-    align-items: center;
-}
-
-
-#my-form{
-    padding: 1.5rem;
-    width: 80%;
-    border-radius: 25px;
-    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.4);
-    color: black;
-    font-weight: 400;
-    background-image: linear-gradient(9deg, rgb(216, 214, 252), white);
-}
-#my-form label{
-    color: black;
-    font-weight: 10000;
-}
-
-.input-field{
-    display: block;
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
-    width: 100%;
-    height: 2rem;
-    border: 0px;
-    padding-left: 15px;
-    padding-top: 5px;
-    border-radius: 4px; 
-}
-.input-field:focus{
-    outline: none;
-}
-.button-container{
-    display: flex;
-    flex-direction: row;
+    padding-bottom: 1.3rem;
+    flex-direction: column;
+    padding: 1rem 0.3rem 0.1rem 0.3rem;
     justify-content: space-between;
-}
-.form-buttons{
-    outline: none;
-    text-decoration: none;
-    width: 40%;
-    border-radius: 5px;
-    border: 0px;
-    padding: 0.5rem;
-    color: black;
-    background-color: white;
-    text-align: center;
-    transition: transform 0.2 ease-in-out;
-}
-.form-buttons:hover{
-    transform: scale(1.1);
-    background-color: rgb(206, 226, 247);
+    background: linear-gradient(270deg,rgba(255, 255, 255, 0),
+     rgba(10,10,10, 0.7)),
+       url("../images/icons.jpg");
+    background-size: cover;
 
-}
-
-/* responsive  */
-@media (max-width: 600px) {
-    body{
-        font-size: small;
-    }
-    .main-class{
-        align-items: baseline;
-        padding: 0;
-        height: 90%;
-    }
-    .container{
-        margin-top: 4rem;
-        width: 100vw;
-        height: auto;
-        gap:38px;
-        flex-wrap: wrap;
-        font-size: smaller;
-        align-items: baseline;
-    }
-    #my-form{
-        width: 100%;
-    }
-    .input-field{
-        height: 1.6rem;
-        font-size: smaller;
-
-    }
-    .button-container{
-
-        height: auto;
-        button{
-        font-size: smaller;
-
+    .header{
+        z-index: 1;
+        .container{
+            color: #ffffffff;
+            font-size: 35px;
+            font-family: 'Major Mono Display', monospace;
+            justify-content: space-between;
+            display: flex;
+            flex-direction: row;
+            a{
+                @include aTag;
+            }
+            .whiteBtn{
+                @include whiteBtn;
+                a{
+                    text-decoration: none;
+                    color: black
+                }
+            }
         }
     }
 
+    .container1{
+        display: flex;
+        flex-direction: row;
+        max-width: 50%;
+        padding: 1rem 0.4rem 0.7rem 0.4rem;
+        justify-content: space-between;
+        div:first-child{
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        button{
+            @include whiteBtn;
+            width: fit-content;
+            a{
+                text-decoration: none;
+                color: black
+            }
+        }
+        .headText{
+            @include headText;
+            font-size: 3rem;
+            max-width: 50%;
+        }
+        .smallText{
+            @include smallText;
+            max-width: 100%;
+            line-height: 1.3rem;
+        }
+    }
+}
+.container-intro{
+    // width: 100%;
+    display: flex;
+    padding: 1rem 0.2rem 0.3rem 0.2rem;
+    justify-content: center;
+    // background: linear-gradient(90deg,rgb(43, 41, 41),
+    // rgba(174, 170, 170, 0.7));
+    background-color: aliceblue ;
+    background-size: 100%;
+}
+.flex-col{
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    gap: 0.5rem;
+    a{
+        @include aTag;
+        color: black;
+        font-weight: 700;
+    }
+    .headText{
+        color: black;
+        font-size: 3rem;
+        font-family: 'Montserrat', sans-serif;  
+    }
+    .whiteBtn{
+        @include whiteBtn;
+        width: fit-content;
+        background-color: black;
+        align-self: center;
+        a{
+            @include aTag;
+            color: white;
+            &:hover{
+                border: none;
+            }
+        }
+    }
 }
 
+
+
+// about section 
+.whiteBtn{
+    @include whiteBtn;
+    a{
+        @include aTag;
+        color: grey;
+        font-weight: 700;
+    }
+}
+
+.blackBtn{
+    @include whiteBtn;
+    background-color: black;
+    a{
+        @include aTag;
+        // color: ;
+    }
+}
+
+.about {
+    display: flex;
+    flex-direction: column;
+    // padding: 1rem 0.2rem 0.3rem 0.2rem;
+    width: 100%;
+    .display-row{
+        display: flex;
+        flex-direction: row;
+        height: 100%;
+        width: 100%;
+        justify-content: space-between;
+        .container{
+            width: 50%;
+        }
+        .img-container{
+            width: 50%;
+            img{
+                width: 100%;
+                height: 100%;              
+            }
+           
+        }
+    }
+    .container{
+        flex-direction: column;
+        justify-content: center;
+        .heading{
+            @include headText;
+            color: black;
+            font-size: 3rem;
+            margin-left: 1rem
+        }
+        .content{
+            @include smallText;
+            color:black;
+            margin-left: 1rem;
+            font-size: 1.7rem;
+            font-family: 'Montserrat';
+            font-weight: 710;
+
+        }
+
+    }
+
+}
+.btn-container{
+    margin-left: 1rem;
+}
+
+
+// code for responsiveness
+@media (max-width: 975px) {
+    .container1{
+        .headText{
+            font-size: 2.5rem !important;
+            width: 70vw;
+        }
+    }
+    
+}
+@media (max-width: 518px) {
+    .container1{
+        .headText{
+            font-size: 1.5rem !important;
+            width: 70vw;
+        }
+    }
+    
+}

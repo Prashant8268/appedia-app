@@ -1,14 +1,50 @@
-.footer {
-  width: 100%;
-  margin-top: 0;
-  background: rgba(103, 14, 14, 0.05); }
-
-.contact-form {
-  padding: 5px;
+@import url("https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=Montserrat:wght@100&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Sorts+Mill+Goudy:ital@1&display=swap");
+footer {
+  padding: 1rem 0.2rem 0.2rem 0.2rem;
   display: flex;
   flex-direction: row;
-  justify-content: space-around; }
+  flex-wrap: wrap; }
 
-@media (max-width: 600px) {
-  .footer {
-    font-size: small; } }
+.container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1rem; }
+  .container div {
+    max-width: 50%; }
+
+.headText {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  color: white;
+  font-family: 'Major Mono Display', monospace;
+  color: black; }
+
+.smallText {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  color: white;
+  color: black;
+  max-width: 40%;
+  font-weight: 500; }
+
+.ul-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  line-height: 1.5rem; }
+  .ul-list li {
+    margin: 0;
+    padding: 0; }
+  .ul-list a {
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+    font-weight: 300;
+    padding: 0rem;
+    font-family: 'Major Mono Display', monospace;
+    font-family: 'Montserrat', sans-serif;
+    color: black;
+    padding: 0;
+    font-weight: 600; }

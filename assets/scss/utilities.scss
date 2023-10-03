@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=Montserrat:wght@100&display=swap');
 @mixin flexRow{
     display: flex;
     flex-direction: row;
@@ -14,10 +15,7 @@
   }
 
 
-  @mixin aTag{
-    text-decoration: none;
-    color: black;
-  }
+
 
   @mixin aButton{
     background-color: transparent;
@@ -40,4 +38,38 @@
       margin: 0;
       text-decoration: none;
     }
+  }
+
+  @mixin aTag{
+    text-decoration: none;
+    // color: #ffffffff;
+    color: white;
+    font-size: 16px;
+    font-weight: 300;
+    padding: 0rem;
+    font-family: 'Major Mono Display', monospace;
+    font-family: 'Montserrat', sans-serif;
+
+  }
+
+  @mixin whiteBtn{
+    font-size: 1rem;
+    padding: 0.4rem;
+    border-radius: 3rem;
+    border: 0.3px;
+    font-family: 'Major Mono Display', monospace;
+    font-family: 'Montserrat', sans-serif;
+    color: black;
+    font-weight: 600;
+  }
+
+  @mixin headText{
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    color: white;
+  }
+  @mixin smallText{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    color: white;
   }
