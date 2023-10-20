@@ -1,10 +1,18 @@
 <link rel="stylesheet" href="/css/chats_section.css">
 <div class="header">
-    <img src="https://cdn-icons-png.flaticon.com/512/4964/4964263.png" alt="Chats">
+    <!-- <img src="https://cdn-icons-png.flaticon.com/512/134/134808.png" alt="Chats"> -->
     <span>Chats</span>
+    <div class="new-chat" >
+        <img src="https://cdn-icons-png.flaticon.com/512/10322/10322417.png" alt="">
+        <div>
+            <% for(user of users) { %>
+            <li class="open-chat" user_Email="<%= user.email %>"><%= user.name %></li>
+            <% } %>
+        </div>
+    </div>
     <div class="line"></div>
 </div>
-<div class="container">
+<div class="container">  
     <div class="chats-container" id="chats-container">
         <% for(let chat of chats){ %>  
             <% if (locals.user.id == chat.sender.id) { %>
@@ -55,8 +63,6 @@
     </div>
 
 </div>
-
-
 
 <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
 <script src="/js/chats_section.js" type="text/javascript"></script>

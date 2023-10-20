@@ -1,6 +1,17 @@
+@import url("https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=Montserrat:ital,wght@0,100;0,200;1,100&family=Raleway:wght@300&display=swap");
 body {
   margin: 0;
   padding: 0; }
+
+:root {
+  --font-family1: 'Major Mono Display', monospace;
+  --font-family2: 'Montserrat', sans-serif;
+  --font-family3: 'Raleway', sans-serif;
+  --font-Meri: 'Merriweather', 'serif';
+  --first-color: #e7eaf6;
+  --second-color: #a2a8d3;
+  --third-color: #38598b;
+  --fourth-color: #113f67; }
 
 .line {
   border-bottom: 2px solid rgba(0, 0, 0, 0.05);
@@ -30,14 +41,14 @@ body {
 
 .chats-container {
   height: 100%;
-  width: 30%;
+  width: 300px;
   border-right: 2px solid rgba(0, 0, 0, 0.05); }
   .chats-container li {
     margin: 0;
     padding: 0.6rem;
     list-style: none; }
     .chats-container li:hover {
-      background-color: lightpink; }
+      background-color: var(--first-color); }
     .chats-container li div {
       display: flex;
       flex-direction: row;
@@ -127,3 +138,7 @@ body {
       height: 1.8rem;
       position: relative;
       left: -3px; }
+
+.new-chat {
+  display: inline-block;
+  transform: scale(0.8); }
