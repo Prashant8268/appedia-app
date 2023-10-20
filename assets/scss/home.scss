@@ -3,114 +3,190 @@ body{
     padding: 0;
 
 }
+@import url('https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=Montserrat:ital,wght@0,100;0,200;1,100&family=Raleway:wght@300&display=swap');
+:root {
+    --font-family1: 'Major Mono Display', monospace;
+    --font-family2: 'Montserrat', sans-serif;
+    --font-family3: 'Raleway', sans-serif;
+    --font-Meri: 'Merriweather', 'serif';
+    --first-color: #e7eaf6; 
+    --second-color: #a2a8d3; 
+    --third-color: #38598b;
+    --fourth-color: #113f67; 
 
+  }
 
-.main-class{
+.main-class2{
     display: flex;
     justify-content: center; 
     align-items: center;
-    padding: 3.5rem;
+    padding: 3rem;
     flex-wrap: nowrap;
     height: 70%;
     width: auto;
+    font-family: var(--font-Meri);
 }
 
-.container{
-    width: 50%;    
-    color: pink;
+.container2{  
+    height: 100%;
+    width: 600px;
     display: flex;
-    flex-wrap: wrap;   
-    justify-content: center; 
+    flex-direction: row;
+
+}
+.lower{
+    background-color: var(--third-color);
+    height: 70%;
+    width: 60%;
+    border-radius: 3rem;
+    z-index: 1;
+    background-color: red;
+    opacity: 0.7;
+}
+.upper{
+    background-color: var(--third-color);
+    width: 90%;
+    height: 100%;
+    z-index: 6;
+    position: relative;
+    left: -30%;
+    top: 10%;
+    border-radius: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
+    text-align: center;
+    color: white;
+    font-family: var(--font-family3);
 }
 
-
-#my-form{
-    padding: 1.5rem;
+#form{
     width: 80%;
-    border-radius: 25px;
-    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.4);
-    color: black;
-    font-weight: 400;
-    background-image: linear-gradient(9deg, rgb(216, 214, 252), white);
+    padding: 10px;
+    display: flex;
+    text-align: left;
+    gap: 0.5rem;
+    flex-direction: column;
+    font-family: var(--font-family3);
+    input{
+        display: block;
+        padding: 7px;
+        border: 0;
+        transition: border 0.3s ease;
+        border-radius: 0.3rem;
+        font-family: var(--font-family3);
+        &:focus{
+            outline: none;
+            border: 0;
+            border-bottom: 3px solid red;
+        }
+    }
 }
-#my-form label{
-    color: black;
-    font-weight: 10000;
+.form-heading{
+    font-size: 1.5rem;
+
 }
 
-.input-field{
-    display: block;
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
-    width: 100%;
-    height: 2rem;
-    border: 0px;
-    padding-left: 15px;
-    padding-top: 5px;
-    border-radius: 4px; 
-}
-.input-field:focus{
-    outline: none;
-}
-.button-container{
+.button-container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  
+  .button-row {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-}
-.form-buttons{
-    outline: none;
-    text-decoration: none;
-    width: 40%;
-    border-radius: 5px;
-    border: 0px;
-    padding: 0.5rem;
-    color: black;
-    background-color: white;
-    text-align: center;
-    transition: transform 0.2 ease-in-out;
-}
-.form-buttons:hover{
-    transform: scale(1.1);
-    background-color: rgb(206, 226, 247);
-
-}
-
-/* responsive  */
-@media (max-width: 600px) {
-    body{
-        font-size: small;
-    }
-    .main-class{
-        align-items: baseline;
+    button{
         padding: 0;
-        height: 90%;
+        width: 49%;
+        color: var(--fourth-color);
+        border: 0;
+        background-color:white;       
+        font-family: var(--font-family3);
+        transition: background-color 0.2s ease;
+        &:hover{
+            background-color: var(--second-color);
+            color: black;
+        }
+
     }
-    .container{
-        margin-top: 4rem;
-        width: 100vw;
-        height: auto;
-        gap:38px;
-        flex-wrap: wrap;
-        font-size: smaller;
-        align-items: baseline;
+}
+
+
+.form-btns{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 49%;
+    text-decoration: none;
+    text-align: center;
+    color: var(--fourth-color);
+    border: 0;
+    background-color:white;       
+    font-family: var(--font-family3);
+    transition: background-color 0.2s ease;
+    &:hover{
+        background-color: var(--second-color);
+        color: black;
     }
-    #my-form{
+}
+
+
+@media (max-width:623px) {
+
+    .main-class2{
+        padding: 1rem !important;
+    }
+    .container2{
         width: 100%;
     }
-    .input-field{
-        height: 1.6rem;
-        font-size: smaller;
-
+ 
+  }
+  @media (max-width:530px) {
+    .form-heading{
+        font-size: 1rem;
     }
-    .button-container{
-
-        height: auto;
-        button{
-        font-size: smaller;
-
+    .main-class2{
+        padding: 0 !important;
+        padding-top: 1rem;
+        height: 100%;
+    }
+    .container2{
+        width: 100%;
+        display: block;
+        margin-top: 2rem;
+        
+        .upper{
+            position: absolute;
+            left: 0;
+            height: 60%;
+            padding: 0.2rem;
+            margin-top: 1rem;
+            left: 5%;
+            top: 12%;
+            padding-top: 1rem;
+            
+        }
+        .lower{
+            width: 100%;
         }
     }
-
-}
-
+    #form{
+        width: 90%;
+        label{
+            font-size: 0.9rem;
+        }
+    }
+    .button-row{
+        font-size: 0.7rem;
+        button{
+            height: 30px;
+        }
+        .form-btns{
+            height: 30px;
+        }
+    }
+  }

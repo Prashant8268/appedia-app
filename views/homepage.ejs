@@ -7,7 +7,7 @@
             <% if (posts) { %>
             <% for( let post  of posts) { %>
                 <div class="post-card"  id="post-<%= post.id %>">
-                    <div>
+                    <div class="post-header">
                         <img src="<%= post.user.avatar %>"  id="user-avatar">
                         <span id="user-name"><%= post.user.name %></span>
                     </div>
@@ -16,7 +16,7 @@
                             Delete
                         </button>
                         <% } %>
-                    <div style="color: black; ">
+                    <div style="color: black;" class="post-content">
                         <p><%= post.content %></p>
                         <% if (locals.user) { %> 
                             <a href="/likes/toggle?id=<%= post.id %>&type=Post" class="like-tag"> 
@@ -26,15 +26,15 @@
                         <% } %>
                         
                             <% if (post.likes.length==0) { %>
-                                <span style="font-size: 1rem; font-family: 'Courier New', Courier, monospace;">
-                                    <span style="font-size: 1rem; font-family: 'Sorts Mill Goudy', serif;" id="post-like-<%= post.id %>">
+                                <span >
+                                    <span  id="post-like-<%= post.id %>">
                                         No
                                     </span>
                                     Likes
                                 </span>
                             <% }else{ %>
-                                <span style="font-size: 1rem; font-family: 'Courier New', Courier, monospace;">
-                                    <span style="font-size: 1rem; font-family: 'Sorts Mill Goudy', serif;" id="post-like-<%= post.id %>">
+                                <span >
+                                    <span  id="post-like-<%= post.id %>">
                                         <%= post.likes.length %>
                                     </span>
                                     Likes
@@ -53,9 +53,8 @@
                     <div id="comments-container-<%= post.id %>" class="hide">
                         <% for( let  comment of post.comments) { %>
                             <li id="comment-<%= comment.id%>" class="single-comment">
-                               <div> <%= comment.user.name %></div>
+                               <div><span class="username"> <%= comment.user.name %> </span> <small class="comment-content">  <%= comment.content %></small></div>
                                <div style="color: black;" >
-                                    <small style="color: black;">  <%= comment.content %></small>
                                    <% if (locals.user) { %>
                                          <a href="/likes/toggle?id=<%= comment._id %>&type=Comment" class="like-tag"> 
                                         <img id="like-logo-C" src="https://cdn-icons-png.flaticon.com/512/1077/1077035.png" alt="like">
@@ -63,7 +62,7 @@
                                    <% } %>
                                     
                                         <span>
-                                            <span style="font-size: 1.2rem;" id="comment-like-<%= comment.id %>">
+                                            <span id="comment-like-<%= comment.id %>">
                                             <% if (comment.likes.length==0){ %>
                                              No 
                                             <% } else{ %>
@@ -75,7 +74,7 @@
                                         <% if (locals.user && ( post.user.id == locals.user.id  || comment.user.id == locals.user.id)) { %>
                                             <small>
                                                 <button class="delete-comment" href="/comments/delete-comment/<%= comment.id %>"  >
-                                                <img src="https://cdn-icons-png.flaticon.com/128/484/484560.png" style="height: 15px; width: 10pxpx;">
+                                                <img src="https://cdn-icons-png.flaticon.com/512/3096/3096673.png" style="height: 15px; width: 10pxpx;">
                                                 </button>
                                             </small>
                                         <% } %>
@@ -94,7 +93,7 @@
 
     <div class="side-bar">
         <div class="side-element">
-            <img src="https://cdn-icons-png.flaticon.com/512/4450/4450283.png" alt="friend">
+            <img src="	https://cdn-icons-png.flaticon.com/512/11976/11976187.png" alt="friend">
             <div class="info">Friends Request</div>
             <div class="request-section">
                 <% if (friendships.length>0) { %>
@@ -120,12 +119,12 @@
         </div>
         <div class="side-element">
             <a href="/chats">
-            <img src="https://cdn-icons-png.flaticon.com/512/4964/4964263.png" alt="chat">
+            <img src="https://cdn-icons-png.flaticon.com/512/134/134808.png" alt="chat">
             <div class="info">Chats</div>
             </a>
         </div>
         <div class="side-element">
-            <img src="https://cdn-icons-png.flaticon.com/512/3220/3220829.png" alt="chat">
+            <img src="https://cdn-icons-png.flaticon.com/512/880/880594.png" alt="friends">
             <div class="info">Friends</div>
             <div class="request-section">
                 <% if (friends.length>0) { %>
@@ -142,7 +141,7 @@
             </div>
         </div>
         <div class="side-element">
-            <img src="https://cdn-icons-png.flaticon.com/512/1165/1165725.png" alt="chat">
+            <img src="https://cdn-icons-png.flaticon.com/512/33/33308.png" alt="users">
             <div class="info">All Users</div>
             <div class="request-section">
                 <% for(user of users) { %>

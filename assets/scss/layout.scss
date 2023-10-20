@@ -28,14 +28,12 @@ body{
 
 
 $primary-color: #e79a9a;
-$primary-font: 'Sorts Mill Goudy', serif;
+// $primary-font: 'Sorts Mill Goudy', serif;
 
 #notification{
   padding: 0.6rem;
-  // color: rgb(89, 83, 83);
   color: white;
-  font-family: $primary-font;
-  background-color: $primary-color;
+  background-color:#113f67;;
   display: inline-block;
   border-radius: 0.2rem;
   animation: slideIn 0.3s ease-in-out;
@@ -43,12 +41,14 @@ $primary-font: 'Sorts Mill Goudy', serif;
   position: fixed;
   margin-left: 2rem;
   margin-top: 1rem;
+  z-index: 10;
   top: 13%;
 }
 
 @media (max-width:750) {
   #notification{
       font: smaller;
+      color: red;
   }
   
 }

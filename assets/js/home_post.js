@@ -1,5 +1,3 @@
-
-
 {
 
     // this is code for notification
@@ -92,22 +90,25 @@
     let newCommentDom = (comment,user)=>{
         return $(`
         <li id="comment-${comment._id}" class="single-comment">
-        <div>${user}</div>
+        <div>
+            <span class="username"> ${comment.user.name }</span>
+            <small class="comment-content">  ${ comment.content}</small>
+        </div>
         <div style="color: black;" >
-             <small style="color: black;">${comment.content}</small>
-                <a href="/likes/toggle?id=${comment._id}&type=Comment" class="like-tag"> 
-                <img id="like-logo-C" src="https://cdn-icons-png.flaticon.com/512/1077/1077035.png" alt="like">
-                </a>
-                <span>
-                    <span style="font-size: 1.2rem;" id="comment-like-${comment._id}">
-                    No 
-                    </span>Likes
-                </span>  
-                     <small>
-                         <button class="delete-comment" href="/comments/delete-comment/${comment._id}"  >
-                         <img src="https://cdn-icons-png.flaticon.com/128/484/484560.png" style="height: 15px; width: 10pxpx;">
-                         </button>
-                     </small>
+            <a href="/likes/toggle?id=${comment._id}&type=Comment" class="like-tag"> 
+            <img id="like-logo-C" src="https://cdn-icons-png.flaticon.com/512/1077/1077035.png" alt="like">
+            </a>
+            <span>
+            <span id="comment-like-${comment._id}">
+             No 
+            </span>Likes
+            </span>
+                 
+            <small>
+                <button class="delete-comment" href="/comments/delete-comment/${ comment._id }"  >
+                <img src="https://cdn-icons-png.flaticon.com/512/3096/3096673.png" style="height: 15px; width: 10pxpx;">
+                </button>
+            </small>
          </div>                                                                        
      </li>`)
     }
@@ -130,9 +131,8 @@
                         const postId = data.data.postId;
                         const containerSelector = `[container="comments-container-${postId}"]`;
                         const commentsContainer = document.querySelector(containerSelector);
-                        commentsContainer.innerHTML= 'Hide comments';
+                        commentsContainer.innerHTML= 'Hide Comments';
                         const temp = document.getElementById(`#comments-container-${postId}`);
-                       // Remove a specific class from the div using jQuery
                         $(`#comments-container-${postId}`).removeClass("hide");
                         check2();
                         refreshToggleComment();
@@ -154,11 +154,11 @@
     createComment();
     createPost();
     let toggleComment = document.querySelectorAll('.toggle-comments');
-
     function refreshToggleComment(){
         toggleComment = document.querySelectorAll('.toggle-comments');
         toggleComment.forEach((e)=>{
             e.addEventListener('click',(event)=>{
+                console.log('clicked',event.target)
                 if(event.target.innerHTML=='See Comments'){
                    event.target.innerHTML= 'Hide Comments'
                 }
@@ -176,7 +176,8 @@
 
 
 
- function check() { deletePost.forEach((e)=>{
+ function check() {
+    deletePost.forEach((e)=>{
     e.addEventListener('click',async()=>{
         const postId = e.getAttribute('postId');
        await $.ajax({
@@ -200,9 +201,6 @@ check();
 
 
 // for deleteing a comment using async
-
-
-
 function check2(){
     let deleteComment = document.querySelectorAll('.delete-comment');
     deleteComment.forEach((link)=>{
@@ -229,13 +227,14 @@ function check2(){
 
 check2();
 
-// ajax code for toggle likes
 
+// ajax code for toggle likes
 const toggleLikes = ()=>{
     let likeableItems = document.querySelectorAll('.like-tag');
     likeableItems.forEach((item)=>{
         item.addEventListener('click',async(event)=>{
             event.preventDefault();
+            console.log(likeableItems,'event ')
             const href = item.getAttribute('href');;
             await $.ajax({
                 type: 'get',
@@ -252,16 +251,11 @@ const toggleLikes = ()=>{
 
                     }
                     if(data.length==0){
-                        likeContainer.innerHTML='No';
+                        likeContainer.innerHTML='No &nbsp;' ;
                         return ;
                     }
-                    
-                        likeContainer.innerHTML= data.length;
-                        notification('Liked');
-                    
-
-
-
+                    likeContainer.innerHTML= `${data.length}  &nbsp;`;
+                    notification('Liked');
                     
                 },
                 error: (err)=>{
@@ -280,15 +274,15 @@ toggleLikes();
 
 
 // for displaying  friends request
-
 const sideElement = document.querySelectorAll('.side-element');
 sideElement.forEach((item)=>{
     item.addEventListener('click',()=>{
         const requestSection = item.firstChild.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling;
         if(requestSection.style.height==0){
             requestSection.style.height  = 'auto';
-            requestSection.style.width = '9rem';
+            requestSection.style.width = 'fit-content';
             requestSection.style.display='block';
+            requestSection.style.fontSize = '0.8rem'
         }
         else{
             requestSection.style.display="none";

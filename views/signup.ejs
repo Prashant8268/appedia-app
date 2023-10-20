@@ -1,40 +1,16 @@
 <link rel="stylesheet" href="/css/home.css">
-
-<!-- <div class="container">
-    <div id="my-form">
-        <form method="POST" action="/user/create-user">
-            <label for="name">Name</label>
-            <input required class="input-field" type="text" name="name" placeholder="Enter your name" >
-            <label for="email">Email or username</label>
-            <input required class="input-field" t requiredype="email" name="email" placeholder="email" >
-            <label for="password">Password</label>
-            <input required class="input-field" type="password" name="password" placeholder="password" >
-            <label for="confirmPassword">Confirm Password</label>
-            <input required class="input-field" type="password" name="confirmPassword" placeholder="Confirm Password" >
-            <div class="button-container" >
-            <a class="form-buttons" href="/sign-in" >Already have a account ? </a>
-            <button class="form-buttons" type="submit" >Sign up</button>
-            </div>
-
-        </form>
-        <a href="/user/auth/google">Sign in 
-            Google
-        </a>
-    </div>
-</div> -->
-
-<main class="main-class">
+<!-- <main class="main-class">
     <div class="container">
         <div id="my-form">
-            <form method="POST" action="/user/create-user">
+            <form method="POST" id="form" action="/user/create-user">
                 <label for="name">Name</label>
-                <input required class="input-field" type="text" name="name" placeholder="Enter your name" >
+                <input required  type="text" name="name" placeholder="Enter your name" >
                 <label for="email">Email or username</label>
-                <input required class="input-field" t requiredype="email" name="email" placeholder="email" >
+                <input required  t requiredype="email" name="email" placeholder="email" >
                 <label for="password">Password</label>
-                <input required class="input-field" type="password" name="password" placeholder="password" >
+                <input required  type="password" name="password" placeholder="password" >
                 <label for="confirmPassword">Confirm Password</label>
-                <input required class="input-field" type="password" name="confirmPassword" placeholder="Confirm Password" >
+                <input required  type="password" name="confirmPassword" placeholder="Confirm Password" >
                 <div class="button-container" >
                 <a class="form-buttons" href="/sign-in" >Already have a account ? </a>
                 <button  class="form-buttons" type="submit" >Sign up</button>
@@ -43,4 +19,30 @@
         </div>
 
     </div>
-</main>
+</main> -->
+
+
+<div class="main-class2">
+    <div class="container2">
+        <div class="lower"></div>
+        <div class="upper">
+            <div class="form-heading">Signup to Continue</div> 
+            <form  method="POST" id="form" action="/user/create-user">
+                <label for="name">Name</label>
+                <input required  type="text" name="name" placeholder="Enter your name" >
+                <label for="email">Email or username</label>
+                <input class="input-field" type="email" name="email" placeholder="email" >
+                <label for="password">Password</label>
+                <input class="input-field" type="password" name="password" placeholder="password" >
+                <label for="confirmPassword">Confirm Password</label>
+                <input required  type="password" name="confirmPassword" placeholder="Confirm Password" >
+                <div class="button-container">
+                    <div class="button-row">
+                      <a class="form-btns" href="/sign-in" >Already have a account ? </a>
+                      <button  class="form-btns" type="submit" >Sign up</button>
+                    </div>
+                </div>          
+            </form>
+        </div>
+    </div>
+</div>

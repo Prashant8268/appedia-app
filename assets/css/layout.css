@@ -22,8 +22,7 @@ body::-webkit-scrollbar-track {
 #notification {
   padding: 0.6rem;
   color: white;
-  font-family: "Sorts Mill Goudy", serif;
-  background-color: #e79a9a;
+  background-color: #113f67;
   display: inline-block;
   border-radius: 0.2rem;
   animation: slideIn 0.3s ease-in-out;
@@ -31,8 +30,10 @@ body::-webkit-scrollbar-track {
   position: fixed;
   margin-left: 2rem;
   margin-top: 1rem;
+  z-index: 10;
   top: 13%; }
 
 @media (max-width: 750) {
   #notification {
-    font: smaller; } }
+    font: smaller;
+    color: red; } }
