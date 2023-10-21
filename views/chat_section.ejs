@@ -2,11 +2,11 @@
 <div class="header">
     <!-- <img src="https://cdn-icons-png.flaticon.com/512/134/134808.png" alt="Chats"> -->
     <span>Chats</span>
-    <div class="new-chat" >
+    <div class="new-chat "   id="open-new-chat">
         <img src="https://cdn-icons-png.flaticon.com/512/10322/10322417.png" alt="">
-        <div>
-            <% for(user of users) { %>
-            <li class="open-chat" user_Email="<%= user.email %>"><%= user.name %></li>
+        <div class="chat-user-list hide">
+            <% for(user1 of users) { %>
+            <li class="open-chat" user_Email="<%= user1.email %>"><%= user1.name %></li>
             <% } %>
         </div>
     </div>
@@ -25,7 +25,7 @@
                             <% if (chat.lastSender==locals.user.id) { %>
                                 You : 
                             <% } %>
-                            <%= chat.latestMessage %>
+                            <span style="font-weight: bold;"><%= chat.latestMessage %></span> 
                         </div>
                     </div> 
                 </div>
@@ -51,11 +51,9 @@
         </div> 
 
     <div class="chats hide">
-
         <div class="single-chat">
-
         </div>
-        <form action="">
+        <form action="" class="send-form" id="send-form">
             <input type="text" id="msg">
             <input type="button" value="Send"  id="send-message">
         </form>

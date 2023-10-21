@@ -31,7 +31,6 @@ module.exports.chatSection=async(req,res)=>{
             email:item.email
         }));
         users = users.filter((user)=>user.id!=req.user.id);
-
         return res.render('chat_section',{
             title:'Codeial | Chats',
             chats:user.chats,  

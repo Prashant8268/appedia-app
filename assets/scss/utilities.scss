@@ -7,9 +7,9 @@
   $primary-font: 'Sorts Mill Goudy', serif;
   @mixin messageCon{
     padding: 0.4rem;
-    background-color: grey;
     display: inline-block;
-    max-width: 30%;
+    max-width: 40%;
+    height: auto;
     border-radius: 4px;
   }
 
