@@ -87,8 +87,6 @@ module.exports.areChatsPresent = async (req,res)=>{
     }
 
 }
-
-
 // Controller for deleting chats
 module.exports.deleteChats = async(req,res)=>{
     try{

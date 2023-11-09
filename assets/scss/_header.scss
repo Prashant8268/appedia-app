@@ -1,112 +1,90 @@
-@import url('https://fonts.googleapis.com/css2?family=Sorts+Mill+Goudy:ital@1&display=swap');
-$primary-color: #914C4C;
-
+/* header.scss */
 @import url('https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=Montserrat:ital,wght@0,100;0,200;1,100&family=Raleway:wght@300&display=swap');
 
 :root {
     --font-family1: 'Major Mono Display', monospace;
     --font-family2: 'Montserrat', sans-serif;
     --font-family3: 'Raleway', sans-serif;
-    --font-Meri: 'Merriweather', 'serif';
     --first-color: #e7eaf6; 
     --second-color: #a2a8d3; 
     --third-color: #38598b;
     --fourth-color: #113f67; 
+    --primary-color: #914C4C;
+}
 
-  }
-.nav-bar{
+.nav-bar {
     width: 100%;
-    height: 60px;
+    height: 80px;
     display: flex;
-    flex-shrink: 0;
-    padding: 10px 0px 0px 0px ;
     justify-content: space-between;
-    flex-direction: row-reverse;
+    align-items: center;
     font-family: var(--font-family3);
     background-color: var(--fourth-color);
-}
-#site-name{
-    font-family: 'Major Mono Display', monospace;
-    color: $primary-color;
-    text-align: justify;
-    font-size: 40px;
-    margin-right: 5px;
-    font-style: italic;
-    font-weight: 500;
-    color: white;
-    line-height: normal;
-    text-transform: capitalize;
-}
+    padding: 10px 20px;
+    box-sizing: border-box;
 
-.canbe{
-    text-decoration: none;
-    display: flex;
-    margin-left: 0.5rem;
-    flex-shrink: 1;
-    margin-top: 1rem;
-    flex-direction: row;
-    gap: 1rem;
-    a{
-        text-decoration: none; 
-        color:  white ;
-        img{
-            height: 3rem;
-            width: 3rem;
-            position: relative;
-            top: -1rem;
-            left: 0rem;
-            border-radius: 50%;
-        }
-        &:hover{
-            color: var(--second-color);
-        }
-
+    #site-name {
+        font-family: 'Major Mono Display', monospace;
+        font-size: 28px;
+        font-style: italic;
+        font-weight: 500;
+        color: white;
+        text-transform: capitalize;
     }
 
-    li{
-        text-decoration: none;
-        margin-right: 1rem;
-        list-style: none;
+    .canbe {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-top: 0.5rem;
 
-    }
+        a {
+            text-decoration: none;
+            color: white;
 
-}
-
-#dont-know{
-    position: relative;
-    top: -2rem;
-}
-
-@media (max-width: 600px) {
-
-    #dont-know{
-        top: -0.8rem;
-    }
-    .nav-bar{
-        font-size: smaller;
-        flex-shrink: 1;
-        height: 40px;
-        padding-top: 5px;
-        a{   
-            img{
-                height: 1.5rem;
-                width: 1.5rem;
-                top: -0.3rem;
-                left: 0;
+            img {
+                height: 2rem;
+                width: 2rem;
+                border-radius: 50%;
+                margin-top: 0rem;
             }
 
+            &:hover {
+                color: var(--second-color);
+            }
         }
 
-    }
-    .canbe{
-        font-size: 0.6rem;
-        gap: 5px;
-    }
-    #site-name{
-        position: relative;
-        top: 0.4rem;
-        font-size: 1.2rem;
-    }
-  }
+        li {
+            margin-right: 1rem;
+            list-style: none;
+        }
 
+        #dont-know {
+            position: relative;
+            top: -0.5rem;
+        }
+    }
 
+    @media (max-width: 600px) {
+        flex-direction: column;
+        height: auto;
+
+        #site-name {
+            font-size: 24px;
+            margin-bottom: 10px; /* Added margin for spacing */
+        }
+
+        .canbe {
+            margin-top: 0.5rem;
+            font-size: 0.8rem;
+
+            a {
+                img {
+                    height: 2rem;
+                    width: 2rem;
+                    margin-top: -0.2rem;
+                }
+            }
+        }
+    }
+}

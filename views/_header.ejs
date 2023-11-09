@@ -1,23 +1,21 @@
+<!-- header.ejs -->
 <header>
     <link rel="stylesheet" href="/css/_header.css">
-<nav class="nav-bar">
-    <div id="site-name" >Apedia</div>
-    <div class="canbe">
-        <% if (locals.user) { %>
-            <li>
-            <a href="/user/profile-update/<%= user.id %>" >
-            <img src="<%= user.avatar %>" alt="Profile">
-                <span id="dont-know"> <%=  user.name %></span>
-            </a>
-            </li>
-            <li><a href="/sign-out">Sign out</a></li>
-
-       
-        <% } else { %>
-            <a href="/sign-in"> Sign In</a>
-            <a href="/sign-up">Sign up</a>
+    <nav class="nav-bar">
+        <div id="site-name">Apedia</div>
+        <div class="canbe">
+            <% if (locals.user) { %>
+                <li>
+                    <a href="/user/profile-update/<%= user.id %>">
+                        <img src="<%= user.avatar %>" alt="Profile">
+                        <span id="dont-know"><%= user.name %></span>
+                    </a>
+                </li>
+                <li><a href="/sign-out">Sign out</a></li>
+            <% } else { %>
+                <a href="/sign-in">Sign In</a>
+                <a href="/sign-up">Sign up</a>
             <% } %>
-         
-    </div>
-</nav>
+        </div>
+    </nav>
 </header>
