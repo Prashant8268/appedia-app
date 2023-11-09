@@ -4,8 +4,8 @@ const bodyParser = require('body-parser');
 const router = require('./routers');
 const port = 5000;
 const cors = require('cors');
-
-
+const dotenv  =require('dotenv');
+dotenv.config();
 const cookieParser = require('cookie-parser');
 const app = express();
 app.use(cors());
