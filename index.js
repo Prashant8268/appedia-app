@@ -31,7 +31,6 @@ app.set('views', './views');
 
 
 const flash = require('connect-flash');
-
 const sassMiddleware = require('node-sass-middleware')
 
 // storing cookie in mongo 
@@ -76,7 +75,7 @@ app.use(session({
         maxAge: (1000*60*100)
     },
     store:MongoStore.create({
-        mongoUrl: 'mongodb://127.0.0.1:27017/codeial',
+        mongoUrl: process.env.MONGO_URL,
         autoRemove: 'disable'
     },(err)=>{
         console.log(err,"--->here at mongostore ");
