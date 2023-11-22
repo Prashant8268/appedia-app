@@ -1,3 +1,4 @@
+
 class ChatEngine{
     constructor(chatBoxId, userEmail){
         this.chatBox = $(`#${chatBoxId}`);
@@ -17,8 +18,6 @@ class ChatEngine{
         this.socket.on('connect',async()=>{
             console.log('connection establish using sockets...!');
             let isPresent;
-
-
             await $.ajax({
                 type: 'post',
                 url: '/chats/r-chats-present',
@@ -58,7 +57,8 @@ class ChatEngine{
                 singleChat.removeChild(singleChat.firstChild);
             }
             const li = document.createElement('li');
-            const heading = document.createElement('h4');
+            const heading = document.createElement('div');
+            heading.classList.add('chat-heading')
             const img = document.createElement('img');
             img.src = user2.avatar;
             heading.innerText=user2.name;
@@ -83,7 +83,7 @@ class ChatEngine{
             deleteButton.classList.add('delete-chats');
             deleteButton.id=isPresent;
             deleteButton.innerHTML = "Delete";
-            chats.append(deleteButton);
+            heading.append(deleteButton);
             deleteButton.addEventListener('click',async(e)=>{
                 console.log('delete btn clicked')
                 await $.ajax({
@@ -105,8 +105,10 @@ class ChatEngine{
 
             })
 
-
-            $(`#send-message`).click(function(){
+            const myForm = document.getElementById('send-form');
+            myForm.addEventListener("submit", function (event) {
+                event.preventDefault();
+                $(`#send-message`).click(function(){
                 let msg = $(`#msg`).val();
                 if(msg!=''){
                     self.socket.emit('send_message',{
@@ -116,7 +118,22 @@ class ChatEngine{
                         chatroom:isPresent.name
                     })
                 };
+                const msgInput = document.getElementById("msg");
+                msgInput.value = "";
             });
+            let msg = $(`#msg`).val();
+            if(msg!=''){
+                self.socket.emit('send_message',{
+                    message:msg,
+                    user1,
+                    user2,
+                    chatroom:isPresent.name
+                })
+            };
+            const msgInput = document.getElementById("msg");
+            msgInput.value = "";
+
+            })
 
         });
 
@@ -143,20 +160,36 @@ class ChatEngine{
 
 
 
-
 const openChatElements = document.querySelectorAll('.open-chat');
-
+let chatSession = null;
 openChatElements.forEach((element) => {
   element.addEventListener('click', async function () {
-    // You can access the clicked element using "this" or "element" variable
-    // const chatsContainer = document.getElementById('chats-container');
-    // chatsContainer.classList.add('hide');
+    console.log('clicked');
     const user_Email = this.getAttribute('user_Email');
+    if(chatSession){
+        chatSession = null;
+        const myForm = document.getElementById("send-form");
+        function removeAllEventListeners(element) {
+        const clone = element.cloneNode(true); 
+        element.parentNode.replaceChild(clone, element); 
+        }
+        removeAllEventListeners(myForm);
+        const sendBtn = document.getElementById('send-message');
+        removeAllEventListeners(sendBtn);
 
-    new ChatEngine('single-chat',user_Email);
-
+    }
+    chatSession =   new ChatEngine('single-chat',user_Email);
   });
 });
+
+
+const newChat = document.getElementById('open-new-chat');
+newChat.addEventListener('click',()=>{
+    const target = document.querySelector('.chat-user-list');
+    target.classList.toggle('hide');
+
+})
+
 
 
 
