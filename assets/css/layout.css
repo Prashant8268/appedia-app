@@ -1,17 +1,21 @@
 @import url("https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap");
-body::-webkit-scrollbar {
-  width: 4px;
-  /* Set the width of the scrollbar */ }
-
-body::-webkit-scrollbar-thumb {
-  background-color: #888;
-  /* Set the color of the thumb (draggable part) */
-  border-radius: 3px;
-  /* Round the corners of the thumb */ }
-
-body::-webkit-scrollbar-track {
-  background-color: #f1f1f1;
-  /* Set the color of the track (non-draggable part) */ }
+body {
+  margin: 0;
+  padding: 0;
+  width: 100% !important;
+  min-width: 100vw;
+  overflow-x: hidden; }
+  body::-webkit-scrollbar {
+    width: 4px;
+    /* Set the width of the scrollbar */ }
+  body::-webkit-scrollbar-thumb {
+    background-color: #888;
+    /* Set the color of the thumb (draggable part) */
+    border-radius: 3px;
+    /* Round the corners of the thumb */ }
+  body::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+    /* Set the color of the track (non-draggable part) */ }
 
 @keyframes slideIn {
   from {

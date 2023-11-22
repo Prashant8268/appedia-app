@@ -1,85 +1,86 @@
+/* Existing styles... */
+/* Add your global utilities here if needed */
+/* Variables */
+/* Body styles */
 body {
   margin: 0;
-  padding: 0; }
+  padding: 0;
+  font-family: "Sorts Mill Goudy", serif;
+  background-color: #f5f5f5; }
 
+/* Container */
 .container {
   display: flex;
   flex-direction: column;
-  height: 100%;
-  padding: 0px; }
+  align-items: center;
+  padding: 20px; }
 
+/* Section 1 - User Info */
 .section-1 {
   display: flex;
-  flex-direction: row;
-  justify-content: center;
-  flex-wrap: wrap;
-  padding-top: 3rem;
-  gap: 1.5rem; }
-  .section-1 div {
-    align-self: center; }
-  .section-1 div:nth-child(2) {
-    text-align: center; }
-  .section-1 img {
-    display: block; }
-  .section-1 button {
-    background-color: transparent;
-    padding: 0.4rem;
-    font-size: 0.7rem;
-    border: 0;
-    background-image: linear-gradient(9deg, #d8d6fc, white);
-    height: 1.5rem;
-    align-self: center;
-    transition: opacity 0.4 ease-in-out;
-    border-radius: 2px;
-    opacity: 0.9; }
-    .section-1 button:hover {
-      transform: scale(1, 1.05);
-      opacity: 1; }
-    .section-1 button a {
-      color: black;
-      padding: 0;
-      margin: 0;
-      text-decoration: none; }
-  .section-1 #user-avatar {
-    height: 7rem;
-    width: 7rem;
-    border-radius: 50%; }
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 30px;
+  gap: 20px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 80%;
+  max-width: 600px; }
 
+#user-avatar {
+  height: 150px;
+  width: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #c66a6a; }
+
+/* Buttons */
+button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #c66a6a;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease; }
+
+button:hover {
+  background-color: #b74646; }
+
+/* Form Section */
 .inner-section {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
-  flex: 1 0 0; }
-  .inner-section input {
-    border-radius: 6px;
-    width: 100%;
-    display: block;
-    margin-bottom: 1.4rem;
-    height: 1.8rem;
-    border: 2px solid rgba(0, 0, 0, 0.1);
-    background: #FFF; }
-    .inner-section input:focus {
-      outline: none; }
-  .inner-section form {
-    width: 50%; }
+  gap: 20px;
+  width: 100%;
+  max-width: 400px; }
 
-#submit-btn {
-  text-align: center; }
+input[type="text"],
+input[type="file"],
+input[type="submit"] {
+  border-radius: 6px;
+  width: 100%;
+  padding: 10px;
+  border: 2px solid rgba(0, 0, 0, 0.1);
+  background: #fff;
+  transition: border-color 0.3s ease; }
+
+input[type="text"]:focus,
+input[type="file"]:focus,
+input[type="submit"]:focus {
+  outline: none;
+  border-color: #c66a6a; }
 
 #submit-btn:hover {
-  background-color: #c66a6a;
   opacity: 0.8;
-  color: black; }
+  background-color: darkblue;
+  color: white; }
 
+/* Media Queries */
 @media (max-width: 600px) {
   .section-1 {
-    flex-direction: column; }
-    .section-1 img {
-      align-self: center; }
-  .inner-section form {
-    width: 80%; }
-  .input-section {
-    font-size: smaller; }
-    .input-section input {
-      font-size: smaller; } }
+    width: 100%;
+    padding: 20px; } }
