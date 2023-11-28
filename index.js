@@ -2,6 +2,7 @@ const express  = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const router = require('./routers');
+const fetch = require('node-fetch');
 const port = 5000;
 const cors = require('cors');
 const dotenv  =require('dotenv');
@@ -99,6 +100,29 @@ app.use(Middleware.setFlash);
 // below you can also use only './routers as it will point to index aut
 app.use('/',require('./routers'))
 app.use('/api', require('./routers/api'));
+
+
+
+// Function to make a request to your server
+const keepServerAwake = () => {
+  const url = 'https://appedia-app.onrender.com'; 
+  fetch(url)
+    .then(response => {
+      if (response.ok) {
+        console.log(`Successfully pinged ${url}`);
+      } else {
+        console.error(`Failed to ping ${url}`);
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+};
+
+setInterval(keepServerAwake, 300000);
+
+
+
 app.listen(port,(err)=>{
     if(err){
         console.log('Error in starting server');

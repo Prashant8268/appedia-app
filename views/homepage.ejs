@@ -8,8 +8,10 @@
             <% for( let post  of posts) { %>
                 <div class="post-card"  id="post-<%= post.id %>">
                     <div class="post-header">
-                        <img src="<%= post.user.avatar %>"  id="user-avatar">
-                        <span id="user-name"><%= post.user.name %></span>
+                        <a id="not-link" href="/user/profile-update/<%= post.user.id %>">
+                            <img src="<%= post.user.avatar %>"  id="user-avatar">
+                            <span id="user-name"><%= post.user.name %></span>
+                        </a>
                     </div>
                     <% if (locals.user && locals.user.id==post.user.id) { %>         
                         <button class="delete-post-btn" postId="<%= post.id %>">

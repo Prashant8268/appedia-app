@@ -313,3 +313,7 @@ body {
 
 .hide {
   display: none; }
+
+#not-link {
+  text-decoration: none;
+  color: inherit; }
